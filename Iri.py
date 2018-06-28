@@ -1,18 +1,16 @@
-import font
-# from FB.iConfig import *
-# from datetime import datetime, time, date
-# from decimal import Decimal
-# import math
-# import shutil
-# import configparser
-# import random
-# import os
-# import codecs
-# import inspect
-# import time
-# import sys
-# import re
-# import traceback
+import os
+import math
+import shutil
+import codecs
+import time
+import sys
+import random
+import inspect
+import sys
+import re
+import traceback
+
+import cfg
 
 #   Iri - SmartSystem with useful functions!
 #   Besides, Iri's very polite, benevolent and soft
@@ -28,6 +26,9 @@ import font
 #   define icon for file
 #   merge by columns
 # ============================= VARIABLES ==============================
+CFG_PATH = "F:\Work\FIOS\iCore.ini"
+PROFILE = "F:\Work\FIOS\profile.ini"
+
 # TESTPHRASE = 'Hello, I\'m Iri :)'
 # MPATH = r'D:\Work\Lessons\Code\Iri\[dev]CreateTheory'
 # SORTPATH = 'D:\Work\Lessons\Code\Iri\[dev]SortManager\Sorted'
@@ -35,7 +36,7 @@ import font
 # CURRENT = 'D:\DataBase\Sort'
 # USED_PATH = r'D:\Work\Lessons\Code\Iri\FB\used.txt'
 # EXC_PATH = r"D:\Work\Lessons\Code\Iri\FB\exc.txt"
-# CFG_PATH = 'D:\Work\Lessons\Code\Iri\FB\Iri.ini'
+
 # PROFILE_PATH = 'D:\Work\Lessons\Code\Iri\FB\profile.ini'
 
 # CFG_FILE = cfg(CFG_PATH)
@@ -58,6 +59,7 @@ class Iri(object):
         self.FIRSTNAME = PROFILE.get('%s firstname' % ('Feebon'))
 
         self.startime = 0
+        # TODO
         self.mode = 'Info get'
         self.projectname = 'Test'
         self.pinitials = font.beige2 + '🗿 ' + font.end
@@ -65,7 +67,7 @@ class Iri(object):
         # self.erotic = font.violet2
         self.pos = font.blue
         self.neg = font.red2
-    # TODO
+'''    # TODO
     def developeme(self):
         item = inspect.stack()[1][3].upper()
         pass
@@ -118,7 +120,7 @@ class Iri(object):
         newvers = (Decimal(self.VERSION) + Decimal(0.1)).quantize(Decimal('.0'))
         print(newvers)
         cfg.set(CFG_FILE, 'General version', str(newvers))
-        write.status('Version Updated!')
+        write.status('Version Updated!')'''
 
 Feebon = Iri()
 # ======================================================================

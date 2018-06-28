@@ -1,13 +1,4 @@
-# from inspect import getsourcefile
-
-# import os
-# import cfg
-
-# subpath = r'E:\Work\FIRI\FIOS'
-# path = os.path.join(subpath, 'iCore.ini')
-# TESTPHRASE = cfg.get(path, 'Add', 'test')
-TESTPHRASE = "HelloWorld"
-version = '3.0'
+TESTPHRASE = "Hello! I'm Iri :)"
 
 # ====== FAMILY ===== #
 end = '\33[0m'
@@ -95,3 +86,8 @@ def background():
     print('bluebg2:   | %s' % bluebg2 + white + TESTPHRASE + end)
     print('violetbg:  | %s' % violetbg + white + TESTPHRASE + end)
     print('violetbg2: | %s' % violetbg2 + white + TESTPHRASE + end)
+
+if __name__ == "__main__":
+    family()
+    color()
+    background()

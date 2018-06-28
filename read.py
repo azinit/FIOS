@@ -1,8 +1,6 @@
 import os
 import codecs
 
-# import write
-
 
 def from_file(filepath, public=False):
     path, name = os.path.split(filepath)

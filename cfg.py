@@ -3,10 +3,6 @@ import codecs
 import configparser
 
 
-# def info(path):
-#     config = configparser.ConfigParser()
-#     print(config.read(path))
-
 def create(path, type='std'):
     if type == 'profile':
         config = configparser.ConfigParser()
@@ -37,10 +33,14 @@ def get(path, section=None, setting=None):
             exit()
             # create(path)
         config = configparser.ConfigParser()
+        # with codecs.open(path, "w", 'utf-8') as config_file:
+        #     config.read_file(config_file)
         config.read(path)
         return config
     else:
         value = get(path).get(section, setting)
+        # value = codecs.encode(value, 'utf-8')
+        # value = get(path).read_file(section, setting)
         return value
 
 
