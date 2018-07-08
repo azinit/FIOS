@@ -1,12 +1,11 @@
 from datetime import datetime
 
-import font
-import cfg
+import FIOS.font as font
+import FIOS.sample as sample
 
 sections = ['Common', 'Aligning', 'Time']
 functions = [['to_graphic_path', 'from_gap', 'to_simple_list'], ['to_center', 'to_rows'], ['to_datetime', 'to_hms', 'to_seconds']]
-width = int(cfg.get(cfg.iCore, 'General', 'line_amount'))  # from cfg
-version = 2.0
+width = sample.width
 # =====   Common   ===== #
 
 
@@ -15,18 +14,20 @@ def to_graphic_path(path):
     return path
 
 
-def from_gap(string, str_=True):
+def to_divided(content, offset=1, divider="="):
+    return divider*width + '\n'*offset + content + '\n'*offset + divider*width
+
+
+def to_interval(string, parser=str):
     # current: i-j -> [i, i+1, ... , j-1, j]
     # update to a-z, A-Z
     gap, result = list(map(int, string.split('-'))), []
     gap.sort()
-    for i in range(gap[0], gap[1] + 1):
-        result.append(i)
-    result = list(map(int, result)) if str_ else result
+    result = [parser(x) for x in range(gap[0], gap[1]+1)]
     return result
 
 
-def to_simple_list(largelist):
+def to_single_list(largelist):
     result = []
     while isinstance(largelist[0], list):
         for sub in largelist:
@@ -57,12 +58,6 @@ def to_rows(lst, border='', w=0):
             n = width
         lst[i] = a.ljust(n, ' ') + border
     return lst
-
-
-def with_shell(value, w=0, pattern=''):
-    w, pattern = width if not w else w, ' ' if not pattern else pattern
-    res = pattern*w + '\n' + value + '\n' + pattern*w
-    return res
 # =====    Time    ===== #
 
 
@@ -88,11 +83,4 @@ def to_seconds(time):
 
 
 if __name__ == '__main__':
-    # print(from_gap('1-3'))
-
-    # array = [[x for x in range(13)], [x**2 for x in range(10) if x % 2 == 0], [x/2 for x in range(100) if x % 13 == 0]]
-    # print(array)
-    # print(to_simple_list(array))
-
-    # print(to_center('Iri', pattern='=', color=font.blink))
     pass

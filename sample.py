@@ -1,5 +1,7 @@
-import font
+import FIOS.font as font
+import FIOS.cfg as cfg
 
+main_path = r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS"
 files = {
     #   CG
     'Image': ['Graphic', '.jpeg', '.jpg', '.png', '.gif', '.ico'],
@@ -142,4 +144,23 @@ phrases = {
     'switch': ['хватит', 'о главном', 'ладно', 'ясно', 'понятно', 'подскажи', 'ири', 'помоги', 'слушай',
                'твоя помощь', 'помочь', 'поможешь мне', 'дашь совет'],
     'bye': ['Ладно.. Мне бежать. Пока)', 'До скорого!', 'Пока. Еще поболтаем', 'Давай. Удачи)']
+}
+width = int(cfg.get(cfg.iCore, "General", "line_amount"))
+versions = {
+    "ask": 0.0,
+    "cfg": 2.0,
+    "check": 0.0,
+    "convert": 0.9,
+    "fi": 0.0,
+    "font": 2.1,
+    "get": 0.0,
+    "init": 0.0,
+    "Iri": 4.0,
+    "marker": 0.0,
+    "notifier": 0.9,
+    "read": 2.0,
+    "sample": 0.0,
+    "sort": 0.0,
+    "split": 0.0,
+    "write": 0.9,
 }

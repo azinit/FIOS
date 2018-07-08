@@ -1,17 +1,18 @@
 import os
 
-import init
-import font
-import sample
-import write
-import convert
+import FIOS.init as init
+import FIOS.font as font
+import FIOS.sample as sample
+import FIOS.write as write
+import FIOS.notifier as notifier
+import FIOS.convert as convert
 
 # =====   Common   ===== #
 
 
 def info(value, name=''):
     obj = init.obj(value, 'none') if name == '' else init.obj(value, name)
-    write.status()
+    notifier.status()
     print('%s name: %s' % (obj.kind, font.beige + obj.name + font.end))
     print('%s type: %s' % (obj.kind, font.beige + obj.type + font.end))
     print('%s %s: %s' % (obj.kind, obj.ps, font.beige + str(obj.content) + font.end))
@@ -43,7 +44,7 @@ def intersection(value, comparewith):
                     if b:
                         result.append(b)
 
-        return convert.to_simple_list(result)
+        return convert.to_single_list(result)
 
 
 def digit(value, digits=''):
@@ -54,21 +55,27 @@ def digit(value, digits=''):
     return digits
 
 
-def key_(key, dictionary):
+def key_(value_search, dictionary):
     for subkey, value in dictionary.items():
-        if value == key:
-            return subkey
+        if isinstance(value, list):
+            for subvalue in value:
+                if subvalue == value_search:
+                    return subkey
+        else:
+            if value == value_search:
+                return subkey
 # =====  File Sys  ===== #
 
 
-def subs(path, fld=True, fls=False, printmode=False, recursive=True):
-    write.status(access=printmode)
+def subs(path, fld=True, fls=False, public=False, recursive=True):
+    if public:
+        notifier.status()
     dst, level = init.obj(path), 0
-    Dir = os.path.split(dst.path)[0] if dst.kind == 'File' else dst.path
-    if Dir:
-        dirs = [Dir] if fld else []
+    root = os.path.split(dst.path)[0] if dst.kind == 'File' else dst.path
+    if root:
+        dirs = [root] if fld else []
         files = []
-        for dirName, dirNames, fileNames in os.walk(Dir):
+        for dirName, dirNames, fileNames in os.walk(root):
             if not recursive and level > 0:
                 break
             if fld and recursive:
@@ -76,7 +83,7 @@ def subs(path, fld=True, fls=False, printmode=False, recursive=True):
             if fls:
                 files.extend(list(map(lambda filename: os.path.join(dirName, filename), fileNames)))
             level += 1
-        if printmode:
+        if public:
             write.me(dirs, font.yellow + sample.objtype['folder'], font.end)
             write.me(files, font.blue + sample.objtype['file'], font.end)
         if fls:
@@ -91,3 +98,11 @@ def time(startime, endtime):
     i, j = min(cur, end), max(cur, end)
     for i in range(i, j+1):
         yield convert.to_hms(i)
+
+if __name__ == "__main__":
+    # info([1, 1, 2, 3, 5])
+    # info("It's string")
+    # files, dirs = subs("F:\Database\Sort", True, True, True, True)
+    # print(key_(".zpr", sample.files))
+    # s = list(time("13:41:00", "14:01:13"))
+    print(intersection([1], ['1',1,2,1]))

@@ -1,17 +1,17 @@
 from datetime import datetime
 import os
-import cfg
 import re
 
-import sample
-import convert
+import FIOS.cfg as cfg
+import FIOS.sample as sample
+import FIOS.convert as convert
 
-files = convert.to_simple_list(list(sample.files.values()))
+files = convert.to_single_list(list(sample.files.values()))
 
 class obj(object):
     def __init__(self, content, name='none'):
         self.content = content
-        self.mpath = cfg.get(os.getcwd()+'\iCore.ini', 'Paths', 'main')
+        self.mpath = cfg.get(cfg.iCore, 'Paths', 'main')
         self.name, self.kind, self.type, self.ps = obj.data(self)
         self.path, self.string, self.time = content, content, content
         if name != 'none':
@@ -103,9 +103,9 @@ class obj(object):
 
         kind = kind__(content)
         name = name__(content, kind)
-        type = type__(content, name, kind)
+        tipe = type__(content, name, kind)
         path = path__(kind)
-        return name, kind.capitalize(), type, path
+        return name, kind.capitalize(), tipe, path
 
     @classmethod
     def fi(cls, value):

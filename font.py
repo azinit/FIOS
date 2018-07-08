@@ -1,7 +1,6 @@
-import cfg
+import FIOS.cfg as cfg
 
 TESTPHRASE = cfg.get(cfg.iCore, 'Add', 'test')
-version = 2.1
 
 # ====== FAMILY ===== #
 end = '\33[0m'

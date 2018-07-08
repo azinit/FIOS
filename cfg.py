@@ -2,8 +2,7 @@ import os.path
 import codecs
 import configparser
 
-iCore = "F:\Work\FIOS\iCore.ini"
-version = 2.0
+iCore = r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS\iCore.ini"
 
 def create(path, type='std'):
     if type == 'profile':

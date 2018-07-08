@@ -1,11 +1,9 @@
 import os
+import re
 
-# import write
-# import font
-# import sample
-# import get
-
-
+import font
+import sample
+import write
 
 # TODO
 def time(value):
@@ -18,7 +16,7 @@ def mistake(self):
 
 
 # TODO
-def intersection(arg1, arg2=''):
+'''def intersection(arg1, arg2=''):
     if arg2:
         intersection, source, destination = [], arg1, arg2
         for a in source:
@@ -30,7 +28,7 @@ def intersection(arg1, arg2=''):
         spath, cur = arg1, []
         for f in spath:
             if os.path.isdir(f):
-                list1, list2 = (check.dircontent(f))
+                list1, list2 = (dircontent(f))
                 cont = write.priority(list1, list2, False, False).split('(')
                 for i, c in enumerate(cont):
                     if c:
@@ -45,7 +43,7 @@ def intersection(arg1, arg2=''):
                 if not cur:
                     cur = cont
                 else:
-                    bol = check.intersection(cur, cont)
+                    bol = intersection(cur, cont)
                     if bol:
                         cur = bol
                     else:
@@ -63,7 +61,7 @@ def intersection(arg1, arg2=''):
                     cur.clear()
                     return cur
 
-        return cur
+        return cur'''
 
 
 def duplicate(filepath, fullname):
@@ -103,21 +101,18 @@ def name(commonpath):
     return fullname
 
 
-def digits(diglist):
-    b = False
+def digits(digit_list, pow_=1):
     try:
-        if not isinstance(diglist, list) and not isinstance(diglist, str):
-            diglist = [diglist]
-            b = True
-        for j, i in enumerate(diglist):
-            if int(i) < 10:
-                diglist[j] = '0' + str(i)
-        if b:
-            return diglist[0]
-        else:
-            return diglist
+        if not isinstance(digit_list, list) and not isinstance(digit_list, str):
+            digit_list = [digit_list]
+        for j, i in enumerate(digit_list):
+            if i.isdigit():
+                i = int(i)
+                if i < 10**(pow_-1):
+                    digit_list[j] = (pow_ - len(str(i)))*'0' + str(i)
+        return digit_list
     except:
-        return diglist
+        return digit_list
 
 
 def verb(word, parent='get'):
@@ -150,7 +145,7 @@ def input(message):
     return b
 
 
-def dircontent(path):
+'''def dircontent(path):
     files, dirs = list(get.subs(path, False, True))[0], list(sample.dirs.keys())
     count = [0]*len(dirs)
     if len(files) == 0:
@@ -163,4 +158,7 @@ def dircontent(path):
                     count[dirs.index(filedir[0])] += 1
         count, dirs = (list(t) for t in zip(*sorted(zip(count, dirs), reverse=True)))
     dirs, count = list(dirs[0:5:]), list(count[0:5:])
-    return dirs, count
+    return dirs, count'''
+
+if __name__ == "__main__":
+    print(digits(['1', '0002', '3', 'abs', 12.3, '04', '25', '23', '04', '107'], 2))

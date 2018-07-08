@@ -1,15 +1,12 @@
 from datetime import datetime
 import os
 import codecs
-import convert
-import inspect
 
+import FIOS.font as font
+import FIOS.convert as convert
+import FIOS.sample as sample
 
-import font
-import sample
-import cfg
-
-width = int(cfg.get(cfg.iCore, 'General', 'line_amount'))
+width = sample.width
 # =====   Common   ===== #
 
 
@@ -36,13 +33,6 @@ def me(value, start='', end='', name='', access=True):
             print(value)
 
 
-def status(tag='', pattern='', w=0, access=True):
-    if access:
-        name, pattern, w = str(inspect.stack()[1][3]) if not tag else tag, '-' if not pattern else pattern, width if not w else w
-        name = convert.to_center(name.upper(), w, pattern)
-        print(name)
-
-
 def list_(array, arrayname='List', colormode='iri'):
     # color = {'iri': font.end, 'temp':}
     lstname = arrayname.capitalize() + ':'
@@ -64,31 +54,17 @@ def list_(array, arrayname='List', colormode='iri'):
 # =====  Built-in  ===== #
 
 
-def priority(mainlst, sidelst='', printmode=True, colormode=True):
-    sidelst, string = (['']*len(mainlst) if not sidelst else sidelst), ''
+def priority(mainlist, sidelist='', public=True, colorize=True):
+    sidelist, string = ([''] * len(mainlist) if not sidelist else sidelist), ''
 
-    for m, s, color in zip(mainlst, sidelst, sample.priority):
+    for m, s, color in zip(mainlist, sidelist, sample.priority):
         if s:
-            color = '' if not colormode else color
+            color = '' if not colorize else color
             string += ('{2}{0}({1}) '.format(m, s, color))
 
-    string = string + font.end if colormode else string
-    me(string, access=printmode)
+    string = string + font.end if colorize else string
+    me(string, access=public)
     return string
-
-
-def notification(path, b, mode='create', access=True):
-    if access:
-        sign, col = '13F', [font.red] + [font.blue] + [font.end]
-        mdd = {
-            'create': ['13F already exists!', 'Created: 13F', '{}Error{} occurred'.format(font.yellow, font.end)],
-            'clean': [],
-            'sort': [],
-            'move': [],
-            'read': ['13F not found', 'Reading: 13F', '{}Error occured'.format(font.yellow, font.end)],
-            'curdir': ['13F not found', 'Directory: 13F', '{}Error occured'.format(font.yellow, font.end)]
-        }
-        print(mdd[mode][2] if b is None else mdd[mode][b].replace(sign, str(col[b] + path + col[2])))
 # =====    Time    ===== #
 
 
@@ -101,13 +77,9 @@ def hms(time='', end=''):
     print(font.beige2 + conv + font.end, end=end)
 # =====    File    ===== #
 
+
 def to_file(filepath, content, mode='w'):
     dir_, name = os.path.split(filepath)
     os.chdir(dir_)
     with codecs.open(name, mode, 'utf-8') as output:
         output.write(content)
-
-
-
-
-
