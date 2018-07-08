@@ -5,7 +5,7 @@ import time
 
 main_path = os.getcwd() # + "\\" + "projects" + "\\" + "HS"
 unis = ['КФУ', 'КГЭУ', 'КНИТУ-КАИ']
-faculty = [['ИТИС', 'ИВМиИТ-ВМК', 'ИММ'], ['ИЦТЭ'], ['ИКТиЗИ', 'ФМФ']]
+faculty = [['ИТИС', 'ИВМиИТ-ВМК'], ['ИЦТЭ'], ['ИКТиЗИ', 'ФМФ']]
 
 print(os.listdir('F:\Work\FIOS\projects\HS\КНИТУ-КАИ'))
 class S():

@@ -1,4 +1,7 @@
-TESTPHRASE = "Hello! I'm Iri :)"
+import cfg
+
+TESTPHRASE = cfg.get(cfg.iCore, 'Add', 'test')
+version = 2.1
 
 # ====== FAMILY ===== #
 end = '\33[0m'
@@ -8,12 +11,12 @@ underline = '\33[4m'
 blink = '\33[5m'
 blink2 = '\33[6m'
 selected = '\33[7m'
+# ====== COLOR ====== #
 # greyscale
 black = '\33[97m'
 grey = '\33[90m'
 grey2 = '\33[37m'
 white = '\33[30m'
-# ====== COLOR ====== #
 # less saturation
 red = '\33[91m'
 yellow = '\33[33m'
@@ -86,6 +89,7 @@ def background():
     print('bluebg2:   | %s' % bluebg2 + white + TESTPHRASE + end)
     print('violetbg:  | %s' % violetbg + white + TESTPHRASE + end)
     print('violetbg2: | %s' % violetbg2 + white + TESTPHRASE + end)
+
 
 if __name__ == "__main__":
     family()

@@ -1,7 +1,12 @@
 from datetime import datetime
 
 import font
+import cfg
 
+sections = ['Common', 'Aligning', 'Time']
+functions = [['to_graphic_path', 'from_gap', 'to_simple_list'], ['to_center', 'to_rows'], ['to_datetime', 'to_hms', 'to_seconds']]
+width = int(cfg.get(cfg.iCore, 'General', 'line_amount'))  # from cfg
+version = 2.0
 # =====   Common   ===== #
 
 
@@ -11,6 +16,8 @@ def to_graphic_path(path):
 
 
 def from_gap(string, str_=True):
+    # current: i-j -> [i, i+1, ... , j-1, j]
+    # update to a-z, A-Z
     gap, result = list(map(int, string.split('-'))), []
     gap.sort()
     for i in range(gap[0], gap[1] + 1):
@@ -29,29 +36,33 @@ def to_simple_list(largelist):
 # =====  Aligning  ===== #
 
 
-def to_center(value, width=39, pattern='', color=''):
-    # width = Feebon.LINE if not width else width
-    pattern = ' ' if not pattern else pattern
-    color = font.beige if not color else color
-    tab = str(value.rjust(width, pattern)).replace(value, '', 1)
-    tab2 = tab[:len(tab)//2:]
-    tab1 = tab2 if len(value) % 2 == 0 else tab2 + pattern
-    value = color + tab1 + value + tab2 + font.end
+def to_center(value, w=0, pattern='', color=''):
+    w, pattern, color = width if not w else w, ' ' if not pattern else pattern, font.beige if not color else color
+    leng = (w - len(value))
+    tab = pattern*(leng//2)
+    value = color + tab + pattern*(leng % 2 == 1) + value + tab + font.end
     return value
 
 
-def to_rows(lst, border='', width=''):
-    width = 57 if not width else width
-    n = width
+def to_rows(lst, border='', w=0):
+    # need to upd
+    border, w = '' if not border else border, width if not w else w
+    n = w
     for i, a in enumerate(lst):
         if a.find('\x1b[0m') > -1:
             n += 9
-        elif i == 0:
-            n += 1
+        # elif i == 0:
+        #    n += 1
         else:
             n = width
         lst[i] = a.ljust(n, ' ') + border
     return lst
+
+
+def with_shell(value, w=0, pattern=''):
+    w, pattern = width if not w else w, ' ' if not pattern else pattern
+    res = pattern*w + '\n' + value + '\n' + pattern*w
+    return res
 # =====    Time    ===== #
 
 
@@ -74,3 +85,14 @@ def to_seconds(time):
     else:       # condition
         cur = time
     return int(cur.hour) * 3600 + int(cur.minute) * 60 + int(cur.second)
+
+
+if __name__ == '__main__':
+    # print(from_gap('1-3'))
+
+    # array = [[x for x in range(13)], [x**2 for x in range(10) if x % 2 == 0], [x/2 for x in range(100) if x % 13 == 0]]
+    # print(array)
+    # print(to_simple_list(array))
+
+    # print(to_center('Iri', pattern='=', color=font.blink))
+    pass

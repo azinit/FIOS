@@ -7,7 +7,9 @@ import inspect
 
 import font
 import sample
+import cfg
 
+width = int(cfg.get(cfg.iCore, 'General', 'line_amount'))
 # =====   Common   ===== #
 
 
@@ -34,12 +36,10 @@ def me(value, start='', end='', name='', access=True):
             print(value)
 
 
-def status(tag='', pattern='', width=39, access=True):
+def status(tag='', pattern='', w=0, access=True):
     if access:
-        name = str(inspect.stack()[1][3]) if not tag else tag
-        pattern = '-' if not pattern else pattern
-        # width = Feebon.LINE if not width else width
-        name = convert.to_center(name.upper(), width, pattern)
+        name, pattern, w = str(inspect.stack()[1][3]) if not tag else tag, '-' if not pattern else pattern, width if not w else w
+        name = convert.to_center(name.upper(), w, pattern)
         print(name)
 
 

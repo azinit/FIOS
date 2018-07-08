@@ -1,6 +1,7 @@
 import os
 import codecs
 
+# line = int(cfg.get(cfg.iCore, 'General', 'line_amount'))
 
 def from_file(filepath, public=False):
     path, name = os.path.split(filepath)
@@ -11,4 +12,5 @@ def from_file(filepath, public=False):
     os.chdir(path)
     with codecs.open(name, 'r+', 'utf-8') as finput:
         content += (finput.read())
+    # content = '='*line + '\n' + content + '\n' + '='*line if divide else content
     return content
