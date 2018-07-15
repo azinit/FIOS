@@ -1,5 +1,3 @@
-from FB.IriDev.Iri import *
-
 def def_file(self):
     file = get.obj(self).content
     if not file:
@@ -58,6 +56,7 @@ def content(self, pattern):
         return i
     else:
         return None
+
 def string(line, color = 'std'):
     string = get.obj(line).string
     if color == 'std':

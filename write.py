@@ -5,6 +5,7 @@ import codecs
 import FIOS.font as font
 import FIOS.convert as convert
 import FIOS.sample as sample
+import FIOS.notifier as notifier
 
 width = sample.width
 # =====   Common   ===== #
@@ -14,7 +15,7 @@ def me(value, start='', end='', name='', access=True):
     if access:
         if isinstance(value, list):
             if name:
-                print(font.beige + name + font.end + ' reference:')
+                print(font.red2 + name + font.end + ' reference:')
             if len(value) > 0:
                 if isinstance(value[0], list):
                     for line in value:
@@ -27,7 +28,7 @@ def me(value, start='', end='', name='', access=True):
                     print(value)
         elif isinstance(value, dict):
             keys, values = value.keys(), value.values()
-            lst = list(map(lambda k, v: "{}[{}]{} - ".format(font.beige, k, font.end) + str(v), keys, values))
+            lst = list(map(lambda k, v: "{}[{}]{} - ".format(font.red2, k, font.end) + str(v), keys, values))
             me(lst, name=name)
         elif isinstance(value, str):
             print(value)
@@ -38,9 +39,9 @@ def list_(array, arrayname='List', colormode='iri'):
     lstname = arrayname.capitalize() + ':'
     lst = array
     if colormode == 'iri':
-        print(font.beige + lstname + font.end)
+        print(font.red2 + lstname + font.end)
         for i, f in enumerate(lst):
-            print(font.beige + '%s. ' % (str(int(i) + 1)) + font.end + f + font.end)
+            print(font.red2 + '%s. ' % (str(int(i) + 1)) + font.end + f + font.end)
     elif colormode == 'temp':
         print(font.underline + lstname + font.end)
         for i, f in enumerate(lst):
@@ -71,15 +72,20 @@ def priority(mainlist, sidelist='', public=True, colorize=True):
 def hms(time='', end=''):
     time = [datetime.now().hour, datetime.now().minute, datetime.now().second] if not time else time
     hour, minute, second = time
-    conv = convert.to_datetime(hour, minute, second)
+    conv = convert.to_time(hour, minute, second)
     conv = conv.strftime('%H:%M:%S')
     end = '\n' if not end else end
     print(font.beige2 + conv + font.end, end=end)
 # =====    File    ===== #
 
 
-def to_file(filepath, content, mode='w'):
-    dir_, name = os.path.split(filepath)
-    os.chdir(dir_)
-    with codecs.open(name, mode, 'utf-8') as output:
-        output.write(content)
+def to_file(file_path, content, mode='w', public=False):
+    path, name = os.path.split(file_path)
+    if public:
+        notifier.status()
+        notifier.result(name, os.path.exists(file_path), "read")
+        notifier.result(path, os.path.exists(path), "cur_dir")
+    if os.path.exists(file_path):
+        os.chdir(path)
+        with codecs.open(name, mode, "utf-8") as output:
+            output.write(content)

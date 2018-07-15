@@ -1,7 +1,8 @@
 import FIOS.cfg as cfg
 
 TESTPHRASE = cfg.get(cfg.iCore, 'Add', 'test')
-
+# TODO
+# ANSI COLORS
 # ====== FAMILY ===== #
 end = '\33[0m'
 bold = '\33[1m'
@@ -49,6 +50,7 @@ beigebg2 = '\33[106m'
 bluebg2 = '\33[44m'
 violetbg2 = '\33[105m'
 
+
 def family():
     print('bold:      | %s' % bold + TESTPHRASE + end)
     print('italic:    | %s' % italic + TESTPHRASE + end)
@@ -56,6 +58,8 @@ def family():
     print('blink:     | %s' % blink + TESTPHRASE + end)
     print('blink2:    | %s' % blink2 + TESTPHRASE + end)
     print('selected:  | %s' % selected + TESTPHRASE + end)
+
+
 def color():
     print('black:     | %s' % black + TESTPHRASE + end)
     print('grey:      | %s' % grey + TESTPHRASE + end)
@@ -72,6 +76,8 @@ def color():
     print('blue2:     | %s' % blue2 + TESTPHRASE + end)
     print('violet:    | %s' % violet + TESTPHRASE + end)
     print('violet2:   | %s' % violet2 + TESTPHRASE + end)
+
+
 def background():
     print('blackbg:   | %s' % blackbg + TESTPHRASE + end)
     print('greybg:    | %s' % greybg + TESTPHRASE + end)
@@ -90,7 +96,12 @@ def background():
     print('violetbg2: | %s' % violetbg2 + white + TESTPHRASE + end)
 
 
+def paint(value, colour):
+    return colour + str(value) + end
+
+
 if __name__ == "__main__":
     family()
     color()
     background()
+    print(paint(value=TESTPHRASE, colour=red2))

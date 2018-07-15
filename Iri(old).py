@@ -67,7 +67,7 @@ class Iri(object):
         # self.erotic = font.violet2
         self.pos = font.blue
         self.neg = font.red2
-'''    # TODO
+    # TODO
     def developeme(self):
         item = inspect.stack()[1][3].upper()
         pass

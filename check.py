@@ -1,67 +1,20 @@
 import os
-import re
 
-import font
-import sample
-import write
+import FIOS.sample as sample
 
 # TODO
-def time(value):
+def time():
     pass
 
 
 # TODO
-def mistake(self):
+def mistake():
     pass
 
 
 # TODO
-'''def intersection(arg1, arg2=''):
-    if arg2:
-        intersection, source, destination = [], arg1, arg2
-        for a in source:
-            for b in destination:
-                if b.find(a) != -1:
-                    intersection.append(a)
-        return intersection
-    else:
-        spath, cur = arg1, []
-        for f in spath:
-            if os.path.isdir(f):
-                list1, list2 = (dircontent(f))
-                cont = write.priority(list1, list2, False, False).split('(')
-                for i, c in enumerate(cont):
-                    if c:
-                        b = ''.join(re.findall('[A-Za-z]', c))
-                        if b:
-                            cont[i] = b
-                        else:
-                            cont.pop(i)
-                if len(cont) > 3 and len(spath) == 1:
-                    cur = cont
-                    break
-                if not cur:
-                    cur = cont
-                else:
-                    bol = intersection(cur, cont)
-                    if bol:
-                        cur = bol
-                    else:
-                        cur.clear()
-                        break
-            else:
-                Type = ''
-                for file in sample.files.values():
-                    if (get.exceptions(f, file, mode='ext')[0]):
-                        Type = file[0]
-                        break
-                if not cur:
-                    cur.append(Type)
-                elif cur[0] != 'Type':
-                    cur.clear()
-                    return cur
-
-        return cur'''
+def intersection():
+    pass
 
 
 def duplicate(filepath, fullname):
@@ -86,8 +39,8 @@ def duplicate(filepath, fullname):
     return fullname
 
 
-def name(commonpath):
-    path, fullname = os.path.split(commonpath)
+def name(full_path):
+    path, fullname = os.path.split(full_path)
     os.chdir(path)
     lst = fullname.split('.')
     if len(lst) > 2:
@@ -103,16 +56,16 @@ def name(commonpath):
 
 def digits(digit_list, pow_=1):
     try:
-        if not isinstance(digit_list, list) and not isinstance(digit_list, str):
+        if not isinstance(digit_list, (list, str)):
             digit_list = [digit_list]
         for j, i in enumerate(digit_list):
             if i.isdigit():
                 i = int(i)
                 if i < 10**(pow_-1):
                     digit_list[j] = (pow_ - len(str(i)))*'0' + str(i)
-        return digit_list
-    except:
-        return digit_list
+    except():
+        pass
+    return digit_list
 
 
 def verb(word, parent='get'):
@@ -138,11 +91,6 @@ def verb(word, parent='get'):
             if not v[2]:
                 word += 'ing'
     return word
-
-
-def input(message):
-    b = True if message == 'y' or message == '' else False
-    return b
 
 
 '''def dircontent(path):
