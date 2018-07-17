@@ -73,6 +73,9 @@ dirs = {
 }
 
 #   FIOS
+assistant = cfg.get(cfg.iCore, "General", "assistant")
+assistant_full = cfg.get(cfg.iCore, "General", "assist_transcript")
+user = cfg.get(cfg.iCore, "General", "user")
 width = int(cfg.get(cfg.iCore, "General", "line_amount"))
 priority = [font.red2, font.red, font.yellow2, font.yellow, font.green]
 objects = {
@@ -144,8 +147,8 @@ versions = {
     "font": 2.19,
     "get": 0.99,
     "substance": 2.0,
-    "Iri": 4.0,
-    "marker": 0.0,
+    "index": 0.0,
+    "iri": 4.0,
     "notifier": 0.99,
     "read": 2.0,
     "sample": 1.0,

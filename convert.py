@@ -40,7 +40,6 @@ def to_single_list(large_list):
 def to_center(value, width=0, pattern='', color=''):
     width = default_width if not width else width
     pattern = ' ' if not pattern else pattern
-    color = font.red2 if not color else color
     length = (width - len(value))
     tab = pattern*(length//2)
     return color + tab + pattern*(length % 2 == 1) + value + tab + font.end

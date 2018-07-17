@@ -96,12 +96,12 @@ def background():
     print('violetbg2: | %s' % violetbg2 + white + TESTPHRASE + end)
 
 
-def paint(value, colour):
-    return colour + str(value) + end
+def paint(value, content_color, next_color=end):
+    return content_color + str(value) + next_color
 
 
 if __name__ == "__main__":
     family()
     color()
     background()
-    print(paint(value=TESTPHRASE, colour=red2))
+    print(paint(value=TESTPHRASE, content_color=red2))
