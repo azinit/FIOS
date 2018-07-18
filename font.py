@@ -1,6 +1,5 @@
-import FIOS.cfg as cfg
+TESTPHRASE = "Hello! I'm Iri ;)"
 
-TESTPHRASE = cfg.get(cfg.iCore, 'Add', 'test')
 # TODO
 # ANSI COLORS
 # ====== FAMILY ===== #

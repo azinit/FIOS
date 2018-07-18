@@ -1,16 +1,18 @@
-import os
-
-import FIOS.substance as substance
-import FIOS.font as font
-import FIOS.sample as sample
-import FIOS.write as write
 import FIOS.notifier as notifier
-import FIOS.convert as convert
+import FIOS.write as write
+import FIOS.write.os as os
+import FIOS.substance as substance
+
+
+sample = notifier.smp
+convert = notifier.convert
+yellow = sample.font.yellow
+blue = sample.font.blue
+end = sample.font.end
+
 
 # =====   Common   ===== #)
-
-
-# TODO
+# TODO : function: path_intersection(deeepest up lvl)
 def intersection():
     pass
 
@@ -33,15 +35,15 @@ def key_by_value(search, dictionary):
         value = [value] if not isinstance(value, list) else convert.to_single_list(value)
         if search in value:
             return key
+
+
 # =====  File Sys  ===== #
-
-
 def subs(path, folders=True, files=False, public=False, recursive=True):
     def unite(main_dir, sub_list):
         return list(map(lambda x: os.path.join(main_dir, x), sub_list))
 
     notifier.status() if public else None
-    dst, level = substance.initialize(path), 0
+    dst, level = substance.init(path), 0
     root = os.path.split(dst.content)[0] if dst.kind == 'file' else dst.content
     if root:
         result_files, result_folders = [], [root] if folders else []
@@ -54,15 +56,15 @@ def subs(path, folders=True, files=False, public=False, recursive=True):
                 result_files.extend(unite(dirName, fileNames))
             level += 1
         if public:
-            write.me(result_folders, font.yellow + sample.objects['folder'], font.end)
-            write.me(result_files, font.blue + sample.objects['file'], font.end)
+            write.me(result_folders, yellow + sample.objects['folder'], end)
+            write.me(result_files, blue + sample.objects['file'], end)
         if files:
             yield result_files
         if folders:
             yield result_folders
+
+
 # =====    Time    ===== #
-
-
 def time(start_time, end_time):
     if not isinstance(start_time, int):
         start_time, end_time = convert.to_seconds(start_time), convert.to_seconds(end_time)
@@ -76,5 +78,5 @@ if __name__ == "__main__":
     print(substring(string=type("SomeString"), pattern="'"))
     print(digit(digit_seq="12349501"))
     print(key_by_value(search=".avi", dictionary=sample.files))
-    folder, file = subs(path=sample.main_path, folders=True, files=True, public=True, recursive=False)
+    folder, file = subs(path=sample.MAIN_PATH, folders=True, files=True, public=True, recursive=False)
     print(list(time(start_time=64800, end_time=64809)))

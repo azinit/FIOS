@@ -9,8 +9,9 @@ def from_file(file_path, public=False):
     content = ''
     if public:
         notifier.status()
-        notifier.result(name, os.path.exists(file_path), "read")
         notifier.result(path, os.path.exists(path), "cur_dir")
+        notifier.result(file_path, os.path.exists(file_path), "read", decore=lambda x: os.path.split(x)[1])
+
     if os.path.exists(file_path):
         os.chdir(path)
         with codecs.open(name, 'r+', 'utf-8') as fin:

@@ -1,11 +1,11 @@
 import datetime
 
-import FIOS.font as font
-import FIOS.sample as sample
+import FIOS.cfg as cfg
 
-sections = ['Common', 'Aligning', 'Time']
-functions = [['to_graphic_path', 'from_gap', 'to_simple_list'], ['to_center', 'to_rows'], ['to_datetime', 'to_hms', 'to_seconds']]
-default_width = sample.width
+# sections = ['Common', 'Aligning', 'Time']
+# functions = [['to_graphic_path', 'from_gap', 'to_simple_list'], ['to_center', 'to_rows'],
+# ['to_datetime', 'to_hms', 'to_seconds']]
+default_width = cfg.Settings.width
 
 
 # =====   Common   ===== #
@@ -42,7 +42,7 @@ def to_center(value, width=0, pattern='', color=''):
     pattern = ' ' if not pattern else pattern
     length = (width - len(value))
     tab = pattern*(length//2)
-    return color + tab + pattern*(length % 2 == 1) + value + tab + font.end
+    return color + tab + pattern*(length % 2 == 1) + value + tab + '\33[0m'
 
 
 def to_rows(lst, border='', width=0):
@@ -83,13 +83,12 @@ def to_seconds(time):
 
 
 if __name__ == '__main__':
-    print(to_graphic_path(path=sample.main_path))
+    print(to_graphic_path(path=r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS"))
     print(to_divided(content="Some text is there. Must be. The main thing is believe", offset=2, pattern='.'))
     print(to_interval(gap="1-5", parser=int))
     print(to_interval(gap="5-1", parser=str))
     print(to_single_list(large_list=[[[1, 2, 3], [4, 5, 6]], [7, 8, 9]]))
-    print(to_center(value="SomeTitle", width=20, pattern='X', color=font.beige))
+    print(to_center(value="SomeTitle", width=20, pattern='X', color='\33[36m'))
     print(to_time(h=18, m=46, s=13))
     print(to_hms(s=datetime.datetime.now()))
     print(to_seconds(time="18:47:20"))
-

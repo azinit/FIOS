@@ -1,19 +1,16 @@
-import datetime
 import inspect
 
-import FIOS.font as font
-import FIOS.sample as sample
 import FIOS.notifier as note
 
-start_time = 0
-end_time = 0
+sample, cfg = note.smp, note.convert.cfg
+font, datetime = sample.font, sample.datetime
 
-csl_color = font.beige
-emit_color = font.beige2
+start_time, end_time = 0, 0
+csl_color, emit_color = font.beige, font.beige2
 
-USER = sample.user
-AI = sample.assistant
-AI_full = sample.assistant_full
+USER = cfg.Settings().user
+AI = cfg.Settings().assistant
+AI_full = cfg.Settings().assistant_full
 AI_ico = font.paint("👩 ", csl_color)
 
 
@@ -66,12 +63,8 @@ def shutdown():
     goodbye()
 
 
-
-
-
 if __name__ == "__main__":
     launch()
     print("// Some magic ¯\_(ツ)_/¯")
     note.time.sleep(2)
     shutdown()
-

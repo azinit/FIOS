@@ -1,63 +1,161 @@
 import datetime
 
 import FIOS.font as font
-import FIOS.cfg as cfg
 
-main_path = r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS"
-
+MAIN_PATH = r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS"
 #   File System
 files = {
     #   CG
-    "Image": ["Graphic", ".jpeg", ".jpg", ".png", ".gif", ".ico"],
-    "Texture": ["CG", ".dds", ".tga", ".raw", ".bmp", ".tiff"],
-    "Vector": ["Graphic", ".svg"],
-    "Video": ["Graphic", ".avi", ".mp4"],
-    "Adobe Photoshop doc": ["Adobe", ".psd", ".psb"],
-    "Adobe Illustrator doc": ["Adobe", ".ai"],
-    "Photoshop preset": ["Adobe", ".eps", ".sln", ".jsx"],
-    "3ds Max": ["CG", ".max", ".ms", ".mse", ".bip"],
-    "Zbrush": ["CG", ".zpr", ".ztl", ".cfg"],
-    "3d Coat": ["CG", "..."],
-    "Topogun": ["CG", "..."],
-    "3D Model": ["CG", ".obj", ".fbx", ".mtl"],
-    "Substance": ["CG", ".sbs", ".sbsar", ".spsm"],
-    "PureRef": ["CG", ".pur"],
-    "Cinema 4D": ["CG", ".c4d"],
-    "Maya": ["CG", ".ma"],
-    "Marmoset Toolbag": ["CG", ".mview"],
-    "Corel Draw": ["CG", ".cdr"],
-    "Paint.NET": ["CG", ".pdn"],
-    "Marvelous Designer": ["CG", ".Zprj"],
+    "Image": [".jpeg", ".jpg", ".png", ".gif", ".ico"],
+    "Texture": [".dds", ".tga", ".raw", ".bmp", ".tiff"],
+    "Vector": [".svg"],
+    "Video": [".avi", ".mp4"],
+    "Adobe Photoshop doc": [".psd", ".psb"],
+    "Adobe Illustrator doc": [".ai"],
+    "Photoshop preset": [".eps", ".sln", ".jsx"],
+    "3ds Max": [".max", ".ms", ".mse", ".bip"],
+    "Zbrush": [".zpr", ".ztl", ".cfg"],
+    "3d Coat": ["..."],
+    "Topogun": ["..."],
+    "3D Model": [".obj", ".fbx", ".mtl"],
+    "Substance": [".sbs", ".sbsar", ".spsm"],
+    "PureRef": [".pur"],
+    "Cinema 4D": [".c4d"],
+    "Maya": [".ma"],
+    "Marmoset Toolbag": [".mview"],
+    "Corel Draw": [".cdr"],
+    "Paint.NET": [".pdn"],
+    "Marvelous Designer": [".Zprj"],
     #   Documents
-    "Adobe Reader": ["Text", ".pdf", ".djvu"],
-    "Microsoft Office": ["Text", ".doc", ".docx", ".rtf"],
-    "Microsoft Excel": ["Text", ".xls", ".xlsx", ".xlsm"],
-    "Microsoft PowerPoint": ["Text", ".ppt", ".pptx"],
-    "XMind": ["Text", ".xmind"],
-    "Text": ["Text", ".txt"],
-    "Code": ["Text", ".xml", ".js", ".java", ".url", ".xml", ""],
-    "Config": ["Text", ".ini", ".config"],
-    "LogFile": ["Text", ".log"],
+    "Adobe Reader": [".pdf", ".djvu"],
+    "Microsoft Office": [".doc", ".docx", ".rtf"],
+    "Microsoft Excel": [".xls", ".xlsx", ".xlsm"],
+    "Microsoft PowerPoint": [".ppt", ".pptx"],
+    "XMind": [".xmind"],
+    "Text": [".txt"],
+    "Code": [".xml", ".js", ".java", ".url", ".xml", ""],
+    "Config": [".ini", ".config"],
+    "LogFile": [".log"],
     # "": ["..."],
     #   Audio
-    "Audio": ["Audio", ".mp3", ".wav", ".m4a"],
-    "Sibelius": ["Audio", ".sib"],
-    "Guitar Pro": ["Audio", ".gpx", ".gp5", ".gp4", ".gp3"],
+    "Audio": [".mp3", ".wav", ".m4a"],
+    "Sibelius": [".sib"],
+    "Guitar Pro": [".gpx", ".gp5", ".gp4", ".gp3"],
     #   System
-    "Archive": ["System", ".zip", ".rar", ".7zip", ".7z"],
-    "Launch": ["Software", ".exe", ".msi"],
-    "Font": ["System", ".ttf", ".otf"],
-    "Link": ["System", ".lnk"],
+    "Archive": [".zip", ".rar", ".7zip", ".7z"],
+    "Launch": [".exe", ".msi", ".bat"],
+    "Font": [".ttf", ".otf"],
+    "Link": [".lnk"],
     #   Code
-    "Python": ["Code", ".py", ".whl"],
-    "Pascal": ["Code", ".pas"],
-    "Visual Studio": ["Code", ".sln", ".cs", ".csproj"],
-    "Android Studio": ["Code", ".apk"],
+    "Python": [".py", ".whl"],
+    "Pascal": [".pas"],
+    "Visual Studio": [".sln", ".cs", ".csproj"],
+    "Android Studio": [".apk"],
+    "UI Style": [".ui"],
     #   Special
     #       Games
-    "Skyrim": ["Games", ".esp", ".esm", ".bsa", ".bsl"],
+    "Skyrim": [".esp", ".esm", ".bsa", ".bsl"],
     #       Torrent
-    "Torrent": ["Download⬇", ".torrent"]
+    "Torrent": [".torrent"]
+}
+objects = {
+    "substance": ">",
+    "number": '🔢',
+    "dataStructure": '📚',
+    "string": '🙱',
+    "boolean": '🚩',
+    "timeData": '⏳',
+    "path": '🖇',
+    "file": '📄',
+    "folder": '📁',
+    "element": '•',
+    "video": '🎬',
+    "slides": '🎟',
+    "image": '🖻',
+    "camera": '📷',
+    "archive": '💾',
+    "game": "🎮",
+    "CG": '📛',
+    "system": '🗔',
+    "audio": '🎵',
+    "guitar": '🎸',
+    "piano": '🎹',
+    "arrow": '➟',
+    "net": '📶',
+    "cloth": '🧥',
+    "draw": '✐',
+    "texture": '🌀',
+    "font": '🗛',
+    "vector": '❐',
+    "play": '▶',
+    "map": '📊',
+    "settings": '🔧',
+    "text": '📝',
+    "table": '📅',
+    "phone": '📱',
+    "castle": '🏰',
+    "house": '🕋',
+    "code": '⌘',
+    "clip": '🔗',
+    "people": '👥',
+    "link": '⮬',
+    "windows": '🗗',
+    "grid": '▤',
+    "bye": '🚪',
+
+}
+files_properties = {
+    "Image": ["Graphic", objects.get("image")],
+    "Texture": ["CG", objects.get("texture")],
+    "Vector": ["Graphic", objects.get("vector")],
+    "Video": ["Graphic", objects.get("video")],
+    "Adobe Photoshop doc": ["Adobe", objects.get("camera")],
+    "Adobe Illustrator doc": ["Adobe", objects.get("draw")],
+    "Photoshop preset": ["Adobe", objects.get("settings")],
+    "3ds Max": ["CG", objects.get("house")],
+    "Zbrush": ["CG", objects.get("people")],
+    "3d Coat": ["CG", objects.get("house")],
+    "Topogun": ["CG", objects.get("house")],
+    "3D Model": ["CG", objects.get("house")],
+    "Substance": ["CG", objects.get("texture")],
+    "PureRef": ["CG", objects.get("image")],
+    "Cinema 4D": ["CG", objects.get("camera")],
+    "Maya": ["CG", objects.get("castle")],
+    "Marmoset Toolbag": ["CG", objects.get("camera")],
+    "Corel Draw": ["CG", objects.get("draw")],
+    "Paint.NET": ["CG", objects.get("draw")],
+    "Marvelous Designer": ["CG", objects.get("cloth")],
+    #   Documents
+    "Adobe Reader": ["Text", objects.get("slides")],
+    "Microsoft Office": ["Text", objects.get("text")],
+    "Microsoft Excel": ["Text", objects.get("table")],
+    "Microsoft PowerPoint": ["Text", objects.get("slides")],
+    "XMind": ["Text", objects.get("map")],
+    "Text": ["Text", objects.get("text")],
+    "Code": ["Text", objects.get("code")],
+    "Config": ["Text", objects.get("log")],
+    "LogFile": ["Text", objects.get("log")],
+    # "": ["..."],
+    #   Audio
+    "Audio": ["Audio", objects.get("audio")],
+    "Sibelius": ["Audio", objects.get("piano")],
+    "Guitar Pro": ["Audio", objects.get("guitar")],
+    #   System
+    "Archive": ["System", objects.get("archive")],
+    "Launch": ["Software", objects.get("launch")],
+    "Font": ["System", objects.get("font")],
+    "Link": ["System", objects.get("link")],
+    #   Code
+    "Python": ["Code", objects.get("code")],
+    "Pascal": ["Code", objects.get("code")],
+    "Visual Studio": ["Code", objects.get("windows")],
+    "Android Studio": ["Code", objects.get("phone")],
+    "UI Style": ["System", objects.get("grid")],
+    #   Special
+    #       Games
+    "Skyrim": ["Games", objects.get("game")],
+    #       Torrent
+    "Torrent": ["Download⬇", objects.get("net")],
 }
 dirs = {
     "Graphic": [font.blue2, "F:\Work\CODE\Projects\SortManager\Sort\Graphic"],
@@ -72,27 +170,7 @@ dirs = {
     "Games": [font.bold, "F:\Work\CODE\Projects\SortManager\Sort\Games"]
 }
 
-#   FIOS
-assistant = cfg.get(cfg.iCore, "General", "assistant")
-assistant_full = cfg.get(cfg.iCore, "General", "assist_transcript")
-user = cfg.get(cfg.iCore, "General", "user")
-width = int(cfg.get(cfg.iCore, "General", "line_amount"))
 priority = [font.red2, font.red, font.yellow2, font.yellow, font.green]
-objects = {
-    "file0": '•',
-    "file": '📄',
-    "folder": '📁',
-    "time": '⏳',
-    "video": '📽',
-    "photo": '📷',
-    "archive": '💾',
-    "text": '🗎',
-    "CG": '📛',
-    "System": '🗔',
-    "Audio": '🎵',
-    "bye": '🚪',
-
-}
 choicebox = ["[y/n]"]
 phrases = {
     "start": ["А я тут", "Я пришла", "Все. Я вся твоя)", "Привет)", "Привет", "Хай", "Доброе утро"],
@@ -120,7 +198,7 @@ types = {
     "number_float_neg": -13.8,
     "number_complex": 1+1j,
     "dataStructure_list": [1, 1, 2, 3, 5],
-    "dateStructure_*_matrix": [[0, 1, 2], [3, 4, 5]],
+    "dataStructure_*_matrix": [[0, 1, 2], [3, 4, 5]],
     "dataStructure_tuple": tuple([1, 1, 2, 3, 5]),
     "dataStructure_dictionary": {"1": "a", "2": "b"},
     "dataStructure_set": {1, 1, 2, 3, 5},
@@ -128,17 +206,19 @@ types = {
     "string_char": 'a',
     "string_line": "Process finished with exit code 0",
     "string_text": "[General]\ncorename = Iri",
-    "boolean": True,
-    "datetime_date": datetime.date.today(),
-    "datetime_time": datetime.datetime.time(datetime.datetime.now()),
-    "datetime_datetime": datetime.datetime.now(),
+    "flag_bool_true": True,
+    "flag_bool_false": False,
+    "flag_NoneType": None,
+    "timeData_date": datetime.date.today(),
+    "timeData_time": datetime.datetime.time(datetime.datetime.now()),
+    "timeData_datetime": datetime.datetime.now(),
     "path_file_is": r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS\sample.py",
     "path_dir_is": r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS",
     "path_file_isn't": r"Z:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS\sample.py",
-    "path_dir_isn't": r"Z:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS",
+    "path_ambiguous": r"Z:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS",
 }
 versions = {
-    "ask": 0.0,
+    "requester": 0.0,
     "cfg": 2.0,
     "check": 0.0,
     "convert": 0.99,

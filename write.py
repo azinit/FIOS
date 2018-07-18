@@ -1,16 +1,14 @@
-from datetime import datetime
 import os
 import codecs
 
-import FIOS.font as font
-import FIOS.convert as convert
 import FIOS.sample as sample
 import FIOS.notifier as notifier
 
-width = sample.width
+font = sample.font
+dt = sample.datetime.datetime
+
+
 # =====   Common   ===== #
-
-
 def me(value, start='', end='', name='', access=True):
     if access:
         if isinstance(value, list):
@@ -52,9 +50,9 @@ def list_(array, arrayname='List', colormode='iri'):
             if i == 0:
                 f = '▲ toParent'
             print(font.yellow + '%s. ' % (str(int(i))) + font.end + f + font.end)
+
+
 # =====  Built-in  ===== #
-
-
 def priority(mainlist, sidelist='', public=True, colorize=True):
     sidelist, string = ([''] * len(mainlist) if not sidelist else sidelist), ''
 
@@ -66,25 +64,26 @@ def priority(mainlist, sidelist='', public=True, colorize=True):
     string = string + font.end if colorize else string
     me(string, access=public)
     return string
+
+
 # =====    Time    ===== #
-
-
 def hms(time='', end=''):
-    time = [datetime.now().hour, datetime.now().minute, datetime.now().second] if not time else time
+    time = [dt.now().hour, dt.now().minute, dt.now().second] if not time else time
     hour, minute, second = time
-    conv = convert.to_time(hour, minute, second)
+    conv = notifier.convert.to_time(hour, minute, second)
     conv = conv.strftime('%H:%M:%S')
     end = '\n' if not end else end
     print(font.beige2 + conv + font.end, end=end)
+
+
 # =====    File    ===== #
-
-
 def to_file(file_path, content, mode='w', public=False):
     path, name = os.path.split(file_path)
     if public:
         notifier.status()
-        notifier.result(name, os.path.exists(file_path), "read")
         notifier.result(path, os.path.exists(path), "cur_dir")
+        notifier.result(file_path, os.path.exists(file_path), "write", decore=lambda x: os.path.split(x)[1])
+
     if os.path.exists(file_path):
         os.chdir(path)
         with codecs.open(name, mode, "utf-8") as output:

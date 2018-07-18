@@ -1,7 +1,7 @@
 def file(fullname):
     result = fullname.split('.')
     if len(result) == 1:
-        filename, file_extension = result[0], ''
+        filename, file_extension = result[0], None
     elif len(result) == 2:
         filename, file_extension = result
     else:    # > 2
@@ -11,7 +11,10 @@ def file(fullname):
 
 def path(full_path, up_lvl=2):
     blocks = str(full_path).split(r"\\"[:1:])
-    result = [x for i, x in enumerate(blocks) if i >= len(blocks) - up_lvl]
+    if up_lvl > 0:
+        result = [x for i, x in enumerate(blocks) if i >= len(blocks) - up_lvl]
+    else:
+        result = [x for i, x in enumerate(blocks) if i < len(blocks) + up_lvl]
     return r"\\".join(result)
 
 
@@ -20,3 +23,5 @@ if __name__ == "__main__":
     print(file(fullname="sample.py"))
     print(file(fullname="sample.py.py"))
     print(path(full_path=r"F:\Work\CODE\toStudy\Python", up_lvl=3))
+    print(path(full_path=r"F:\Work\CODE\toStudy\Python", up_lvl=0))
+    print(path(full_path=r"F:\Work\CODE\toStudy\Python", up_lvl=-1))

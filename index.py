@@ -1,66 +1,107 @@
-def def_file(self):
-    file = get.obj(self).content
-    if not file:
-        us = USED_PATH
-    else:
-        us = file
-    return us
+import FIOS.write as write
+import FIOS.read as read
+import FIOS.font as font
+note = write.notifier
+substance = note.substance
+os = read.os
+codecs = read.codecs
 
-def new(self = MPATH, file =''):
-    path = get.obj(self).path
-    us = marker.def_file(file)
-    # ==========================
-    createf('temp', path)
-    spath = os.path.join(path, 'temp')
-    shutil.copy('name.txt', spath)
-    os.chdir(spath)
-    name = 'usedbase' + '.txt'
-    os.rename('name.txt', name)
-    print(font.yellow + name + font.end + ' created!')
+dir_tmp = r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS\%Temp"
+used_tmp = "used_branches.txt"
+exc_tmp = "exc_branches.txt"
 
-def append(self = MPATH, file =''):
-    path = get.obj(self).path
-    us = marker.def_file(file)
-    # ==========================
-    os.chdir(os.path.join(MPATH, 'temp'))
-    with codecs.open(us, 'a', 'utf-8') as usedbase:
-        usedbase.writelines(path)
-        usedbase.writelines('\n')
-        # print(font.grey + path + font.end + ' added as used!')
-def check(self = MPATH, file =''):
-    path = get.obj(self).path
-    us = marker.def_file(file)
-    # ==========================
-    used = []
-    os.chdir(os.path.join(MPATH, 'temp'))
-    with codecs.open(us, 'r+', 'utf-8') as usedbase:
-        for lines in usedbase:
-            lines = lines[:-1:]
-            used.append(lines)
-    # for u in used:
-    #    print(font.ext.grey + u + font.ext.end + ' was used!')
-    return used
-def clean(self = MPATH, file =''):
-    path = get.obj(self).path
-    us = marker.def_file(file)
-    # ==========================
-    os.chdir(os.path.join(MPATH, 'temp'))
-    with codecs.open('usedbase.txt', 'w', 'utf-8') as usedbase:
-        usedbase.write('')
-        print(font.red + 'usedbase.txt' + font.end + ' cleaned!')
 
-def content(self, pattern):
-    content = get.obj(self).content
-    if isinstance(content, str):
-        i = content.find(pattern)
-        return i
-    else:
-        return None
+# =====    Extra   ===== #
+def string(value, color=font.red2):
+    return color + value + font.end
 
-def string(line, color = 'std'):
-    string = get.obj(line).string
-    if color == 'std':
-        string = font.red + string + font.end
-    elif color == 'iri':
-        string = font.beige2 + string + font.end
-    return string
+
+def content(value, pattern):
+    res = []
+    for i in range(len(str(value))):
+        if str(value)[i] == pattern:
+            res.append(i)
+    return res if len(res) > 0 else -1
+
+
+# =====   General   ===== #
+def new(full_path, public=False):
+    def create(path, content="", public=False):
+        item = substance.init(path)
+        success = False
+        if item.kind == "path" and not item.exist:
+            if item.type in ["folder", "ambiguous"]:
+                try:
+                    os.makedirs(path)
+                    success = True
+                except Exception as e:
+                    print(font.paint(e, font.red))
+            elif item.type == "file":
+                if not os.path.exists(item.dir):
+                    create(item.dir)
+                with codecs.open(path, "w", "utf-8") as my_file:
+                    my_file.write(content)
+                success = True
+            else:
+                success = None
+        note.result(path, success, "create") if public else None
+        return success
+
+    try:
+        create(full_path, public=public)
+    except Exception as e:
+        print(e)
+
+
+def append(data_path, *args, public=False):
+    args = args[0] if isinstance(args[0], list) else args
+    if not os.path.exists(data_path):
+        new(data_path, public)
+    write.to_file(data_path, '\n'.join(args) + '\n', 'a', public=public)
+
+
+def get(data_path, mode="used", public=False):
+    data_links = False, []
+    try:
+        data = substance.init(data_path)
+        os.chdir(data.dir)
+        data_links = read.from_file(data_path).split('\r\n')[:-1:]
+    except Exception as e:
+        print(e)
+    note.message_console(os.path.split(data_path)[1], "reading...") if public else None
+    for link in data_links:
+        note.message_console(link, 'was %s.' % mode, substance.init(link).sign, font.grey) if public else None
+    return data_links
+
+
+def clean(data_path, public=False):
+    success = False
+    try:
+        data = substance.init(data_path)
+        os.chdir(data.dir)
+        write.to_file(data_path, '')
+        success = True
+    except Exception as e:
+        print(e)
+    note.result(data_path, success, "clean") if public else None
+
+
+def files(label_list, check_list, to_index_list, color=font.grey):
+    index_list = []
+    for index_path in to_index_list:
+        if index_path in check_list:
+            index_list.append(list(check_list).index(index_path))
+    return [font.paint(x, color) if i in index_list else x for i, x in enumerate(label_list)]
+
+
+if __name__ == "__main__":
+    print(string(value="SomeString. Mark me. pleeease ^___^", color=font.beige))
+    print(content(value="Hello. It's Me", pattern="'"))
+    print(content(value=type("Hello. It's Me"), pattern="'"))
+    # new(os.getcwd(), True)
+    data = [r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS\%Temp\used_branches.txt",
+            r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS\%Temp\exc_branches.txt"]
+    for i in range(2):
+        append(data[i], ["1", "2", "3"], public=True)
+        data_list = get(data[i], public=True) if i == 0 else get(data[i], "blocked", True)
+        clean(data[i], True)

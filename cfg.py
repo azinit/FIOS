@@ -4,6 +4,7 @@ import configparser
 
 iCore = r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS\iCore.ini"
 
+
 def create(path, type='std'):
     if type == 'profile':
         config = configparser.ConfigParser()
@@ -63,3 +64,12 @@ def delete(path, section=None, setting=None):
         else:
             config.remove_section(section)
         set(path, config_ref=config)
+
+
+class Settings():
+    #   FIOS
+    assistant = get(iCore, "General", "assistant")
+    assistant_full = get(iCore, "General", "assist_transcript")
+    user = get(iCore, "General", "user")
+    width = int(get(iCore, "General", "line_amount"))
+    TESTPHRASE = get(iCore, 'Add', 'test')

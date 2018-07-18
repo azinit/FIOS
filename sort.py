@@ -1,72 +1,71 @@
 import os
 import re
 
-import get
+import FIOS.substance as substance
 
 
-'''def fileorder(self, numlist=[]):
-    list = os.listdir(get.obj(self).path)
-    newlist = []
-    if not numlist:
-        numlist = [x for x in range(0,len(list)+1)]
-    numlist.sort()
-    for i in numlist:
-        for j in list:
-            num = re.findall(r'\d+',j)
-            if num:
-                if i == int(num[0]):
-                    newlist.append(j)
-    return newlist'''
+# =====    DIGITS   ===== #
 def by_num(value):
-    nums = list(map(lambda x: int(re.findall(r'\d+', x)[0]), value))
-    print(value, nums)
+    return re.findall(r'\d+', value)
 
-def files_by_num(path, dirlist):
+
+def by_interval(orig_list, ind_interval):
+    insertion_list = []
+    column = int(len(orig_list) / ind_interval)
+    for i in range(0, ind_interval):
+        for j in range(0, column):
+            insertion_list.append(orig_list[i + j * ind_interval])
+    return insertion_list
+
+
+# =====    FILES   ===== #
+'''def files_by_num(path, dirlist):
     if dirlist:
-        nums = re.findall(r'\d+', dirlist[0])
-        print(nums)
+        return by_num(dirlist[0])
     else:
-        return files_by_num(path, os.listdir(path))
+        return files_by_num(path, os.listdir(path))'''
 
 
-path_ = r'D:\Work\Lessons\Code\Iri\[dev]CreateTheory\vs 1.0\test'
-sub = 'definition_1.txt'
-sub1 = 'definition1.txt'
-sub2 = 'defini1tion1.txt'
-# print(by_num(sub))
-# print(by_num(sub1))
-# print(by_num(sub2))
-print(by_num(os.listdir(path_)))
-# print(os.listdir(path_,))
-'''def ieror(self, markered = 'sorted'):
-    content = get.obj(self).content
-    if markered != 'sorted':
-        path = markered
-        for count, i in enumerate(content):
-            j = os.path.join(path, i)
-            if get.obj(j).kind == 'Folder':
-                content[count] = '📁 ' + i
-            elif get.obj(j).kind == 'File':
-                content[count] = '• ' + i
-        # print(content)
-    clist = ['📁','•']
-    ielist = []
-    if isinstance(content,list):
-        glist = content
-    elif os.path.isabs(content):
-        glist = os.listdir(content)
+# TODO: optimize, dev
+def file_order(directory, num_list=""):
+    directory = directory if isinstance(directory, list) else os.listdir(directory)
+    max_int = max([-1] + [int(by_num(x)[-1]) for x in directory if by_num(x)])
+    if max_int == -1:
+        return directory
     else:
-        glist = []
-    for c in clist:
-        for i,f in enumerate(glist):
-            if get.exceptions(f,c,fullmode= False)[0]:
-                ielist.append(i)
-    return ielist
-def bynum(self, num):
-    list = get.obj(self).content
-    newlist = []
-    col = int(len(list) / num)
-    for i in range(0,num):
-        for j in range(0,col):
-            newlist.append(list[i+j*num])
-    return newlist'''
+        num_list, sorted_dir = [x for x in range(max_int)] if not num_list else num_list
+        num_list.sort()
+        for digit in num_list:
+            for j, element in enumerate(directory):
+                num = by_num(element)
+                if num:
+                    if digit == int(num[-1]):
+                        sorted_dir.append(element)
+                        directory.pop(j)
+        return sorted_dir
+
+
+# TODO: optimize
+def hierarchy(directory):
+    sorted_hierarchy = []
+    directory, root = os.listdir(directory) if os.path.isabs(directory) else directory, directory
+    for i, element in enumerate(directory):
+        el = substance.init(os.path.join(root, element))
+        if el.type == "folder":
+            sorted_hierarchy.append(element)
+            directory.pop(i)
+    sorted_hierarchy.extend(directory)
+    return sorted_hierarchy
+
+
+if __name__ == "__main__":
+    path_ = r'F:\Work\Lessons\Code\Iri\[dev]CreateTheory\vs 1.0\Planimetry\Triangles\Various\Formulas'
+    sub = 'defin123ition4_1.txt'
+    sub1 = 'definition1.txt'
+    sub2 = 'defini1tion1.txt'
+    print(by_num(sub))
+    print(by_num(sub1))
+    print(by_num(sub2))
+    print(by_interval([x for x in range(1, 55)], 6))
+    print(os.listdir(path_))
+    print(file_order(path_))
