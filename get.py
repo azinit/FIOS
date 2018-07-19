@@ -1,9 +1,8 @@
 import FIOS.notifier as notifier
 import FIOS.write as write
-import FIOS.write.os as os
-import FIOS.substance as substance
 
-
+os = write.os
+substance = notifier.substance
 sample = notifier.smp
 convert = notifier.convert
 yellow = sample.font.yellow

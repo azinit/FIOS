@@ -1,16 +1,17 @@
 import shutil
-import os as os
-import os.path as op
-import inspect
-import codecs
-
-import FIOS.font as font
 import FIOS.notifier as note
 import FIOS.split as split
 import FIOS.sort as sort
 import FIOS.index as ind
+import FIOS.requester as req
+
+font = ind.font
 substance = note.substance
 convert = note.convert
+os = ind.os
+op = substance.op
+codecs = ind.codecs
+inspect = substance.inspect
 
 
 # =====   General  ===== #
@@ -71,6 +72,10 @@ def delete(path, public=False):
     return success
 
 
+def clean():
+    pass
+
+
 # TODO: test on images, audio, ...
 def open(path, public=False):
     success = None
@@ -114,13 +119,13 @@ def move(source, destination, public=False, branch_view=3):
     return success
 
 
-def copy(path, public=False):
+def copy(source, destination, public=False):
     success = False
-    note.result(path, success, mode()) if public else None
+    note.result(source, success, "move", destination) if public else None
 
 
 # TODO: sortierarchy, adv input, colorize
-def navigator(path, it=0, color=font.violet, color_bg=font.violetbg):
+def navigator(path, it=0, color=font.violet):
     # TODO: block-red; set/unset track
     def preparing():
         this_dir = sort.hierarchy(path)
@@ -139,7 +144,7 @@ def navigator(path, it=0, color=font.violet, color_bg=font.violetbg):
 
     def get_correct_input(c_fin):
         # [False, True, None] == [Exit, GoNext, Refresh]
-        if not console(c_fin.content):
+        if not req.console(c_fin.content):
             return False, None
         else:
             c_fin = c_fin.content if c_fin.kind == "number" and 0 <= c_fin.content < len(cur_dir) else None
@@ -150,7 +155,7 @@ def navigator(path, it=0, color=font.violet, color_bg=font.violetbg):
         if step == 0:
             note.status(delta=1, color=color, pattern='.'),
             note.result(path, os.path.exists(path), mode(1), '', lambda x: convert.to_graphic_path(x), color),
-            note.message_console("Select next location: ", '', color=color),
+            note.message_console("Select next location: ", '', c_pat='', color=color),
         elif step == 1:
             [print("{} {}".format(font.paint(str(i) + '.', color), x)) for i, x in enumerate(cur_display)]
         else:
@@ -160,7 +165,7 @@ def navigator(path, it=0, color=font.violet, color_bg=font.violetbg):
                 note.result(fin.content, False, mode(1)),
             else:
                 note.parameters({"Final Path": path, "Iterations": it}, color=color + font.bold + font.underline)
-                note.process(mode(1), False, color=color_bg + font.black)
+                note.process(mode(1), False, color=font.bg(color))
 
     notify(0)
     cur_dir, cur_labels, cur_display = preparing()
@@ -178,13 +183,6 @@ def navigator(path, it=0, color=font.violet, color_bg=font.violetbg):
         notify(2)
         return path
     return path
-
-
-def console(fin):
-    if fin == "":
-        return False
-    else:
-        return True
 
 
 # =====  Built-in  ===== #
@@ -216,4 +214,5 @@ if __name__ == "__main__":
         rename(r"C:\Users\Feebon\Desktop\Loops", "loli[pop", True)
 
     # test_fm()
-    sel_path = navigator(r"F:\Work\CODE\toStudy\Python")
+    ui2py(r"F:\Work\CODE\toStudy\Python\PyQt\Poems.ui")
+    # sel_path = navigator(r"F:\Work\CODE\toStudy\Python")

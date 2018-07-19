@@ -26,15 +26,17 @@ def launch(project="", mode="Test"):
 
     def greeting(offset=False):
         print() if offset else None
-        note.message_console("Hello, {}!".format(font.paint(USER, font.blue)), c_pat=AI_ico, time_delay=0.2)
-        note.message_console("I'm {}{} :) {}".format(emit_color, AI, font.end), c_pat=AI_ico, time_delay=0.2)
+        note.message_console("Hello, {}!".format(USER), c_pat=AI_ico, time_delay=0.2)
+        note.message_console("I'm {} :)".format(AI), c_pat=AI_ico, time_delay=0.2)
+        # TODO: Intersection colors
+        # note.message_console("I'm {}{} :) {}".format(font.bold, AI, font.end, ''), c_pat=AI_ico, time_delay=0.2)
         note.message_console("I'll be your assistant".format(font.paint(AI, emit_color)), c_pat=AI_ico)
 
     def set_time():
         global start_time
         start_time = datetime.datetime.now()
 
-    info({"Time": str(datetime.datetime.now()), "Project": project})
+    info({"Time": str(datetime.datetime.now()), "Project": project, "Mode": mode})
     greeting(True)
     set_time()
     note.status('=', '=', color=csl_color)
@@ -42,8 +44,8 @@ def launch(project="", mode="Test"):
 
 def shutdown():
     def info(diff):
-        note.message_console(font.paint("{} finishing".format("Process"), csl_color))
-        note.message_console("In: {}{}h:{}m:{}s{}".format(emit_color, diff[0], diff[1], diff[2], font.end))
+        note.message_console(font.paint("{} finishing".format("Process"), csl_color), c_pat='')
+        note.message_console("In: {}{}h:{}m:{}s{}".format(emit_color, diff[0], diff[1], diff[2], font.end), c_pat='')
 
     def get_work_time():
         global start_time, end_time
@@ -53,8 +55,7 @@ def shutdown():
 
     def goodbye(offset=False):
         print() if offset else None
-        note.message_console(font.paint("Fuh...After all, we worked well, didn't we? {}".
-                                        format(font.paint(";)", emit_color, csl_color)), csl_color), c_pat=AI_ico)
+        note.message_console("Fuh...After all, we worked well, didn't we? ;)", c_pat=AI_ico)
         note.message_console("See you soon", c_pat=AI_ico)
         note.message_console("Your {}".format(font.paint(AI, emit_color)), c_pat=AI_ico)
 

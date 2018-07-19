@@ -1,4 +1,4 @@
-import os.path as path
+import os.path as op
 import inspect
 
 import FIOS.sample as sample
@@ -13,7 +13,7 @@ kinds_dict = {
     lambda x, n: Number.create(int(x) if isinstance(x, str) else x, n): lambda x: isinstance(x, (int, float, complex)) or str(x).isdigit(),
     lambda x, n: DataStructure.create(x, n): lambda x: isinstance(x, (list, tuple, dict, set, frozenset)),
     lambda x, n: TimeData.create(x, n): lambda x: isinstance(x, (d.date, d.time, d.datetime)),
-    lambda x, n: Path.create(x, n): lambda x: path.isabs(str(x)),
+    lambda x, n: Path.create(x, n): lambda x: op.isabs(str(x)),
     lambda x, n: String.create(x, n): lambda x: isinstance(x, str),
     lambda x, n: Substance.create(x, n): True
 }
@@ -26,8 +26,8 @@ class Substance(object):
         self.kind = str(inspect.stack()[3][4][0][17::]).split('.')[0]
         self.kind = self.kind[0].lower() + self.kind[1:]
         self.type = abs(self)
-        self.sign = sample.objects.get(self.kind)
         self.property = + self
+        self.sign = self[sample.objects]
 
     def __abs__(self):
         return str(type(self.content)).split("'")[1]
@@ -40,6 +40,13 @@ class Substance(object):
 
     def __pos__(self):
         return None
+
+    def __getitem__(self, dictionary):
+        for item in [self.type, self.kind]:
+            if item in dictionary.keys():
+                return dictionary.get(item)
+        else:
+            return ""
 
     @classmethod
     def create(cls, value, name=''):
@@ -78,23 +85,21 @@ class TimeData(Substance):
 
 class Path(Substance):
     def __init__(self, value, name=''):
-        Substance.__init__(self, value, path.split(value)[1] if not name else name)
-        self.exist = path.exists(self.content)
-        self.sign = sample.objects.get(self.type) if self.type != "ambiguous" else self.sign
-        # self.sign = sample.files_properties.get(self.property)[1] if not self.property is None else self.sign
-        self.dir = path.split(value)[0]
+        Substance.__init__(self, value, op.split(value)[1] if not name else name)
+        self.exist = op.exists(self.content)
+        self.dir = op.split(value)[0]
 
     def __abs__(self):
-        if path.isdir(self.content):
+        if op.isdir(self.content):
             return "folder"
-        elif path.isfile(self.content) or str(self.name).count('.') > 0 and str(self.name)[0] != '.':
+        elif op.isfile(self.content) or str(self.name).count('.') > 0 and str(self.name)[0] != '.':
             return "file"
         else:
             return "ambiguous"
 
     def __str__(self):
         header, content = Substance.__str__(self).split("\n")
-        header += ", Exist: {0}{2}{1}, Dir: {0}{3}{1}".format(red2, end, self.exist, self.dir)
+        header += ", Exist: {0}{2}{1}, Dir: {0}//{3}{1}".format(red2, end, self.exist, self.dir.split(r'\\'[:1:])[-1])
         return header + "\n" + content
 
     def __pos__(self):
@@ -108,6 +113,7 @@ class Path(Substance):
 
         if self.type == "file":
             extension = self.name.split('.')
+            self.extension = None if len(extension) == 1 else extension[1]
             return "Without extension" if len(extension) == 1 else get_key('.' + extension[1], sample.files)
         elif self.type == "folder":
             # TODO: def dir
@@ -115,6 +121,14 @@ class Path(Substance):
             return self.name
         else:
             return None
+
+    def __getitem__(self, dictionary):
+        if self.type == "file" and self.property in sample.files_properties.keys():
+            return sample.files_properties.get(self.property)[1]
+            # TODO: 📁(🎵, 📝) - get for folder by folder_type by contained files(not name)
+            # return sign if self.type == 'file' else "{}({})".format(sample.objects.get("folder"), sign)
+        else:
+            return Substance.__getitem__(self, dictionary)
 
 
 class String(Substance):
@@ -152,9 +166,11 @@ if __name__ == "__main__":
 
     test_cases(0)
     test_value = "Hello! I'm Iri :)"
-    item1 = init(test_value)
-    print(str(item1))
-    item2 = init([test_value])
-    print(str(item2))
-    item3 = init(None)
-    print(item3)
+    values = [test_value, [test_value], None,
+              r"F:\Work\CODE\toStudy\Python\PyQt\converter.bat"]
+    dirs = sample.dirs.values()
+    # [print(init(content, 'item')) for content in values]
+    for content in dirs:
+        Dir = init(content[1])
+        print(Dir)
+

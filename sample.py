@@ -63,7 +63,7 @@ objects = {
     "number": '🔢',
     "dataStructure": '📚',
     "string": '🙱',
-    "boolean": '🚩',
+    "flag": '🚩',
     "timeData": '⏳',
     "path": '🖇',
     "file": '📄',
@@ -81,9 +81,10 @@ objects = {
     "guitar": '🎸',
     "piano": '🎹',
     "arrow": '➟',
-    "net": '📶',
-    "cloth": '🧥',
-    "draw": '✐',
+    "net": '🖧',
+    "cloth": '👗',
+    "log": '📜',
+    "draw": '🎨',
     "texture": '🌀',
     "font": '🗛',
     "vector": '❐',
@@ -95,7 +96,7 @@ objects = {
     "phone": '📱',
     "castle": '🏰',
     "house": '🕋',
-    "code": '⌘',
+    "code": '💻',
     "clip": '🔗',
     "people": '👥',
     "link": '⮬',
@@ -119,8 +120,8 @@ files_properties = {
     "3D Model": ["CG", objects.get("house")],
     "Substance": ["CG", objects.get("texture")],
     "PureRef": ["CG", objects.get("image")],
-    "Cinema 4D": ["CG", objects.get("camera")],
-    "Maya": ["CG", objects.get("castle")],
+    "Cinema 4D": ["CG", objects.get("house")],
+    "Maya": ["CG", objects.get("house")],
     "Marmoset Toolbag": ["CG", objects.get("camera")],
     "Corel Draw": ["CG", objects.get("draw")],
     "Paint.NET": ["CG", objects.get("draw")],
@@ -142,7 +143,7 @@ files_properties = {
     "Guitar Pro": ["Audio", objects.get("guitar")],
     #   System
     "Archive": ["System", objects.get("archive")],
-    "Launch": ["Software", objects.get("launch")],
+    "Launch": ["Software", objects.get("play")],
     "Font": ["System", objects.get("font")],
     "Link": ["System", objects.get("link")],
     #   Code
@@ -158,16 +159,16 @@ files_properties = {
     "Torrent": ["Download⬇", objects.get("net")],
 }
 dirs = {
-    "Graphic": [font.blue2, "F:\Work\CODE\Projects\SortManager\Sort\Graphic"],
-    "Audio": [font.green, "F:\Work\CODE\Projects\SortManager\Sort\Audio"],
-    "Adobe": [font.blue, "F:\Work\CODE\Projects\SortManager\Sort\Adobe"],
-    "CG": [font.beige2, "F:\Work\CODE\Projects\SortManager\Sort\CG"],
-    "Text": [font.bold, "F:\Work\CODE\Projects\SortManager\Sort\Text"],
-    "Software": [font.yellow, "F:\Work\CODE\Projects\SortManager\Sort\Software"],
-    "System": [font.yellow, "F:\Work\CODE\Projects\SortManager\Sort\System"],
-    "Download⬇": [font.beige2, "F:\Work\CODE\Projects\SortManager\Sort\Download"],
-    "Code": [font.beige2, "F:\Work\CODE\Projects\SortManager\Sort\Code"],
-    "Games": [font.bold, "F:\Work\CODE\Projects\SortManager\Sort\Games"]
+    "Audio": [font.green, "F:\Work\CODE\Projects\SortManager\Sorted\Audio"],
+    "Adobe": [font.blue, "F:\Work\CODE\Projects\SortManager\Sorted\Adobe"],
+    "Graphic": [font.blue2, "F:\Work\CODE\Projects\SortManager\Sorted\Graphic"],
+    "CG": [font.beige2, "F:\Work\CODE\Projects\SortManager\Sorted\CG"],
+    "Text": [font.bold, "F:\Work\CODE\Projects\SortManager\Sorted\Text"],
+    "Software": [font.yellow, "F:\Work\CODE\Projects\SortManager\Sorted\Software"],
+    "System": [font.yellow, "F:\Work\CODE\Projects\SortManager\Sorted\System"],
+    "Download⬇": [font.beige2, "F:\Work\CODE\Projects\SortManager\Sorted\Download"],
+    "Code": [font.beige2, "F:\Work\CODE\Projects\SortManager\Sorted\Code"],
+    "Games": [font.bold, "F:\Work\CODE\Projects\SortManager\Sorted\Games"]
 }
 
 priority = [font.red2, font.red, font.yellow2, font.yellow, font.green]
@@ -216,23 +217,26 @@ types = {
     "path_dir_is": r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS",
     "path_file_isn't": r"Z:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS\sample.py",
     "path_ambiguous": r"Z:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS",
+    "path_file_ui": r"F:\Work\CODE\toStudy\Python\PyQt\Poems.ui",
+    "path_file_launch": r"F:\Work\CODE\toStudy\Python\PyQt\converter.bat",
+    "path_dir_sort": "F:\Work\CODE\Projects\SortManager\Sorted\Audio",
 }
 versions = {
     "requester": 0.0,
     "cfg": 2.0,
     "check": 0.0,
     "convert": 0.99,
-    "fi": 0.0,
+    "fm": 0.8,
     # TODO
     "font": 2.19,
     "get": 0.99,
-    "substance": 2.0,
-    "index": 0.0,
+    "substance": 2.1,
+    "index": 0.9,
     "iri": 4.0,
     "notifier": 0.99,
     "read": 2.0,
     "sample": 1.0,
-    "sort": 0.0,
+    "sort": 0.9,
     "split": 0.99,
     "write": 0.9,
 }
@@ -279,3 +283,13 @@ subjects = {
     "Ecology": "Экология",
     "Economics": "Экономика"
 }
+
+if __name__ == "__main__":
+    dicts = [files, objects, files_properties, dirs, phrases, versions, types, engchars, ruschars, cards, subjects]
+    names = ["files", "objects", "files_properties", "dirs", "phrases", "versions", "types", "engchars", "ruschars",
+             "cards", "subjects"]
+    for i in range(len(dicts)):
+        print('.'*13 + names[i].upper() + '.'*13)
+        for key, value in dicts[i].items():
+            print("{}: {}".format(key, font.paint(value)))
+        print()

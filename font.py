@@ -1,6 +1,6 @@
+# TODO: maybe class with overload... ?; maybe short name....
 TESTPHRASE = "Hello! I'm Iri ;)"
 
-# TODO
 # ANSI COLORS
 # ====== FAMILY ===== #
 end = '\33[0m'
@@ -49,6 +49,24 @@ beigebg2 = '\33[106m'
 bluebg2 = '\33[44m'
 violetbg2 = '\33[105m'
 
+backs = [blackbg, greybg, greybg2, whitebg, redbg, redbg2, yellowbg, yellowbg2, greenbg, beigebg, beigebg2, bluebg,
+         bluebg2, violetbg, violetbg2]
+
+simples = [black, grey, grey2, white, red, red2, yellow, yellow2, green, beige, beige2, blue,
+           blue2, violet, violet2]
+
+
+def bg(simple_color):
+    return backs[simples.index(simple_color)]
+
+
+def sm(back_color):
+    return simples[backs.index(back_color)]
+
+
+def paint(value, content_color=beige, next_color=end):
+    return content_color + str(value) + next_color
+
 
 def family():
     print('bold:      | %s' % bold + TESTPHRASE + end)
@@ -95,12 +113,11 @@ def background():
     print('violetbg2: | %s' % violetbg2 + white + TESTPHRASE + end)
 
 
-def paint(value, content_color, next_color=end):
-    return content_color + str(value) + next_color
-
-
 if __name__ == "__main__":
+    if blackbg in backs:
+        print(bg(red2) + black + "someting" + end)
+    print(sm(beigebg) + "someting" + end)
+    print(paint(value=TESTPHRASE, content_color=red2))
     family()
     color()
     background()
-    print(paint(value=TESTPHRASE, content_color=red2))
