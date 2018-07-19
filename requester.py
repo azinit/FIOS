@@ -59,9 +59,9 @@ def console(user_input):
         return True
 
 
-def start(*args):
+def start(*args, requester=''):
     print(args[1:]) if len(args) > 1 else None
-    print(str(args[0]).capitalize(), sample.choicebox[0], '?: ')
+    print(requester + str(args[0]).capitalize(), '?', sample.choicebox[0])
     user_input = input('> ')
 
     if user_input in ['', 'y']:

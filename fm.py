@@ -111,7 +111,7 @@ def move(source, destination, public=False, branch_view=3):
     else:
         try:
             os.chdir(destination)
-            shutil.move(source, destination)
+            # shutil.move(source, destination)
             success = True
         except Exception as e:
             print(font.paint(e, font.red))
@@ -124,7 +124,7 @@ def copy(source, destination, public=False):
     note.result(source, success, "move", destination) if public else None
 
 
-# TODO: sortierarchy, adv input, colorize
+# TODO: sortierarchy, adv input, colorize and bold
 def navigator(path, it=0, color=font.violet):
     # TODO: block-red; set/unset track
     def preparing():
@@ -166,6 +166,7 @@ def navigator(path, it=0, color=font.violet):
             else:
                 note.parameters({"Final Path": path, "Iterations": it}, color=color + font.bold + font.underline)
                 note.process(mode(1), False, color=font.bg(color))
+                note.status('.', '.', color=color)
 
     notify(0)
     cur_dir, cur_labels, cur_display = preparing()

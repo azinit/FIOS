@@ -19,7 +19,7 @@ def launch(project="", mode="Test"):
 
     def info(info_struct):
         version = sample.versions.get("iri")
-        note.message_box("{} vs. {}".format(AI_full, version), b_pat='.', color=font.blackbg + csl_color)
+        note.message_box("{} vs. {}".format(AI_full, version), b_m=7, b_pat='.', color=font.blackbg + csl_color)
         note.time.sleep(0.3)
         print()
         note.parameters(info_struct)
