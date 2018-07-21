@@ -16,7 +16,7 @@ requests_help = {
     # explorer actions
     "ref": "Refresh Directory Content",
     "open": "Open Current Directory",
-    "move {src} {dst}": "Move {source} to {destination}",
+    "move {src}": "Move {source}",
     "type i": "Get type of {i} folder",
     "del i": "Delete {i}",
     "clean": "Clean {cur_dir}from empty dirs",

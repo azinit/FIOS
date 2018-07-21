@@ -26,6 +26,7 @@ violet = '\33[35m'
 # more saturation
 red2 = '\33[31m'
 yellow2 = '\33[93m'
+green2 = '\33[92m'
 beige2 = '\33[96m'
 blue2 = '\33[34m'
 violet2 = '\33[95m'
@@ -45,14 +46,15 @@ violetbg = '\33[45m'
 # more saturation
 redbg2 = '\33[41m'
 yellowbg2 = '\33[103m'
+greenbg2 = '\33[102m'
 beigebg2 = '\33[106m'
 bluebg2 = '\33[44m'
 violetbg2 = '\33[105m'
 
-backs = [blackbg, greybg, greybg2, whitebg, redbg, redbg2, yellowbg, yellowbg2, greenbg, beigebg, beigebg2, bluebg,
+backs = [whitebg, greybg, greybg2, blackbg, redbg, redbg2, yellowbg, yellowbg2, greenbg, greenbg2, beigebg, beigebg2, bluebg,
          bluebg2, violetbg, violetbg2]
 
-simples = [black, grey, grey2, white, red, red2, yellow, yellow2, green, beige, beige2, blue,
+simples = [white, grey, grey2, black, red, red2, yellow, yellow2, green, green2, beige, beige2, blue,
            blue2, violet, violet2]
 
 
@@ -62,6 +64,15 @@ def bg(simple_color):
 
 def sm(back_color):
     return simples[backs.index(back_color)]
+
+
+def enhance(color):
+    list_color = simples if color in simples else backs
+    ind = list_color.index(color)
+    if ind % 2 == 1 and ind > 2:
+        return color
+    else:
+        return list_color[ind + 1]
 
 
 def paint(value, content_color=beige, next_color=end):
@@ -87,6 +98,7 @@ def color():
     print('yellow:    | %s' % yellow + TESTPHRASE + end)
     print('yellow2:   | %s' % yellow2 + TESTPHRASE + end)
     print('green:     | %s' % green + TESTPHRASE + end)
+    print('green2:    | %s' % green2 + TESTPHRASE + end)
     print('beige:     | %s' % beige + TESTPHRASE + end)
     print('beige2:    | %s' % beige2 + TESTPHRASE + end)
     print('blue:      | %s' % blue + TESTPHRASE + end)
@@ -105,6 +117,7 @@ def background():
     print('yellowbg:  | %s' % yellowbg + white + TESTPHRASE + end)
     print('yellowbg2: | %s' % yellowbg2 + grey2 + TESTPHRASE + end)
     print('greenbg:   | %s' % greenbg + white + TESTPHRASE + end)
+    print('greenbg2:  | %s' % greenbg2 + white + TESTPHRASE + end)
     print('beigebg:   | %s' % beigebg + white + TESTPHRASE + end)
     print('beigebg2:  | %s' % beigebg2 + white + TESTPHRASE + end)
     print('bluebg:    | %s' % bluebg + white + TESTPHRASE + end)
@@ -115,9 +128,11 @@ def background():
 
 if __name__ == "__main__":
     if blackbg in backs:
-        print(bg(red2) + black + "someting" + end)
-    print(sm(beigebg) + "someting" + end)
+        print(bg(simple_color=red2) + black + TESTPHRASE + end)
+    print(sm(back_color=beigebg) + TESTPHRASE + end)
     print(paint(value=TESTPHRASE, content_color=red2))
+    print(enhance(color=violet) + TESTPHRASE + end)
+    print(enhance(color=whitebg) + TESTPHRASE + end)
     family()
     color()
     background()

@@ -2,7 +2,7 @@ import FIOS.write as write
 import FIOS.read as read
 import FIOS.font as font
 note = write.notifier
-substance = note.substance
+substance = note.subst
 os = read.os
 codecs = read.codecs
 

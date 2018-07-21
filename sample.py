@@ -52,6 +52,7 @@ files = {
     "Visual Studio": [".sln", ".cs", ".csproj"],
     "Android Studio": [".apk"],
     "UI Style": [".ui"],
+    "WEB": [".html", ".css", ".js"],
     #   Special
     #       Games
     "Skyrim": [".esp", ".esm", ".bsa", ".bsl"],
@@ -59,8 +60,10 @@ files = {
     "Torrent": [".torrent"]
 }
 objects = {
-    "substance": ">",
+    "substance": '>',
+    "bin": '🗑',
     "number": '🔢',
+    "sort": '⥀',
     "dataStructure": '📚',
     "string": '🙱',
     "flag": '🚩',
@@ -81,6 +84,7 @@ objects = {
     "guitar": '🎸',
     "piano": '🎹',
     "arrow": '➟',
+    "arrow_broken": '⭍',
     "net": '🖧',
     "cloth": '👗',
     "log": '📜',
@@ -152,6 +156,7 @@ files_properties = {
     "Visual Studio": ["Code", objects.get("windows")],
     "Android Studio": ["Code", objects.get("phone")],
     "UI Style": ["System", objects.get("grid")],
+    "WEB": ["Code", objects.get("code")],
     #   Special
     #       Games
     "Skyrim": ["Games", objects.get("game")],
@@ -162,13 +167,14 @@ dirs = {
     "Audio": [font.green, "F:\Work\CODE\Projects\SortManager\Sorted\Audio"],
     "Adobe": [font.blue, "F:\Work\CODE\Projects\SortManager\Sorted\Adobe"],
     "Graphic": [font.blue2, "F:\Work\CODE\Projects\SortManager\Sorted\Graphic"],
-    "CG": [font.beige2, "F:\Work\CODE\Projects\SortManager\Sorted\CG"],
+    "CG": [font.beige, "F:\Work\CODE\Projects\SortManager\Sorted\CG"],
     "Text": [font.bold, "F:\Work\CODE\Projects\SortManager\Sorted\Text"],
     "Software": [font.yellow, "F:\Work\CODE\Projects\SortManager\Sorted\Software"],
     "System": [font.yellow, "F:\Work\CODE\Projects\SortManager\Sorted\System"],
-    "Download⬇": [font.beige2, "F:\Work\CODE\Projects\SortManager\Sorted\Download"],
-    "Code": [font.beige2, "F:\Work\CODE\Projects\SortManager\Sorted\Code"],
-    "Games": [font.bold, "F:\Work\CODE\Projects\SortManager\Sorted\Games"]
+    "Download⬇": [font.green, "F:\Work\CODE\Projects\SortManager\Sorted\Download"],
+    "Code": [font.beige, "F:\Work\CODE\Projects\SortManager\Sorted\Code"],
+    "Games": [font.redbg + font.black, "F:\Work\CODE\Projects\SortManager\Sorted\Games"],
+    "Unassigned": [font.bold, r"F:\Work\CODE\Projects\SortManager\Sorted\Unassigned"]
 }
 
 priority = [font.red2, font.red, font.yellow2, font.yellow, font.green]
@@ -220,6 +226,10 @@ types = {
     "path_file_ui": r"F:\Work\CODE\toStudy\Python\PyQt\Poems.ui",
     "path_file_launch": r"F:\Work\CODE\toStudy\Python\PyQt\converter.bat",
     "path_dir_sort": "F:\Work\CODE\Projects\SortManager\Sorted\Audio",
+    "path_file_zbrush": r"F:\Work\CODE\Projects\SortManager\Sorted\Unassigned\HelloWorld.ZTL",
+    "path_file_exe": r"F:\Work\CODE\Projects\SortManager\Sorted\Unassigned\kts18.0.0.405abcdefgru_13930.exe",
+    "path_file_torrent": r"F:\Work\CODE\Projects\SortManager\Sorted\Unassigned\Sony Vegas Pro 13.0 Build 453 Multilingual.torrent",
+    "path_file_html": r"F:\Work\CODE\Projects\SortManager\Sorted\Unassigned\messages_Даниил Герасимов(167539495).html",
 }
 versions = {
     "requester": 0.0,

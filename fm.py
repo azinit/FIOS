@@ -6,7 +6,7 @@ import FIOS.index as ind
 import FIOS.requester as req
 
 font = ind.font
-substance = note.substance
+substance = note.subst
 convert = note.convert
 os = ind.os
 op = substance.op
@@ -100,7 +100,7 @@ def close(path, public=False):
     return success
 
 
-def move(source, destination, public=False, branch_view=3):
+def move(source, destination, public=False, branch_view=3, item_color=font.blue, folder_color=font.blue2):
     src, dst = substance.init(source), substance.init(destination)
     success = False
     dst_are = create(dst.content) if not dst.exist else None
@@ -111,11 +111,13 @@ def move(source, destination, public=False, branch_view=3):
     else:
         try:
             os.chdir(destination)
-            # shutil.move(source, destination)
+            shutil.move(source, destination)
             success = True
         except Exception as e:
             print(font.paint(e, font.red))
-    note.result(source, success, mode(), destination, lambda x: split.path(x, branch_view)) if public else None
+    i, s = item_color, folder_color
+    note.result(source, success, mode(), destination, lambda x: split.path(x, branch_view),
+                i_true=i, s_true=s) if public else None
     return success
 
 
@@ -154,7 +156,7 @@ def navigator(path, it=0, color=font.violet):
     def notify(step):
         if step == 0:
             note.status(delta=1, color=color, pattern='.'),
-            note.result(path, os.path.exists(path), mode(1), '', lambda x: convert.to_graphic_path(x), color),
+            note.result(path, os.path.exists(path), mode(1), '', lambda x: convert.to_graphic_path(x), general_c=color),
             note.message_console("Select next location: ", '', c_pat='', color=color),
         elif step == 1:
             [print("{} {}".format(font.paint(str(i) + '.', color), x)) for i, x in enumerate(cur_display)]
@@ -215,5 +217,5 @@ if __name__ == "__main__":
         rename(r"C:\Users\Feebon\Desktop\Loops", "loli[pop", True)
 
     # test_fm()
-    ui2py(r"F:\Work\CODE\toStudy\Python\PyQt\Poems.ui")
-    # sel_path = navigator(r"F:\Work\CODE\toStudy\Python")
+    # ui2py(r"F:\Work\CODE\toStudy\Python\PyQt\Poems.ui")
+    sel_path = navigator(r"F:\Work\CODE\toStudy\Python")

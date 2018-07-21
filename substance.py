@@ -114,7 +114,7 @@ class Path(Substance):
         if self.type == "file":
             extension = self.name.split('.')
             self.extension = None if len(extension) == 1 else extension[1]
-            return "Without extension" if len(extension) == 1 else get_key('.' + extension[1], sample.files)
+            return "Without extension" if len(extension) == 1 else get_key('.' + extension[-1].lower(), sample.files)
         elif self.type == "folder":
             # TODO: def dir
             # return get_key(self.content, sample.dirs)
