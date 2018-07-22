@@ -87,7 +87,7 @@ class TimeData(Substance):
 
 class Path(Substance):
     def __init__(self, value, name=''):
-        # TODO: mb files/folder contains amount....
+        # TODO: mb files/folder contains amount....; init family/property if has time for procount(arg=True)
         Substance.__init__(self, value, op.split(value)[1])
         self.exist = op.exists(self.content)
         self.dir = op.split(value)[0]

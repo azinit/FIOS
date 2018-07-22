@@ -47,7 +47,7 @@ files = {
     "Font": [".ttf", ".otf"],
     "Link": [".lnk"],
     #   Code
-    "Python": [".py", ".whl"],
+    "Python": [".py", ".whl", ".pyc"],
     "Pascal": [".pas"],
     "Visual Studio": [".sln", ".cs", ".csproj"],
     "Android Studio": [".apk"],

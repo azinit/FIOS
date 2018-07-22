@@ -1,7 +1,6 @@
+import os
 import FIOS.notifier as notifier
-import FIOS.write as write
 
-os = write.os
 substance, smp, convert = notifier.subst, notifier.smp, notifier.convert
 yellow, blue, end = smp.font.yellow, smp.font.blue, smp.font.end
 
@@ -32,7 +31,7 @@ def subs(path, folders=True, files=False, public=False, recursive=True):
     def unite(main_dir, sub_list):
         return list(map(lambda x: os.path.join(main_dir, x), sub_list))
 
-    notifier.status() if public else None
+    notifier.status(pattern='.', color=smp.font.beige) if public else None
     dst, level = substance.init(path), 0
     root = os.path.split(dst.content)[0] if dst.kind == 'file' else dst.content
     if root:
@@ -46,12 +45,16 @@ def subs(path, folders=True, files=False, public=False, recursive=True):
                 result_files.extend(unite(rootName, fileNames))
             level += 1
         if public:
-            write.me(result_folders, yellow + smp.objects['folder'], end)
-            write.me(result_files, blue + smp.objects['file'], end)
-        if files:
-            yield result_files
-        if folders:
-            yield result_folders
+            [print(yellow, substance.init(x).sign, x, end) for x in result_folders]
+            [print(blue, substance.init(x).sign, x, end) for x in result_files]
+        if files and folders:
+            return result_folders, result_files
+        elif files:
+            return [], result_files
+        elif folders:
+            return result_folders, []
+        else:
+            return [], []
 
 
 # =====    Time    ===== #
@@ -67,5 +70,5 @@ if __name__ == "__main__":
     print(intersection())
     print(digit(digit_seq="12349501"))
     print(key_by_value(search=".avi", dictionary=smp.files))
-    folder, file = subs(path=smp.MAIN_PATH, folders=True, files=True, public=True, recursive=False)
+    subs(path=smp.MAIN_PATH, folders=True, files=True, public=True, recursive=False)
     print(list(time(start_time=64800, end_time=64809)))

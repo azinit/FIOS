@@ -14,9 +14,9 @@ default_width = convert.cfg.Settings.width
 # TODO: simplify by functions; s_1, s_2, s_3 => s_1, s_2, s_3 = [generator]
 def result(item, flag, mode, sub='', decore=lambda x: x, init=None,
            general_c='', i_false=f.red, i_true=f.blue2, i_none=f.yellow,
-           s_false='', s_true='', s_none=''):
+           s_false='', s_true='', s_none='', end='\n'):
     col_sign = lambda name, color: f.paint(smp.objects.get(name), f.enhance(color))
-    col_obj = lambda val, colors, sign: f.paint(str(sign + ' '*(len(sign) > 0)) + str(decore(subst.init(val).content)), colors[flag], end)
+    col_obj = lambda val, colors, sign: f.paint(str(sign + ' '*(len(sign) > 0)) + str(decore(subst.init(val).content)), colors[flag], c_end)
     def_sign = lambda val, ind: subst.init(val).sign if init[ind] is True else init[ind]
 
     init = [True, True] if init is None else (['', ''] if init is False else init)
@@ -24,7 +24,7 @@ def result(item, flag, mode, sub='', decore=lambda x: x, init=None,
     s_true = '' if not sub else (f.enhance(i_true) if not s_true else s_true)
     s_none = '' if not sub else (i_none if not s_none else s_none)
     c_items, c_subs = ([i_false, i_true, i_none], [s_false, s_true, s_none]) if not general_c else (['', '', ''], ['', '', ''])
-    end = '' if general_c else f.end
+    c_end = '' if general_c else f.end
     sub, init[1] = (sub + ' ', init[1]) if sub or sub == 0 else ('', '')
 
     flag, arr = subst.init(flag).property, [col_sign(n, c) for n, c in zip(["arrow", "arrow_r", "arrow_broken"], [i_true, i_true, i_false])]
@@ -40,9 +40,9 @@ def result(item, flag, mode, sub='', decore=lambda x: x, init=None,
         "navigator": ["Incorrect {1}: {0}", "Current directory: {0}", "{1}➥ {0}"],
         "read": ["Input file {0} not found", "Reading from: {0}", "{1}Error occurred: {0}"],
         "write": ["Output file {0} not found", "Writing to: {0}", "{1}Error occurred: {0}"],
-        "cur_dir": ["{1}{0} not found", "{1}Directory: {0}", "{1}Error occurred: {0}"]
+        "cur_dir": ["{1}{0} not found", "{1}Directory: {0}", "{1}{0}"]
     }
-    print(general_c + notification_dict[mode][flag].format(item, sub) + f.end)
+    print(general_c + notification_dict[mode][flag].format(item, sub) + c_end, end=end)
 
 
 def status(tag='', pattern='', width=0, color='', delta=0):

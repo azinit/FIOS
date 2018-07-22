@@ -1,24 +1,22 @@
 import shutil
+import FIOS.get as get
 import FIOS.notifier as note
 import FIOS.split as split
 import FIOS.sort as sort
 import FIOS.index as ind
 import FIOS.requester as req
 
-f = ind.font
-substance = note.subst
-smp = substance.sample
-convert = note.convert
-os = ind.os
-op = substance.op
-codecs = ind.codecs
-inspect = substance.inspect
+subst, convert = note.subst, note.convert
+f, smp = ind.font, subst.sample
+os, op = ind.os, subst.op
+codecs, inspect = ind.codecs, subst.inspect
+
 correct = False
 
 
 # =====   General  ===== #
 def create(path, content="", public=False):
-    item = substance.init(path)
+    item = subst.init(path)
     success = False
     if item.kind == "path" and not item.exist:
         if item.type in ["folder", "ambiguous"]:
@@ -41,7 +39,7 @@ def create(path, content="", public=False):
 
 
 def rename(old, new, public=False, branch_view=3):
-    item0, item1 = substance.init(old), substance.init(new)
+    item0, item1 = subst.init(old), subst.init(new)
     # print(str(item1))
     sign0 = item0.sign
     success = False
@@ -60,7 +58,7 @@ def rename(old, new, public=False, branch_view=3):
 
 
 def delete(path, public=False):
-    item = substance.init(path)
+    item = subst.init(path)
     success = False
     if not item.exist:
         success = None
@@ -96,7 +94,7 @@ def open(path, public=False):
 
 # TODO: close folder, file...
 def close(path, public=False):
-    item = substance.init(path)
+    item = subst.init(path)
     success = False
     if item.type == "file":
         os.system("TASKKILL /F /IM %s" % note.smp.files_properties.get(item.property))
@@ -106,7 +104,7 @@ def close(path, public=False):
 
 
 def move(source, destination, public=False, branch_view=3, item_color=f.blue, folder_color=f.blue2):
-    src, dst = substance.init(source), substance.init(destination)
+    src, dst = subst.init(source), subst.init(destination)
     success = False
     dst_are = create(dst.content) if not dst.exist else None
     if not src.exist:
@@ -127,7 +125,7 @@ def move(source, destination, public=False, branch_view=3, item_color=f.blue, fo
 
 
 def copy(source, destination, public=False, branch_view=3, item_color=f.blue, folder_color=f.blue2):
-    src, dst = substance.init(source), substance.init(destination)
+    src, dst = subst.init(source), subst.init(destination)
     success = False
     dst_are = create(dst.content) if not dst.exist else None
     if not src.exist:
@@ -148,96 +146,104 @@ def copy(source, destination, public=False, branch_view=3, item_color=f.blue, fo
 
 
 # TODO: sortierarchy, adv input, colorize and bold
-def navigator(path, it=0, color=f.violet, mod="next"):
+def navigator(path, it=0, color=f.violet, mod="next", shutdown=True):
     # TODO: block-red; set/unset track
     def preparing():
-        exceptions, used = ind.get(op.join(ind.dir_tmp, ind.exc_tmp)), ind.get(op.join(ind.dir_tmp, ind.used_tmp))
+        exceptions, used = [ind.get(op.join(ind.dir_tmp, x)) for x in [ind.exc_tmp, ind.used_tmp]]
+        # input(op.join(ind.dir_tmp, ind.used_tmp))
         dir_ = sort.hierarchy(path)
-        # TODO: dev num_list, sorted_dir = [x for x in range(max_int)] if not num_list else num_list
         # this_dir = sort.file_order(this_dir) # TODO: ValueError: too many values to unpack (expected 2)
+        # os.path.exists(path)
         if clear_path:
             dir_.insert(0, op.split(path)[0])
             dir_clear = [op.join(path, x) for x in dir_]
         else:
-            dir_clear = path
-
-        dir_ = [substance.init(x) for x in dir_clear]
+            dir_clear = path.copy()
+        dir_ = [subst.init(x) for x in dir_clear]
+        empty = [x.content for x in dir_ if x.type == "folder" and x.len == 0]
         labels = ["🔝 toParent"]*clear_path + [x.sign + ' ' + x.name for i, x in enumerate(dir_) if i != 0 or not clear_path]
-        labels = ind.files(labels, dir_clear, used)
+        labels = ind.files(labels, dir_clear, used, f.underline)
         labels = ind.files(labels, dir_clear, exceptions, f.red)
-
-        return dir_, labels
+        labels = ind.files(labels, dir_clear, empty)
+        return dir_, labels, empty
 
     def get_correct_input(c_fin):
-        # [False, True, None] == [Exit, GoNext, Refresh]
+        # [False, True, None] == [Exit, GoNext, Refresh]    ||    "cmd": (flag, value),    ||    "cmd": func(*args),
         cmd, tag, val = req.console(c_fin)
         global correct
+        temp0, temp1 = False, False
+        cmd = "sort" if mod == "sort" and not val else cmd
         correct = True if c_fin == "rf" or cmd and cmd != "ref" else False
-        print([cmd, tag, val], correct)
+        # input([cmd, tag, val])
         out = {
-            # "cmd": (flag, value),
-            "help": (None, ''),
-            "undo": (None, ''),
-            "fin": (False, "exit"),
-            "": (False, ''),
-            "make": (None, ''),
-            "del": (False, ''),
+            "help":   (None, ''),
+            "undo":   (None, ''),
+            "fin":    (False, "exit"),
+            "":       (False, ''),
+            "make":   (None, ''),
             "rename": (None, ''),
-            "move": (False, ''),
-            "copy": (False, ''),
-            "sort": (False, ''),
-            "open": (None, ''),
-            "ref": (None, ''),
-            "type": (None, ''),
-            "index": (None, ''),
-            "get": (None, ''),
+            "del":    (False, []),
+            "move":   (False, []),
+            "copy":   (False, []),
+            "sort":   (False, 'single'),
+            "open":   (None, ''),
+            "ref":    (None, ''),
+            "type":   (None, ''),
+            "ind":  (None, ''),
+            "get":    (None, ''),
+            "cd":     (True, 0),
         }
         do = {
-            "make": lambda x: create(op.join(path, x), '', True),
-            "del": lambda x: delete(x, True),
-            "rename": lambda x: rename(x, input("Enter new name: "), True, 2),
-            "open": lambda x: open(x, True),
+            "make":   (lambda x: create(op.join(path, x), '', True)),
+            "del":    (lambda x: delete(x, True)),
+            "rename": (lambda x: rename(x, input("Enter new name: "), True, 2)),
+            "open":   (lambda x: open(x, True)),
+            "get":    (lambda x: get.subs(x, temp0, temp1, True)),
+            "ind":  (lambda x: ind.append(op.join(ind.dir_tmp, str(temp0)), x, public=True))
         }
-        if cmd in ["move", "copy"]:
-            pathways, moved = [cur_dir[x] for x in val], []
-            msg = [f.paint("Selected:", f.yellow) + f.paint('(' + cmd + ')', f.grey)] + [smp.objects.get("element") + ' ' + p.content for p in pathways] + [' ']
-            [print(x) for x in msg]
-            inter = pathways[0].family
-            inter = set(inter) if isinstance(inter, list) else {inter}
-            for i in range(1, len(pathways)):
-                inter &= {pathways[i].family}
-            for sup_dst in list(inter):
-                dst = smp.dirs.get(sup_dst)
-                dst_name_colored = f.paint(substance.init(dst[1]).sign + ' ' + dst[1], dst[0], '')
-                if req.start("Is {0}{2}{1} the {0}destination{1}".format(f.bold, f.end, dst_name_colored), reverse=True):
-                    r_dst = dst[1]
-                    break
+
+        if cmd in out.keys():
+            if cmd in ["move", "copy"]:
+                to_set = lambda value: set(value) if isinstance(value, list) else {value}
+                pathways, moved = [cur_dir[x] for x in val], []
+                msg = [f.paint("Selected:", f.yellow) + f.paint('(' + cmd + ')', f.grey)] + [smp.objects.get("element") + ' ' + p.content for p in pathways] + [' ']
+                [print(x) for x in msg]
+                inter = to_set(pathways[0].family)
+                for i in range(1, len(pathways)):
+                    inter &= to_set(pathways[i].family)
+                for sup_dst in list(inter):
+                    dst = smp.dirs.get(sup_dst)
+                    dst_name_colored = f.paint(subst.init(dst[1]).sign + ' ' + dst[1], dst[0], '')
+                    if req.start("Is {0}{2}{1} the {0}destination{1}".format(f.bold, f.end, dst_name_colored), reverse=True):
+                        r_dst = dst[1]
+                        break
+                else:
+                    r_dst, msg = navigator(path, 1, f.yellow, cmd, False)
+                for item in pathways:
+                    moved.append(op.join(r_dst, item.name))
+                    move(item.content, r_dst, public=True) if cmd == "move" else copy(item.content, r_dst, public=True)
+                out.update({cmd: (False, moved)})
             else:
-                r_dst = navigator(path, 1, f.yellow, cmd)
-            for item in pathways:
-                moved.append(op.join(r_dst, item.name))
-                move(item.content, r_dst, public=True) if cmd == "move" else copy(item.content, r_dst, public=True)
-            return False, moved
-        elif cmd in out.keys():
-            val = [path] if not val else [cur_dir[x].content if isinstance(x, int) else x for x in (val if isinstance(val, list) else [val])]
-            [do.get(cmd)(x) for x in val] if cmd in do.keys() else None
-            return out.get(cmd)
+                temp0 = ind.used_tmp if cmd == "ind" and tag == "usd" else (ind.exc_tmp if cmd == "ind" and tag == "exc" else temp0)                        # init "ind"
+                temp0, temp1 = (True, False) if cmd == "get" and tag == "dir" else ((False, True) if cmd == "get" and tag == "file" else (temp0, temp1))    # init "get"
+                out.update({cmd: (False, [cur_dir[x].content for x in val])}) if cmd == "del" else None                                                     # init "del"
+                out.update({cmd: (False, tag)}) if cmd == "sort" and tag == "rec" else None
+
+                val = cur_empty if cmd == "del" and tag == "odd" else val                                                                                   # init "del -odd"
+                val = [path] if not val else [(cur_dir[x].content if isinstance(x, int) else x) for x in (val if isinstance(val, list) else [val])]
+                [do.get(cmd)(x) for x in val] if cmd in do.keys() else None
         elif 0 <= val < len(cur_dir):
-            if cur_dir[val].type == "file":
-                some_func = do.get("open", lambda x: x)
-                input(some_func)
-                some_func(cur_dir[val].content)
-                return out.get("open")
-            else:
-                return True, val
+            cmd = "open" if cur_dir[val].type == "file" else "cd"
+            do.get("open")([path] if not val else cur_dir[val].content) if cmd == "open" else out.update({cmd: (True, val)})
         else:
-            return out.get("ref")
+            cmd = "ref"
+        return out.get(cmd)
 
     def notify(step):
         if step == 0:
             note.status(delta=1, color=color, pattern='.') if it == 0 else print()
             if clear_path:
-                note.result(path, os.path.exists(path), "cur_dir", 'Current', lambda x: convert.to_graphic_path(x), general_c=color, init=[True, '']),
+                note.result(path, None, "cur_dir", '', lambda x: convert.to_graphic_path(x), general_c=color, init=[True, '']),
                 note.message_console("Select %s location: " % f.paint(mod, color + f.underline, color), '', c_pat='', color=color, end='')
             else:
                 note.result(smp.objects.get("folder"), True, "cur_dir", 'Choice', lambda x: convert.to_graphic_path(x), general_c=color, init=['', '']),
@@ -251,28 +257,26 @@ def navigator(path, it=0, color=f.violet, mod="next"):
                 None if correct else note.result(fin, False, mode(1), init=False)
             else:
                 note.parameters({"Final Path": path, "Iterations": it}, color=color + f.bold + f.underline)
-                note.process(mode(1), False, color=f.bg(color))
-                note.status('.', '.', color=color)
+                None if not shutdown else note.process(mode(1), False, color=f.bg(color))
+                None if not shutdown else note.status('.', '.', color=color)
 
     clear_path = not isinstance(path, list)
     notify(0)
-    cur_dir, cur_labels = preparing()
+    cur_dir, cur_labels, cur_empty = preparing()
     notify(1)
     fin = input(">> ")
     flag, k = get_correct_input(fin)
-    print([flag, k], correct, end=' ')
-    input()
+    # input([flag, k])
     if flag:
         selected = cur_dir[k].content
         notify(2)
-        path = navigator(selected, it + 1, color, mod)
+        path, k = navigator(selected, it + 1, color, mod)
     elif flag is None:
         notify(2)
-        path = navigator(path, it + 1, color, mod)
+        path, k = navigator(path, it + 1, color, mod)
     else:
         notify(2)
-        return path
-    return path
+    return path, k
 
 
 # =====  Built-in  ===== #
@@ -308,6 +312,6 @@ if __name__ == "__main__":
     # test_fm()
     # ui2py(r"F:\Work\CODE\toStudy\Python\PyQt\Poems.ui")
     while True:
-        sel_path = navigator(r"F:\Work\CODE\toStudy\Python")
-        print()
+        sel_path, info = navigator(r"F:\Work\CODE\toStudy\Python")
+        print([sel_path, info])
     # sel_path = navigator([x[1] for x in smp.dirs.values()])

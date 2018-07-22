@@ -1,1 +1,3 @@
 F:\Work\CODE\toStudy\Python\my_second
+F:\Work\CODE\toStudy\Python\PyQt
+F:\Work\CODE\toStudy\Python\__pycache__

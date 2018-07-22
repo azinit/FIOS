@@ -57,7 +57,7 @@ def append(data_path, *args, public=False):
     args = args[0] if isinstance(args[0], list) else args
     if not os.path.exists(data_path):
         new(data_path, public)
-    write.to_file(data_path, '\n'.join(args) + '\n', 'a', public=public)
+    write.to_file(data_path, '\r\n'.join(args) + '\r\n', 'a', public=public)
 
 
 def get(data_path, mode="used", public=False):

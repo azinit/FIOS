@@ -1,36 +1,36 @@
 import FIOS.sample as sample
 import FIOS.convert as convert
 
-# TODO: simplify ; rename() ; incorrect words
+# TODO: simplify ; rename() ; incorrect words ; match with fm; multiple tags
 help_req = {
     "GENERAL": '',                                      # ------
-    "undo": "Cancel last operation",                    # X
-    "exit": "Finish program",                           # >
-    "": "Enter",                                        # V
-    ".TAGS..": '',                                      # ------
-    "-r": "Recursive",                                  # X
-    "-o": "Odd",                                        # X
-    "exc": "$EXCEPTION",                                # X
-    "usd": "$USED",                                     # X
-    "-d": "Dir",                                        # X
-    "-f": "File",                                       # X
-    "-t": "Type",                                       # X
-    "EXPLORE": '',                                      # ------
-    "mk {item}": "Make {item} in WD",                   # V
-    "rn {item}": "Rename {item}",                       # V
-    "rm {item}": "Remove {item}",                       # V
-    "rm -o ": "Delete empty items in WD",               # X
-    "cp {item}": "Copy {item} to ...",                  # V
-    "mv {item}": "Move {item} to ...",                  # V
-    "sd": "Single Sort WD",                             # X
-    "sd -r": "Recursive Sort WD",                       # X
-    "op": "Open WD",                                    # V
-    "rf": "Refresh WD content",                         # V
-    "tp {item}": "Get type of {item} folder",           # X
-    "{item} >> exc": "Index {item} into exception",     # X
-    "{item} >> usd": "Index {item} into used",          # X
-    "gt -d": "Get dirs in WD",                          # X
-    "gt -f": "Get files in WD",                         # X
+    "undo":          "Cancel last operation",           # X
+    "exit":          "Finish program",                  # >
+    "":              "Enter",                           # V
+    ".TAGS..":       '',                                # ------
+    "-r":            "Recursive",                       # X
+    "-o":            "Odd",                             # >
+    "exc":           "$EXCEPTION",                      # V
+    "usd":           "$USED",                           # V
+    "-d":            "Dir",                             # >
+    "-f":            "File",                            # >
+    "-t":            "Type",                            # X
+    "EXPLORE":       '',                                # ------
+    "mk {item}":     "Make {item} in WD",               # V
+    "rn {item}":     "Rename {item}",                   # V
+    "rm {item}":     "Remove {item}",                   # V
+    "rm -o ":        "Delete empty items in WD",        # V
+    "cp {item}":     "Copy {item} to ...",              # V
+    "mv {item}":     "Move {item} to ...",              # V
+    "sd":            "Single Sort WD",                  # X
+    "sd -r":         "Recursive Sort WD",               # X
+    "op":            "Open WD",                         # V
+    "rf":            "Refresh WD content",              # V
+    "tp {item}":     "Get type of {item} folder",       # X
+    "{*item} >> exc": "Index {item} into exception",    # V
+    "{*item} >> usd": "Index {item} into used",         # V
+    "gt -d": "Get dirs in WD",                          # V
+    "gt -f": "Get files in WD",                         # V
     ".......": '',                                      # ------
     # "-i exception": "Set Extension Directory",
     # "-ch step": "choose step",
@@ -67,7 +67,7 @@ def console(ui):
     def init_input():
         fin = ui.split() + ['']*(3 - len(ui.split()))
         if fin[0].isdigit():
-            return ("ent", '', int(fin[0])) if not fin[1] else ("ind", fin[2], int(fin[0]))
+            return ("ent", '', int(fin[0])) if not fin[1] else ("ind", fin[-1], (fin[:-2:]))
         else:
             cmd, tag = req.get("cmd").get(fin[0], ''), req.get("tag").get(fin[1], '')
             cmd = "ref" if not cmd and ui.count(' ') == 0 and ui else cmd
@@ -103,7 +103,7 @@ if __name__ == "__main__":
     # start("Well. Let's start", reverse=True)
     console("help")
     print()
-    for item in ['', "20", "rf", "13 >> exc", "rm 13", "rm -o", "mk folder", "mk folder_1 folder_2", "mv 1 23 5-7 16", "typo", "op 7", "rn 3"]:
+    for item in ['', "20", "rf", "13 >> exc", "1 2 3 >> usd", "rm 13", "rm -o", "mk folder", "mk folder_1 folder_2", "mv 1 23 5-7 16", "typo", "op 7", "rn 3", "sd", "sd -r"]:
         print(str({item}).ljust(20), console(item))
     for j in range(3):
         print(console(input(">> ")))
