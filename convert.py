@@ -29,10 +29,11 @@ def to_interval(gap, parser=lambda x: type(x)):
 def to_single_list(large_list):
     result = []
     large_list = list(large_list) if type(large_list) == "<class 'dict_values'>" else large_list
-    while isinstance(large_list[0], list):
-        for sub in large_list:
-            result.extend(sub if isinstance(sub, list) else [sub])
-        large_list, result = result.copy(), []
+    for i in range(len(large_list)):
+        while isinstance(large_list[i], list):
+            for sub in large_list:
+                result.extend(sub if isinstance(sub, list) else [sub])
+            large_list, result = result.copy(), []
     return large_list
 
 
@@ -88,6 +89,7 @@ if __name__ == '__main__':
     print(to_interval(gap="1-5", parser=int))
     print(to_interval(gap="5-1", parser=str))
     print(to_single_list(large_list=[[[1, 2, 3], [4, 5, 6]], [7, 8, 9]]))
+    print(to_single_list(large_list=[1, 23, [5, 6, 7], 16]))
     print(to_center(value="SomeTitle", width=20, pattern='X', color='\33[36m'))
     print(to_time(h=18, m=46, s=13))
     print(to_hms(s=datetime.datetime.now()))

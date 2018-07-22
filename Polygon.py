@@ -1,7 +1,15 @@
+import sys
 import iri
 
 # iri.launch()
 
-a, b = (1, 2) if False else (2, 3)
+list_1 = [5, 4, 3, 2, 1]
+list_2 = ['a', 'l', 'i', 'r', 'i']
 
-print(a, b)
+list_1, list_2 = zip(*sorted(zip(list_2, list_1)))
+print(list_1)
+print(list_2)
+
+print('> ', end='')
+data = sys.stdin.readline()
+print(data)

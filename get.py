@@ -2,23 +2,14 @@ import FIOS.notifier as notifier
 import FIOS.write as write
 
 os = write.os
-substance = notifier.subst
-sample = notifier.smp
-convert = notifier.convert
-yellow = sample.font.yellow
-blue = sample.font.blue
-end = sample.font.end
+substance, smp, convert = notifier.subst, notifier.smp, notifier.convert
+yellow, blue, end = smp.font.yellow, smp.font.blue, smp.font.end
 
 
 # =====   Common   ===== #)
 # TODO : function: path_intersection(deeepest up lvl)
 def intersection():
     pass
-
-
-def substring(string, pattern):
-    res = [x for i, x in enumerate(str(string).split(pattern)) if i % 2 == 1]
-    return res[0] if len(res) == 1 else res
 
 
 def digit(digit_seq):
@@ -46,17 +37,17 @@ def subs(path, folders=True, files=False, public=False, recursive=True):
     root = os.path.split(dst.content)[0] if dst.kind == 'file' else dst.content
     if root:
         result_files, result_folders = [], [root] if folders else []
-        for dirName, folderNames, fileNames in os.walk(root):
+        for rootName, folderNames, fileNames in os.walk(root):
             if not recursive and level > 0:
                 break
             if folders and recursive:
-                result_folders.extend(unite(dirName, folderNames))
+                result_folders.extend(unite(rootName, folderNames))
             if files:
-                result_files.extend(unite(dirName, fileNames))
+                result_files.extend(unite(rootName, fileNames))
             level += 1
         if public:
-            write.me(result_folders, yellow + sample.objects['folder'], end)
-            write.me(result_files, blue + sample.objects['file'], end)
+            write.me(result_folders, yellow + smp.objects['folder'], end)
+            write.me(result_files, blue + smp.objects['file'], end)
         if files:
             yield result_files
         if folders:
@@ -74,8 +65,7 @@ def time(start_time, end_time):
 
 if __name__ == "__main__":
     print(intersection())
-    print(substring(string=type("SomeString"), pattern="'"))
     print(digit(digit_seq="12349501"))
-    print(key_by_value(search=".avi", dictionary=sample.files))
-    folder, file = subs(path=sample.MAIN_PATH, folders=True, files=True, public=True, recursive=False)
+    print(key_by_value(search=".avi", dictionary=smp.files))
+    folder, file = subs(path=smp.MAIN_PATH, folders=True, files=True, public=True, recursive=False)
     print(list(time(start_time=64800, end_time=64809)))

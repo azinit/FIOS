@@ -1,3 +1,4 @@
+import os
 import os.path as op
 import inspect
 
@@ -70,6 +71,7 @@ class Number(Substance):
             return '+' * (self.content > 0) + '0' * (self.content == 0) + '-' * (self.content < 0)
 
 
+# TODO: intersection x * y overload
 class DataStructure(Substance):
     def __init__(self, value, name=''):
         Substance.__init__(self, value, name)
@@ -85,9 +87,12 @@ class TimeData(Substance):
 
 class Path(Substance):
     def __init__(self, value, name=''):
-        Substance.__init__(self, value, op.split(value)[1] if not name else name)
+        # TODO: mb files/folder contains amount....
+        Substance.__init__(self, value, op.split(value)[1])
         self.exist = op.exists(self.content)
         self.dir = op.split(value)[0]
+        self.extension = None if len(self.name.split('.')) == 1 else self.name.split('.')[-1]
+        self.family = ~ self
 
     def __abs__(self):
         if op.isdir(self.content):
@@ -99,7 +104,10 @@ class Path(Substance):
 
     def __str__(self):
         header, content = Substance.__str__(self).split("\n")
-        header += ", Exist: {0}{2}{1}, Dir: {0}//{3}{1}".format(red2, end, self.exist, self.dir.split(r'\\'[:1:])[-1])
+        header += ", Family: {0}{4}{1}\nExist: {0}{2}{1}, Dir: {0}{3}/..{1}".format(
+            red2, end, self.exist, self.dir.split(r'\\'[:1:])[-1], self.family)
+        p_name, extra = ("Extension", self.extension) if self.type == "file" else (("Files amount", self.len) if self.type == "folder" else ("Extra", ""))
+        header += "\n** {3}: {0}{2}{1}".format(red2, end, extra, p_name)
         return header + "\n" + content
 
     def __pos__(self):
@@ -113,12 +121,24 @@ class Path(Substance):
 
         if self.type == "file":
             extension = self.name.split('.')
-            self.extension = None if len(extension) == 1 else extension[1]
             return "Without extension" if len(extension) == 1 else get_key('.' + extension[-1].lower(), sample.files)
         elif self.type == "folder":
-            # TODO: def dir
-            # return get_key(self.content, sample.dirs)
-            return self.name
+            families, all_files = list(sample.files.keys()), []
+            for root, folders, files in os.walk(self.content):
+                all_files.extend([op.join(root, x) for x in files])
+            self.len = len(all_files)
+            if len(all_files) == 0:
+                return "~/empty"
+            elif len(all_files) <= 150:
+                count = [0]*len(families)
+                for file in all_files:
+                    file_family = init(file).property
+                    ind = families.index(file_family) if file_family in families else -1
+                    count[ind] = count[ind] + 1 * (ind != -1)
+                count, families = zip(*sorted(zip(count, families), reverse=True))
+                return families[:min(5, count.index(0)):]
+            else:
+                return "~/DEEP"
         else:
             return None
 
@@ -129,6 +149,18 @@ class Path(Substance):
             # return sign if self.type == 'file' else "{}({})".format(sample.objects.get("folder"), sign)
         else:
             return Substance.__getitem__(self, dictionary)
+
+    def __invert__(self):
+        if self.type == "file":
+            return sample.files_properties.get(self.property, ["Unassigned"])[0]
+        elif self.type == "folder":
+            # return [sample.files_properties.get(x, ["Unassigned"])[0] for i, x in enumerate(self.property) if i < 3]
+            if 0 < self.len <= 300:
+                return list(dict.fromkeys([sample.files_properties.get(x, ["Unassigned"])[0] for i, x in enumerate(self.property) if i < 3]))
+            else:
+                return self.property
+        else:
+            return "Unassigned"
 
 
 class String(Substance):
@@ -166,11 +198,12 @@ if __name__ == "__main__":
 
     test_cases(0)
     test_value = "Hello! I'm Iri :)"
-    values = [test_value, [test_value], None,
-              r"F:\Work\CODE\toStudy\Python\PyQt\converter.bat"]
+    values = [test_value, [test_value], None, r"F:\Work\CODE\Projects\SortManager\Sorted\Audio",
+        "F:\Work\CODE\Projects\SortManager\TestType", "F:\Work\CODE", r"F:\Work\CODE\toStudy\Python\PyQt\converter.bat"]
     dirs = sample.dirs.values()
-    # [print(init(content, 'item')) for content in values]
+    [print(init(content, 'item'), '\n') for content in values[::-1]]
+    # print(sample.files_properties.get(init(values[-1]).property[0]))
     for content in dirs:
         Dir = init(content[1])
-        print(Dir)
+        print(Dir, '\n')
 

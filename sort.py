@@ -47,13 +47,20 @@ def file_order(directory, num_list=""):
 
 # TODO: optimize
 def hierarchy(directory):
-    sorted_hierarchy = []
-    directory, root = os.listdir(directory) if os.path.isabs(directory) else directory, directory
-    for i, element in enumerate(directory):
-        el = substance.init(os.path.join(root, element))
+    sorted_hierarchy, i = [], 0
+    if isinstance(directory, list):
+        root = ''
+        directory = directory.copy()
+    else:
+        root = directory
+        directory = os.listdir(directory)
+    while i != len(directory):
+        element, el = directory[i], substance.init(os.path.join(root, directory[i]))
         if el.type == "folder":
             sorted_hierarchy.append(element)
-            directory.pop(i)
+            directory.pop(directory.index(element))
+            i -= 1
+        i += 1
     sorted_hierarchy.extend(directory)
     return sorted_hierarchy
 

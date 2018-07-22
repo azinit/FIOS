@@ -83,7 +83,8 @@ objects = {
     "audio": '🎵',
     "guitar": '🎸',
     "piano": '🎹',
-    "arrow": '➟',
+    "arrow_r": '🢤',
+    "arrow": '➠',
     "arrow_broken": '⭍',
     "net": '🖧',
     "cloth": '👗',
@@ -230,6 +231,8 @@ types = {
     "path_file_exe": r"F:\Work\CODE\Projects\SortManager\Sorted\Unassigned\kts18.0.0.405abcdefgru_13930.exe",
     "path_file_torrent": r"F:\Work\CODE\Projects\SortManager\Sorted\Unassigned\Sony Vegas Pro 13.0 Build 453 Multilingual.torrent",
     "path_file_html": r"F:\Work\CODE\Projects\SortManager\Sorted\Unassigned\messages_Даниил Герасимов(167539495).html",
+    "path_file_unassigned": r"F:\Work\CODE\Projects\SortManager\Sorted\Unassigned\messages_Даниил Герасимов(167539495).ttytp",
+    "path_folder_deep": r"F:\Work\CODE\toStudy",
 }
 versions = {
     "requester": 0.0,

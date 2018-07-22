@@ -1,4 +1,6 @@
+import sys
 import time
+# import threading
 
 import FIOS.substance as subst
 import FIOS.convert as convert
@@ -9,31 +11,31 @@ f = smp.font
 default_width = convert.cfg.Settings.width
 
 
-# TODO: simplify by functions;
+# TODO: simplify by functions; s_1, s_2, s_3 => s_1, s_2, s_3 = [generator]
 def result(item, flag, mode, sub='', decore=lambda x: x, init=None,
            general_c='', i_false=f.red, i_true=f.blue2, i_none=f.yellow,
            s_false='', s_true='', s_none=''):
     col_sign = lambda name, color: f.paint(smp.objects.get(name), f.enhance(color))
-    col_obj = lambda val, colors, sign: f.paint(str(sign + ' ') + str(decore(subst.init(val).content)), colors[flag], end)
+    col_obj = lambda val, colors, sign: f.paint(str(sign + ' '*(len(sign) > 0)) + str(decore(subst.init(val).content)), colors[flag], end)
     def_sign = lambda val, ind: subst.init(val).sign if init[ind] is True else init[ind]
 
-    init = [True, True] if init is None else init
-    s_false = i_false if not s_false else s_false
-    s_true = f.enhance(i_true) if not s_true else s_true
-    s_none = f.enhance(i_none) if not s_none else s_none
+    init = [True, True] if init is None else (['', ''] if init is False else init)
+    s_false = '' if not sub else (i_false if not s_false else s_false)
+    s_true = '' if not sub else (f.enhance(i_true) if not s_true else s_true)
+    s_none = '' if not sub else (i_none if not s_none else s_none)
     c_items, c_subs = ([i_false, i_true, i_none], [s_false, s_true, s_none]) if not general_c else (['', '', ''], ['', '', ''])
     end = '' if general_c else f.end
     sub, init[1] = (sub + ' ', init[1]) if sub or sub == 0 else ('', '')
 
-    arr, arr_brok, flag = col_sign("arrow", i_true), col_sign("arrow_broken", i_false), subst.init(flag).property
+    flag, arr = subst.init(flag).property, [col_sign(n, c) for n, c in zip(["arrow", "arrow_r", "arrow_broken"], [i_true, i_true, i_false])]
     item, sub = col_obj(item, c_items, def_sign(item, 0)), col_obj(sub, c_subs, def_sign(sub, 1))
     notification_dict = {
         "create": ["{1}{0} already exists!", "{1}Created: {0}", "{1}Error occurred: {0}"],
-        "rename": ["{0} " + arr_brok + " {1}", "{0} " + arr + " {1}", "Not found: {0}"],
+        "rename": ["{0} " + arr[2] + " {1}", "{0} " + arr[0] + " {1}", "Not found: {0}"],
         "delete": ["{1}Deleting {0} failed.", "{1}Deleted: {0}", "Not found: {0}"],
         "clean": ["{1}Cleaning {0} failed.", "{1}Cleaned: {0}", "Not found: {0}"],
         "sort": ["{1}Sorting in {0} failed.", "🎩 {1}Sorted: {0} files ", "Sort directory: {0}"],
-        "move": ["{0} " + arr_brok + " {1}", "{0} " + arr + " {1}", "Not found: {0}"],
+        "move": ["{1} " + arr[2] + " {0}", "{1}" + arr[1] + " {0}", "Not found: {0}"],
         "open": ["Failed {1}opening: {0}", "{1}Opened: {0}", "{1}Opening... {0}"],
         "navigator": ["Incorrect {1}: {0}", "Current directory: {0}", "{1}➥ {0}"],
         "read": ["Input file {0} not found", "Reading from: {0}", "{1}Error occurred: {0}"],
@@ -51,10 +53,10 @@ def status(tag='', pattern='', width=0, color='', delta=0):
     print(name)
 
 
-def message_console(message, sub_msg='', c_pat="> ", color=f.beige, c_pat_color=f.beige, time_delay=0):
+def message_console(message, sub_msg='', c_pat="> ", color=f.beige, c_pat_color=f.beige, time_delay=0, end='\n'):
     time.sleep(time_delay)
     c_pat_color = '' if not color else c_pat_color
-    print(f.paint(c_pat, c_pat_color, color) + f.paint(str(message), color, ''), str(sub_msg))
+    print(f.paint(c_pat, c_pat_color, color) + f.paint(str(message), color, ''), str(sub_msg), end=end)
 
 
 def parameters(*args, marker=smp.objects.get("element"), color=f.beige, general_color=''):
@@ -93,7 +95,21 @@ def match():
     pass
 
 
+# TODO: multiprocess persecond
+def waiting(total_time=8):
+    def _print(string):
+        sys.stdout.write(string)
+        sys.stdout.flush()
+    print("{}⏳ ".format(f.grey), end='')
+    # threading.Timer(1.0, waiting).start()
+    for j in range(total_time):
+        _print(".")
+        time.sleep(0.25)
+    print(f.end)
+
+
 if __name__ == "__main__":
+    waiting()
     for i, i_mode in enumerate(["create", "rename", "clean", "sort", "move", "open", "navigator", "read", "write", "cur_dir"]):
         for j, i_state in enumerate([False, True, None]):
             print("{}_{}: ".format(i_mode, i_state), end=' ')
@@ -107,3 +123,4 @@ if __name__ == "__main__":
         message_box(message="Hello!", b_pat=".", b_gap=" ", b_m=i)
     message_console("Enter number: ")
     parameters(1, 2, 3)
+
