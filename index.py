@@ -96,16 +96,18 @@ def clean(data_path, public=False):
 
 
 def files(label_list, check_list, to_index_list, color=_font.grey):
-    index_list = []
+    index_list, special = [], []
     for index_path in to_index_list:
         if index_path in check_list:
             index_list.append(list(check_list).index(index_path))
-    return [_font.paint(x, color) if i in index_list else x for i, x in enumerate(label_list)]
+            special.append(index_path)
+    return [_font.paint(x, color) if i in index_list else x for i, x in enumerate(label_list)], special
 
 
 if __name__ == "__main__":
     data = [r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS\%Temp\used_branches.txt",
             r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS\%Temp\exc_branches.txt"]
+
     def test_cycle():
         print(string(value="SomeString. Mark me. pleeease ^___^", color=_font.beige))
         print(content(value="Hello. It's Me", pattern="'"))
@@ -120,4 +122,5 @@ if __name__ == "__main__":
     # clean(data[0], public=True)
     # append(data[0], [r"F:\Work\CODE\Projects\SortManager\toSort\HelloWorld",
     #       r"F:\Work\CODE\Projects\SortManager\toSort\vk"], public=True)
-    append(default_exc, r"F:\Work\CODE\Projects\SortManager\toSort\HelloWorld", public=True)
+    path = r"F:\Work\CODE\toStudy\Python\.idea"
+    append(default_exc, path, public=True)

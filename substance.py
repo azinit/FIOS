@@ -17,6 +17,7 @@ kinds_dict = {
 }
 
 
+# TODO: define type of objects
 class Substance(object):
     def __init__(self, content, name=''):
         self.content = content

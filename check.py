@@ -1,7 +1,13 @@
 import os
+import os.path as op
+import re
 
 from FIOS.sample import engchars as _eng
+from FIOS.substance import init as _init
 from FIOS.convert import _rld
+from FIOS.split import file as sp_file
+
+
 # TODO
 def time():
     pass
@@ -18,7 +24,22 @@ def intersection():
 
 
 def duplicate(source, destination):
-
+    src = _init(source)
+    if op.exists(op.join(destination, src.name)):   # TODO: check (1)(2) ...; folders merger or inc index by input
+        old, ext = sp_file(src.name)
+        ext, res = ext if not ext else '.' + ext, re.findall("\d+", old)
+        if res and str(old[-1:]).isdigit():
+            digit = int(res[-1]) + 1
+            new = _rld(old, digit - 1)
+        else:
+            digit = 1
+            new = old + "_%d" % digit
+        while op.exists(op.join(destination, new + ext)):
+            new = _rld(new, digit)
+            digit += 1
+        return op.join(src.dir, new + ext)
+    else:
+        return False
 
 
 def name(full_path):

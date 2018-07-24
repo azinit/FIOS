@@ -12,7 +12,7 @@ from FIOS.convert import to_center as _to_c
 default_width = _Settings.width
 
 
-# TODO: simplify by functions; s_1, s_2, s_3 => s_1, s_2, s_3 = [generator]
+# TODO: simplify by functions; s_1, s_2, s_3 => s_1, s_2, s_3 = [generator]; ¯\_(ツ)_/¯ case (str = [nothing to sort, exception , .. ])
 def result(item, flag, mode, sub='', decore=lambda x: x, init=None,
            general_c='', i_false=_f.red, i_true=_f.blue2, i_none=_f.yellow,
            s_false='', s_true='', s_none='', end='\n'):
@@ -55,7 +55,7 @@ def status(tag='', pattern='', width=0, color='', delta=0):
     print(name)
 
 
-def message_console(message, sub_msg='', c_pat=">> ", color=_f.beige, c_pat_color=_f.beige, time_delay=0, end='\n'):
+def message_console(message, sub_msg='', c_pat=">> ", color=_f.beige, c_pat_color=_f.beige, time_delay=0, end=_f.end+'\n'):
     time.sleep(time_delay)
     c_pat_color = '' if not color else c_pat_color
     print(_f.paint(c_pat, c_pat_color, color) + _f.paint(str(message), color, ''), str(sub_msg), end=end)

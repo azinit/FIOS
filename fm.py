@@ -3,20 +3,30 @@ import os.path as op
 import shutil
 import codecs
 import inspect
-import re
 
 import FIOS.font as _f
 import FIOS.notifier as _note
 import FIOS.index as _ind
-from FIOS.sample import objects as _obj, dirs as _dirs, files_properties as _files_p, MAIN_PATH as _MP
+from FIOS.check import duplicate as _is_dup
+from FIOS.sample import objects as _obj, dirs as _dirs, files_properties as _files_p
 from FIOS.substance import init as _init
-from FIOS.convert import to_graphic_path as _to_gp, _rld
+from FIOS.convert import to_graphic_path as _to_gp
 from FIOS.get import subs as _subs
 from FIOS.split import path as sp_path, file as sp_file
 from FIOS.sort import hierarchy as _hierarchy
 from FIOS.requester import console as _console, start as _start
 
 correct = False
+
+
+# =====  Built-in  ===== #
+def _catch_exception(value, exc='', color=_f.red):
+    exc = _ind.get(_ind.default_exc) if not exc else exc
+    if value in exc:
+        _note.message_console("%s: Exception ¯\_(ツ)_/¯" % sp_path(value, 2), c_pat='', color=color)
+        return True
+    else:
+        return False
 
 
 # =====   General  ===== #
@@ -45,33 +55,28 @@ def create(path, content="", public=False):
 
 def rename(old, new, public=False, branch_view=3):
     """ Rename exist file/ folder by path """
-    item0, item1 = _init(old), _init(new)
-    # print(str(item1))
-    sign0 = item0.sign
     success = False
-    if not item0.exist:
-        success, new = None, ''
-    else:
-        try:
-            new = op.join(item0.dir, str(item1.content)) if item1.kind in ["string", "number"] else new
-            new += ('' if new.count('.') > 0 else '.' + item0.extension) if item0.type == "file" else ''
-            os.rename(old, new)
-            success = True
-        except Exception as e:
-            print(_f.paint(e, _f.red))
-    _note.result(old, success, mode(), new, lambda x: sp_path(x, branch_view), init=[sign0, True]) if public else None
+    if not _catch_exception(old):
+        item0, item1 = _init(old), _init(new)
+        # print(str(item1))
+        if not item0.exist:
+            success, new = None, ''
+        else:
+            try:
+                new = op.join(item0.dir, str(item1.content)) if item1.kind in ["string", "number"] else new
+                new += ('' if new.count('.') > 0 else '.' + item0.extension) if item0.type == "file" else ''
+                os.rename(old, new)
+                success = True
+            except Exception as e:
+                print(_f.paint(e, _f.red))
+        _note.result(old, success, mode(), new, lambda x: sp_path(x, branch_view), init=[item0.sign, True]) if public else None
     return new if success else success
 
 
 def delete(path, public=False, success=False):
     """ Delete exist file/ folder by path """
-    if success is None:
-        success = False
-        path = "directory"
-        init = False
-    else:
+    if not _catch_exception(path):
         item = _init(path)
-        sign = item.sign
         if not item.exist:
             success = None
         else:
@@ -83,8 +88,7 @@ def delete(path, public=False, success=False):
                 success = True
             else:
                 pass
-        init = [sign, True]
-    _note.result(path, success, mode(), init=init) if public else None
+        _note.result(path, success, mode(), init=[item.sign, True]) if public else None
     return success
 
 
@@ -96,13 +100,14 @@ def clean():
 def open(path, public=False):
     """ Open selected file/folder by path """
     success = None
-    _note.result(path, success, mode()) if public else None
-    try:
-        os.startfile(path)
-        success = True
-    except():
-        success = False
-    _note.result(path, success, mode()) if public else None
+    if not _catch_exception(path):
+        _note.result(path, success, mode()) if public else None
+        try:
+            os.startfile(path)
+            success = True
+        except():
+            success = False
+        _note.result(path, success, mode()) if public else None
     return success
 
 
@@ -118,45 +123,37 @@ def close(path, public=False):
     return success
 
 
-def move(source, destination, public=False, branch_view=3, item_color=_f.blue, folder_color=_f.blue2, ignore_errors=False, mod="move"):
+def move(source, destination, public=False, branch_view=3, item_color=_f.blue, folder_color=_f.blue2, ignore_errors=False, mod="move", exc=''):
     """ Move file/folder to any destination by pathways """
-    success, src, dst = False, _init(source), _init(destination)
-    create(dst.content) if not dst.exist and src.exist else None
-    # input(src)
-    if not src.exist:
-        success, destination = None, ''
-    else:
-        if op.exists(op.join(destination, src.name)):   # TODO: check (1)(2) ...; folders merger or inc index by input
-            old, ext = sp_file(src.name)
-            ext, res = ext if not ext else '.' + ext, re.findall("\d+", old)
-            if res and str(old[-1:]).isdigit():
-                digit = int(res[-1]) + 1
-                new = _rld(old, digit-1)
-            else:
-                digit = 1
-                new = old + "_%d" % digit
-            while op.exists(op.join(destination, new + ext)):
-                new = _rld(new, digit)
-                digit += 1
-            new_source = op.join(src.dir, new + ext)
-            source = rename(source, new_source, branch_view=1)
-            item_color = _f.yellow
-        if source:
-            try:
-                os.chdir(destination)
-                # shutil.move(source, destination) if mod == "move" else shutil.copy2(source, destination)
-                success = True
-            except Exception as e:
-                print(_f.paint(e, _f.red)) if not ignore_errors else None
+    success = False
+    if not _catch_exception(source, exc) and not _catch_exception(destination, exc):
+        _src, _dst = _init(source), _init(destination)
+        create(_dst.content) if not _dst.exist and _src.exist else None
+        # input(src)
+        if not _src.exist:
+            success, destination = None, ''
+        else:
+            new_source = _is_dup(source, destination)
+            if new_source:
+                source = rename(source, new_source, branch_view=1)
+                item_color = _f.yellow
 
-    _note.result(source, success, mode(), destination, lambda x: sp_path(x, branch_view),
-                 i_true=item_color, s_true=folder_color, init=[src.sign, True]) if public else None
-    return success
+            if source:
+                try:
+                    os.chdir(destination)
+                    # shutil.move(source, destination) if mod == "move" else shutil.copy2(source, destination)
+                    success = True
+                except Exception as e:
+                    print(_f.paint(e, _f.red)) if not ignore_errors else None
+
+        _note.result(source, success, mode(), destination, lambda x: sp_path(x, branch_view),
+                     i_true=item_color, s_true=folder_color, init=[_src.sign, True]) if public else None
+        return success
 
 
-def copy(source, destination, public=False, branch_view=3, item_color=_f.blue, folder_color=_f.blue2, ignore_errors=False):
+def copy(source, destination, public=False, branch_view=3, item_color=_f.blue, folder_color=_f.blue2, ignore_errors=False, exc=''):
     """ Copy file/folder to any destination by pathways """
-    return move(source, destination, public, branch_view, item_color, folder_color, ignore_errors, mod="copy")
+    return move(source, destination, public, branch_view, item_color, folder_color, ignore_errors, mod="copy", exc=exc)
 
 
 # TODO: sortierarchy, adv input, colorize and bold; choose by mask (*.exe); .get => []
@@ -164,7 +161,7 @@ def copy(source, destination, public=False, branch_view=3, item_color=_f.blue, f
 def navigator(path, it=0, color=_f.violet, mod="next", shutdown=True):
     """ Navigator for File System with resolved operations such as move/copy/rename/delete and etc... """
     def preparing():
-        exceptions, used = [_ind.get(op.join(_ind.dir_tmp, x)) for x in [_ind.exc_tmp, _ind.used_tmp]]
+        _exc, _usd = [_ind.get(op.join(_ind.dir_tmp, x)) for x in [_ind.exc_tmp, _ind.used_tmp]]
         # input(op.join(ind.dir_tmp, ind.used_tmp))     # TODO: block-red; set/unset track
         if clear_path:
             # this_dir = sort.file_order(this_dir) # TODO: ValueError: too many values to unpack (expected 2)
@@ -177,16 +174,19 @@ def navigator(path, it=0, color=_f.violet, mod="next", shutdown=True):
         dir_ = [_init(x) for x in dir_clear]
         folders = [x.content for x in dir_ if x.type == "folder"]
         labels = ["🔝 toParent"]*clear_path + [x.sign + ' ' + x.name for i, x in enumerate(dir_) if i != 0 or not clear_path]
-        labels = _ind.files(labels, dir_clear, used, _f.grey)
-        labels = _ind.files(labels, dir_clear, exceptions, _f.red)
-        labels = _ind.files(labels, dir_clear, folders, _f.bold)
+        labels = _ind.files(labels, dir_clear, _usd, _f.grey)[0]
+        labels, _exc = _ind.files(labels, dir_clear, _exc, _f.red)
+        labels = _ind.files(labels, dir_clear, folders, _f.bold)[0]
         # labels = _ind.files(labels, dir_clear, invalid_ways, _f.red2)
 
-        return dir_, labels
+        return dir_, labels, _exc
 
     def get_correct_input(c_fin):
+        offset = lambda x, list: print() if x in list else None
         # [False, True, None] == [Exit, GoNext, Refresh]    ||    "cmd": (flag, value),    ||    "cmd": func(*args),
+
         cmd, tag, val = _console(c_fin)
+        offset(cmd, ["rename", "del", "move", "copy", "open", "get", "make"])
         global correct
         temp0, temp1 = False, False
         cmd = "sort" if mod == "sort" and cmd in ['', "sort"] and not val else cmd
@@ -206,7 +206,7 @@ def navigator(path, it=0, color=_f.violet, mod="next", shutdown=True):
             "open":   (None, ''),
             "ref":    (None, ''),
             "type":   (None, ''),
-            "ind":  (None, ''),
+            "ind":    (None, ''),
             "get":    (None, ''),
             "cd":     (True, 0),
         }
@@ -223,23 +223,24 @@ def navigator(path, it=0, color=_f.violet, mod="next", shutdown=True):
         if cmd in out.keys():
             if cmd in ["move", "copy"]:
                 to_set = lambda value: set(value) if isinstance(value, list) else {value}
-                pathways, moved = [cur_dir[x] for x in val], []
-                msg = [_f.paint("Selected:", _f.yellow) + _f.paint('(' + cmd + ')', _f.grey)] + [_obj.get("element") + ' ' + p.content for p in pathways] + [' ']
+                pathways, pathways_c, moved = [cur_dir[x] for x in val], [cur_dir[x].content for x in val], []
+                msg = [_f.paint("Selected:", _f.yellow) + _f.paint('(' + cmd + ')', _f.grey)] + [_obj.get("element") + ' ' + p for p in _ind.files(pathways_c, pathways_c, exc, _f.red)[0]] + [' ']
                 [print(x) for x in msg]
                 inter = to_set(pathways[0].family)
                 for i in range(1, len(pathways)):
                     inter &= to_set(pathways[i].family)
                 for sup_dst in list(inter):
-                    dst = _dirs.get(sup_dst)
-                    dst_name_colored = _f.paint(_init(dst[1]).sign + ' ' + dst[1], dst[0], '')
+                    _dst = _dirs.get(sup_dst)
+                    dst_name_colored = _f.paint(_init(_dst[1]).sign + ' ' + _dst[1], _dst[0], '')
                     if _start("Is {0}{2}{1} the {0}destination{1}".format(_f.bold, _f.end, dst_name_colored), reverse=True, color=''):
-                        r_dst = dst[1]
+                        r_dst = _dst[1]
                         break
                 else:
                     r_dst, msg = navigator([x[1] for x in _dirs.values()], 1, _f.yellow, cmd, False)
+                print()
                 for item in pathways:
                     moved.append(op.join(r_dst, item.name))
-                    move(item.content, r_dst, public=True) if cmd == "move" else copy(item.content, r_dst, public=True)
+                    move(item.content, r_dst, public=True, exc=exc) if cmd == "move" else copy(item.content, r_dst, public=True, exc=exc)
                 out.update({cmd: (False, moved)})
             else:
                 temp0 = _ind.used_tmp if cmd == "ind" and tag == "usd" else (_ind.exc_tmp if cmd == "ind" and tag == "exc" else temp0)                      # init "ind"
@@ -249,15 +250,22 @@ def navigator(path, it=0, color=_f.violet, mod="next", shutdown=True):
                 if cmd == "del" and tag == "odd":                                                                                                           # init "del -odd"
                     val = [x.content for x in cur_dir if x.property == "~/empty"]
                     if not val:
-                        print("No empty folders ¯\_(ツ)_/¯")
+                        _note.message_console("Nothing to sort ¯\_(ツ)_/¯", c_pat='', color=_f.grey)
                         cmd, tag, val = "ref", '', ''
                 val = [path] if not val else [(cur_dir[x].content if isinstance(x, int) else x) for x in (val if isinstance(val, list) else [val])]
                 [do.get(cmd)(x) for x in val] if cmd in do.keys() else None
         elif 0 <= val < len(cur_dir):
-            cmd = "open" if cur_dir[val].type == "file" else "cd"
-            do.get("open")([path] if not val else cur_dir[val].content) if cmd == "open" else out.update({cmd: (True, val)})
+            if _catch_exception(cur_dir[val].content, exc, _f.grey):
+                cmd = "ref"
+            elif cur_dir[val].type == "file":
+                cmd = "open"
+                do.get("open")([path] if not val else cur_dir[val].content)
+            else:
+                cmd = "cd"
+                out.update({cmd: (True, val)})
         else:
             cmd = "ref"
+        offset(cmd, ["del", "move", "copy"])
         return out.get(cmd)
 
     def notify(step):
@@ -273,7 +281,7 @@ def navigator(path, it=0, color=_f.violet, mod="next", shutdown=True):
             [print("{} {}".format(_f.paint(str(i) + '.', color), x)) for i, x in enumerate(cur_labels)]
         else:
             if flag:
-                _note.result(selected, None, mode(1), decore=lambda x: _to_gp(x))
+                _note.result(cur_dir[k].content, None, mode(1), decore=lambda x: _to_gp(x))
             elif flag is None:
                 None if correct else _note.result(fin, False, mode(1), init=False)
             else:
@@ -283,20 +291,17 @@ def navigator(path, it=0, color=_f.violet, mod="next", shutdown=True):
 
     clear_path = not isinstance(path, list)
     notify(0)
-    cur_dir, cur_labels = preparing()
+    cur_dir, cur_labels, exc = preparing()
     notify(1)
     fin = input(">> ")
     flag, k = get_correct_input(fin)
     # input([flag, k])
+    notify(2)
     if flag:
         selected = cur_dir[k].content
-        notify(2)
         path, k = navigator(selected, it + 1, color, mod)
     elif flag is None:
-        notify(2)
         path, k = navigator(path, it + 1, color, mod)
-    else:
-        notify(2)
     return path, k
 
 
@@ -334,10 +339,10 @@ if __name__ == "__main__":
 
     # test_fm()
     # ui2py(r"F:\Work\CODE\toStudy\Python\PyQt\Poems.ui")
-    while False:
+    while True:
         sel_path, info = navigator(r"F:\Work\CODE\toStudy\Python")
         print([sel_path, info])
-    # sel_path = navigator([x[1] for x in smp.dirs.values()])
-    src = [r"F:\Work\CODE\Projects\SortManager\toSort\chatClient\chatClient.exe",  r"F:\Work\CODE\Projects\SortManager\toSort\desktop\4.ZTL"]
+    # sel_path = navigator([x[1] for x in _dirs.values()])
+    src = [r"F:\Work\CODE\Projects\SortManager\toSort\chatClient\chatClient.exe",  r"F:\Work\CODE\Projects\SortManager\toSort\desktop\6.ZTL"]
     dst = [r"F:\Work\CODE\Projects\SortManager\Sorted\System", r"F:\Work\CODE\Projects\SortManager\Sorted\CG"]
-    move(src[1], dst[1], True)
+    # move(src[1], dst[1], True)
