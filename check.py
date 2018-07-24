@@ -57,18 +57,18 @@ def name(full_path):
     return fullname
 
 
-def digits(digit_list, pow_=1):
+def digits_by_pow(digits, parser, pow_=1):
     try:
-        if not isinstance(digit_list, (list, str)):
-            digit_list = [digit_list]
-        for j, i in enumerate(digit_list):
-            if i.isdigit():
+        if not isinstance(digits, (list, str)):
+            digits = [digits]
+        for j, i in enumerate(digits):
+            if str(i).isdigit():
                 i = int(i)
                 if i < 10**(pow_-1):
-                    digit_list[j] = (pow_ - len(str(i)))*'0' + str(i)
+                    digits[j] = (pow_ - len(str(i))) * '0' + str(i)
     except():
         pass
-    return digit_list
+    return [parser(x) for x in digits]
 
 
 def verb(word, parent='get'):   # TODO:
@@ -112,4 +112,5 @@ def verb(word, parent='get'):   # TODO:
     return dirs, count'''
 
 if __name__ == "__main__":
-    print(digits(['1', '0002', '3', 'abs', 12.3, '04', '25', '23', '04', '107'], 2))
+    print(digits_by_pow(digits=['1', '0002', '3', 'abs', 12.3, '04', '25', '23', '04', '107'], pow_=5))
+    print(digits_by_pow(digits=1, pow_=2))

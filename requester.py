@@ -4,35 +4,39 @@ from FIOS.convert import to_interval as _to_i, to_single_list as _to_s
 
 # TODO: simplify ; rename() ; incorrect words ; match with fm; multiple tags
 help_req = {
-    "GENERAL": '',                                      # ------
-    "undo":          "Cancel last operation",           # X
-    "exit":          "Finish program",                  # >
-    "":              "Enter",                           # V
-    ".TAGS..":       '',                                # ------
-    "-r":            "Recursive",                       # X
-    "-o":            "Odd",                             # >
-    "exc":           "$EXCEPTION",                      # V
-    "usd":           "$USED",                           # V
-    "-d":            "Dir",                             # >
-    "-f":            "File",                            # >
-    "-t":            "Type",                            # X
-    "EXPLORE":       '',                                # ------
-    "mk {item}":     "Make {item} in WD",               # V
-    "rn {item}":     "Rename {item}",                   # V
-    "rm {item}":     "Remove {item}",                   # V
-    "rm -o ":        "Delete empty items in WD",        # V
-    "cp {item}":     "Copy {item} to ...",              # V
-    "mv {item}":     "Move {item} to ...",              # V
-    "sd":            "Single Sort WD",                  # X
-    "sd -r":         "Recursive Sort WD",               # X
-    "op":            "Open WD",                         # V
-    "rf":            "Refresh WD content",              # V
-    "tp {item}":     "Get type of {item} folder",       # X
-    "{*item} >> exc": "Index {item} into exception",    # V
-    "{*item} >> usd": "Index {item} into used",         # V
-    "gt -d": "Get dirs in WD",                          # V
-    "gt -f": "Get files in WD",                         # V
-    ".......": '',                                      # ------
+    "GENERAL":        '',                                # ------
+    "undo":           "Cancel last operation",           # X
+    "exit":           "Finish program",                  # >
+    "":               "Enter",                           # V
+    ".TAGS..":        '',                                # ------
+    "++":             "Inc",                             # >
+    "--":             "Dec",                             # >
+    "-r":             "Recursive",                       # V
+    "-o":             "Odd",                             # >
+    "exc":            "$EXCEPTION",                      # V
+    "usd":            "$USED",                           # V
+    "-d":             "Dir",                             # >
+    "-f":             "File",                            # >
+    "-t":             "Type",                            # X
+    "EXPLORE":        '',                                # ------
+    "mk {item}":      "Make {item} in WD",               # V
+    "rn {item}":      "Rename {item}",                   # V
+    "rm {item}":      "Remove {item}",                   # V
+    "rm -o ":         "Delete empty items in WD",        # V
+    "cp {item}":      "Copy {item} to ...",              # V
+    "mv {item}":      "Move {item} to ...",              # V
+    "sd":             "Single Sort WD",                  # V
+    "sd -r":          "Recursive Sort WD",               # V
+    "op":             "Open WD",                         # V
+    "rf":             "Refresh WD content",              # V
+    "tp":             "Get type for every folder",       # V
+    "clr":            "Get color for every item",        # V
+    "fl":             "Change fluency parameter",        # >
+    "{*item} >> exc": "Index {item} into exception",     # V
+    "{*item} >> usd": "Index {item} into used",          # V
+    "gt -d":          "Get dirs in WD",                  # V
+    "gt -f":          "Get files in WD",                 # V
+    ".......":        '',                                # ------
     # "-i exception": "Set Extension Directory",
     # "-ch step": "choose step",
 }
@@ -47,14 +51,18 @@ req = {
         "rm": "del",
         "cp": "copy",
         "mv": "move",
+        "sd": "sort",
         "op": "open",
         "rf": "ref",
         "tp": "type",
+        "clr": "color",
         "ind": "ind",
+        "fl": "fluency",
         "gt": "get",
-        "sd": "sort",
     },
     "tag": {
+        "++": "inc",
+        "--": "dec",
         "-r": "rec",
         "-o": "odd",
         "-d": "dir",
@@ -106,7 +114,7 @@ if __name__ == "__main__":
     # start("Well. Let's start", reverse=True)
     console("help")
     print()
-    for item in ['', "20", "rf", "13 >> exc", "1 2 3 >> usd", "rm 13", "rm -o", "mk folder", "mk folder_1 folder_2", "mv 1 23 5-7 16", "typo", "op 7", "rn 3", "sd", "sd -r"]:
+    for item in ['', "20", "rf", "13 >> exc", "1 2 3 >> usd", "rm 13", "rm -o", "mk folder", "mk folder_1 folder_2", "mv 1 23 5-7 16", "tp", "clr", "op 7", "rn 3", "sd", "sd -r", "fl ++", "fl --"]:
         print(str({item}).ljust(20), console(item))
     for j in range(3):
         print(console(input(">> ")))

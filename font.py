@@ -1,6 +1,6 @@
 # TODO: maybe class with overload... ?; maybe short name....
-TESTPHRASE = "Hello! I'm Iri ;)"
-
+# TESTPHRASE = "Hello! I'm Iri ;)"
+TESTPHRASE = '❓'
 # ANSI COLORS
 # ====== FAMILY ===== #
 end = '\33[0m'
@@ -59,6 +59,7 @@ simples = [white, grey, grey2, black, red, red2, yellow, yellow2, green, green2,
 
 # TODO: lists => dict with pairs; bg, sm => invert value (bg <=> sm)
 
+
 def bg(simple_color):
     return backs[simples.index(simple_color)]
 
@@ -77,6 +78,9 @@ def enhance(color):
 
 
 def paint(value, content_color=beige, next_color=end):
+    for c in simples + backs + [end]:
+        if c != content_color:
+            value = str(value).replace(c, '')
     return content_color + str(value) + next_color
 
 

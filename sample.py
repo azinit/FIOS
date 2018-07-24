@@ -1,7 +1,8 @@
 import datetime
 
-from FIOS.font import (paint as _p, bold as _bold, blue as _blue, blue2 as _blue2, green as _green, yellow as _yellow, yellow2 as _yellow2, red as _red, red2 as _red2, beige as _beige, black as _black, redbg as _redbg)
+import FIOS.font as _f
 
+# TODO: offset = 30
 MAIN_PATH = r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS"
 #   File System
 files = {
@@ -72,6 +73,7 @@ objects = {
     "file":                     '📄',
     "folder":                   '📁',
     "e_folder":                 '🗀',
+    "d_folder":                 '📂',
     "element":                  '•',
     "video":                    '🎬',
     "slides":                   '🎟',
@@ -109,77 +111,80 @@ objects = {
     "windows":                  '🗗',
     "grid":                     '▤',
     "bye":                      '🚪',
+    "question":                 '❓',
+    "vfx":                      '🎆',
+    "dragon":                   '🐉',
 
 }
 files_properties = {
-    "Image":                    ["Graphic", objects.get("image")],
-    "Texture":                  ["CG", objects.get("texture")],
-    "Vector":                   ["Graphic", objects.get("vector")],
-    "Video":                    ["Graphic", objects.get("video")],
-    "Adobe Photoshop doc":      ["Adobe", objects.get("camera")],
-    "Adobe Illustrator doc":    ["Adobe", objects.get("draw")],
-    "Photoshop preset":         ["Adobe", objects.get("settings")],
-    "3ds Max":                  ["CG", objects.get("house")],
-    "Zbrush":                   ["CG", objects.get("people")],
-    "3d Coat":                  ["CG", objects.get("house")],
-    "Topogun":                  ["CG", objects.get("house")],
-    "3D Model":                 ["CG", objects.get("house")],
-    "Substance":                ["CG", objects.get("texture")],
-    "PureRef":                  ["CG", objects.get("image")],
-    "Cinema 4D":                ["CG", objects.get("house")],
-    "Maya":                     ["CG", objects.get("house")],
-    "Marmoset Toolbag":         ["CG", objects.get("camera")],
-    "Corel Draw":               ["CG", objects.get("draw")],
-    "Paint.NET":                ["CG", objects.get("draw")],
-    "Marvelous Designer":       ["CG", objects.get("cloth")],
+    "Image":                    ["Graphic", objects["image"]],
+    "Texture":                  ["CG", objects["texture"]],
+    "Vector":                   ["Graphic", objects["vector"]],
+    "Video":                    ["Graphic", objects["video"]],
+    "Adobe Photoshop doc":      ["Adobe", objects["camera"]],
+    "Adobe Illustrator doc":    ["Adobe", objects["draw"]],
+    "Photoshop preset":         ["Adobe", objects["settings"]],
+    "3ds Max":                  ["CG", objects["house"]],
+    "Zbrush":                   ["CG", objects["people"]],
+    "3d Coat":                  ["CG", objects["house"]],
+    "Topogun":                  ["CG", objects["house"]],
+    "3D Model":                 ["CG", objects["house"]],
+    "Substance":                ["CG", objects["texture"]],
+    "PureRef":                  ["CG", objects["image"]],
+    "Cinema 4D":                ["CG", objects["house"]],
+    "Maya":                     ["CG", objects["house"]],
+    "Marmoset Toolbag":         ["CG", objects["camera"]],
+    "Corel Draw":               ["CG", objects["draw"]],
+    "Paint.NET":                ["CG", objects["draw"]],
+    "Marvelous Designer":       ["CG", objects["cloth"]],
     #   Documents
-    "Adobe Reader":             ["Text", objects.get("slides")],
-    "Microsoft Office":         ["Text", objects.get("text")],
-    "Microsoft Excel":          ["Text", objects.get("table")],
-    "Microsoft PowerPoint":     ["Text", objects.get("slides")],
-    "XMind":                    ["Text", objects.get("map")],
-    "Text":                     ["Text", objects.get("text")],
-    "Code":                     ["Text", objects.get("code")],
-    "Config":                   ["Text", objects.get("log")],
-    "LogFile":                  ["Text", objects.get("log")],
+    "Adobe Reader":             ["Text", objects["slides"]],
+    "Microsoft Office":         ["Text", objects["text"]],
+    "Microsoft Excel":          ["Text", objects["table"]],
+    "Microsoft PowerPoint":     ["Text", objects["slides"]],
+    "XMind":                    ["Text", objects["map"]],
+    "Text":                     ["Text", objects["text"]],
+    "Code":                     ["Text", objects["code"]],
+    "Config":                   ["Text", objects["log"]],
+    "LogFile":                  ["Text", objects["log"]],
     # "": ["..."],
     #   Audio
-    "Audio":                    ["Audio", objects.get("audio")],
-    "Sibelius":                 ["Audio", objects.get("piano")],
-    "Guitar Pro":               ["Audio", objects.get("guitar")],
+    "Audio":                    ["Audio", objects["audio"]],
+    "Sibelius":                 ["Audio", objects["piano"]],
+    "Guitar Pro":               ["Audio", objects["guitar"]],
     #   System
-    "Archive":                  ["System", objects.get("archive")],
-    "Launch":                   ["Software", objects.get("play")],
-    "Font":                     ["System", objects.get("font")],
-    "Link":                     ["System", objects.get("link")],
+    "Archive":                  ["System", objects["archive"]],
+    "Launch":                   ["Software", objects["play"]],
+    "Font":                     ["System", objects["font"]],
+    "Link":                     ["System", objects["link"]],
     #   Code
-    "Python":                   ["Code", objects.get("code")],
-    "Pascal":                   ["Code", objects.get("code")],
-    "Visual Studio":            ["Code", objects.get("windows")],
-    "Android Studio":           ["Code", objects.get("phone")],
-    "UI Style":                 ["System", objects.get("grid")],
-    "WEB":                      ["Code", objects.get("code")],
+    "Python":                   ["Code", objects["code"]],
+    "Pascal":                   ["Code", objects["code"]],
+    "Visual Studio":            ["Code", objects["windows"]],
+    "Android Studio":           ["Code", objects["phone"]],
+    "UI Style":                 ["System", objects["grid"]],
+    "WEB":                      ["Code", objects["code"]],
     #   Special
     #       Games
-    "Skyrim":                   ["Games", objects.get("game")],
+    "Skyrim":                   ["Games", objects["game"]],
     #       Torrent
-    "Torrent":                  ["Download⬇", objects.get("net")],
+    "Torrent":                  ["Download⬇", objects["net"]],
 }
 dirs = {
-    "Audio":        [_green, "F:\Work\CODE\Projects\SortManager\Sorted\Audio"],
-    "Adobe":        [_blue, "F:\Work\CODE\Projects\SortManager\Sorted\Adobe"],
-    "Graphic":      [_blue2, "F:\Work\CODE\Projects\SortManager\Sorted\Graphic"],
-    "CG":           [_beige, "F:\Work\CODE\Projects\SortManager\Sorted\CG"],
-    "Text":         [_bold, "F:\Work\CODE\Projects\SortManager\Sorted\Text"],
-    "Software":     [_yellow, "F:\Work\CODE\Projects\SortManager\Sorted\Software"],
-    "System":       [_yellow, "F:\Work\CODE\Projects\SortManager\Sorted\System"],
-    "Download⬇":    [_green, "F:\Work\CODE\Projects\SortManager\Sorted\Download"],
-    "Code":         [_beige, "F:\Work\CODE\Projects\SortManager\Sorted\Code"],
-    "Games":        [_redbg + _black, "F:\Work\CODE\Projects\SortManager\Sorted\Games"],
-    "Unassigned":   [_bold, r"F:\Work\CODE\Projects\SortManager\Sorted\Unassigned"]
+    "Audio":        [_f.violet, "F:\Work\CODE\Projects\SortManager\Sorted\Audio", objects["audio"]],
+    "Adobe":        [_f.beige, "F:\Work\CODE\Projects\SortManager\Sorted\Adobe", objects["camera"]],
+    "Graphic":      [_f.blue2, "F:\Work\CODE\Projects\SortManager\Sorted\Graphic", objects["image"]],
+    "CG":           [_f.beige, "F:\Work\CODE\Projects\SortManager\Sorted\CG", objects["draw"]],
+    "Text":         [_f.white, "F:\Work\CODE\Projects\SortManager\Sorted\Text", objects["text"]],
+    "Software":     [_f.yellow, "F:\Work\CODE\Projects\SortManager\Sorted\Software", objects["play"]],
+    "System":       [_f.blackbg, "F:\Work\CODE\Projects\SortManager\Sorted\System", objects["system"]],
+    "Download⬇":    [_f.beige2 + _f.bold, "F:\Work\CODE\Projects\SortManager\Sorted\Download", objects["net"]],
+    "Code":         [_f.beige, "F:\Work\CODE\Projects\SortManager\Sorted\Code", objects["code"]],
+    "Games":        [_f.red, "F:\Work\CODE\Projects\SortManager\Sorted\Games", objects["game"]],
+    "Unassigned":   ['', r"F:\Work\CODE\Projects\SortManager\Sorted\Unassigned", objects["question"]]
 }
 
-priority = [_red2, _red, _yellow2, _yellow, _green]
+priority = [_f.red2, _f.red, _f.yellow2, _f.yellow, _f.green]
 choicebox = ["[y/n]"]
 phrases = {
     "start":        ["А я тут", "Я пришла", "Все. Я вся твоя)", "Привет)", "Привет", "Хай", "Доброе утро"],
@@ -207,6 +212,12 @@ types = {
     "string_char":                  'a',
     "string_line":                  "Process finished with exit code 0",
     "string_text":                  "[General]\ncorename = Iri",
+    "string_slash":                 '/',
+    "string_double_slash":          "//",
+    "string_multi_slash":           "////",
+    "string_slash_":                '\\'[:1],
+    "string_double_slash_":         "\\",
+    "string_multi_slash_":          "\\\\",
     "flag_bool_true":               True,
     "flag_bool_false":              False,
     "flag_NoneType":                None,
@@ -227,6 +238,7 @@ types = {
     "path_file_unassigned":         r"F:\Work\CODE\Projects\SortManager\Sorted\Unassigned\messages_Даниил Герасимов(167539495).ttytp",
     "path_folder_deep":             r"F:\Work\CODE\toStudy",
     "path_folder_invalid":          r"F:\Work\CODE\Projects\SortManager\Sorted\Code ",
+    "path_folder_invalid_":         r"F:\Work\CODE\toStudy\Python\my_second",
 }
 versions = {
     "requester":    1.0,
@@ -294,7 +306,8 @@ if __name__ == "__main__":
     names = ["files", "objects", "files_properties", "dirs", "phrases", "versions", "types", "engchars", "ruschars",
              "cards", "subjects"]
     for i in range(len(dicts)):
-        print('.'*13 + names[i].upper() + '.'*13)
+        print('.'*31 + names[i].upper() + '.'*31)
         for key, value in dicts[i].items():
-            print("{}: {}".format(key, _p(value)))
+            length = 31 - (len(key) + 1)
+            print("{}:{}{}".format(key, ' '*length, _f.paint(value)))
         print()

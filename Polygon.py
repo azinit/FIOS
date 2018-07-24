@@ -44,4 +44,20 @@ def test_copy():
 # path = "F:\Work\CODE\Projects\SortManager\Sorted\Code F"
 # print([path])
 # print([path.strip()])
-print(1), print(2) if True else None
+# print(1), print(2) if True else None
+if isinstance(0, bool):
+    print(1)
+if isinstance(True, bool):
+    print(2)
+if isinstance(False, bool):
+    print(3)
+if isinstance('dasd', bool):
+    print(4)
+if isinstance([], bool):
+    print(5)
+l = ["🔝 toParent"] * False
+
+print(0 ^ 0)
+print(0 ^ 1)
+print(1 ^ 0)
+print(1 ^ 1)
