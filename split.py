@@ -1,7 +1,7 @@
 def file(fullname):
     result = fullname.split('.')
     if len(result) == 1:
-        filename, file_extension = result[0], None
+        filename, file_extension = result[0], ''
     elif len(result) == 2:
         filename, file_extension = result
     else:    # > 2

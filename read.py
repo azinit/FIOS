@@ -1,16 +1,18 @@
 import os
 import codecs
 
-import FIOS.notifier as notifier
+from FIOS.notifier import status as _s, result as _r
 
 
+# TODO; add binary mode for media
 def from_file(file_path, public=False):
+    """ Read from file by path """
     path, name = os.path.split(file_path)
     content = ''
     if public:
-        notifier.status()
-        notifier.result(path, os.path.exists(path), "cur_dir")
-        notifier.result(file_path, os.path.exists(file_path), "read", decore=lambda x: os.path.split(x)[1])
+        _s()
+        _r(path, os.path.exists(path), "cur_dir")
+        _r(file_path, os.path.exists(file_path), "read", decore=lambda x: os.path.split(x)[1])
 
     if os.path.exists(file_path):
         os.chdir(path)

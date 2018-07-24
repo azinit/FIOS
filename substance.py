@@ -1,20 +1,17 @@
 import os
 import os.path as op
 import inspect
+import datetime as d
 
-import FIOS.sample as sample
-
-# files_dict = to_single_list(list(files.values()))
-red2 = sample.font.red2
-end = sample.font.end
-d = sample.datetime
+from FIOS.font import red2 as _red2, end as _end
+from FIOS.sample import files as _files, files_properties as _files_p, dirs as _dirs, objects as _obj, types as _typ
 
 kinds_dict = {
     lambda x, n: Flag.create(x, n): lambda x: isinstance(x, (bool, type(None))),
     lambda x, n: Number.create(int(x) if isinstance(x, str) else x, n): lambda x: isinstance(x, (int, float, complex)) or str(x).isdigit(),
     lambda x, n: DataStructure.create(x, n): lambda x: isinstance(x, (list, tuple, dict, set, frozenset)),
     lambda x, n: TimeData.create(x, n): lambda x: isinstance(x, (d.date, d.time, d.datetime)),
-    lambda x, n: Path.create(x, n): lambda x: op.isabs(str(x)),
+    lambda x, n: Path.create(str(x).strip(), n): lambda x: op.isabs(str(x)),
     lambda x, n: String.create(x, n): lambda x: isinstance(x, str),
     lambda x, n: Substance.create(x, n): True
 }
@@ -28,15 +25,15 @@ class Substance(object):
         self.kind = self.kind[0].lower() + self.kind[1:]
         self.type = abs(self)
         self.property = + self
-        self.sign = self[sample.objects]
+        self.sign = self[_obj]
 
     def __abs__(self):
         return str(type(self.content)).split("'")[1]
 
     # TODO: Overload
     def __str__(self):
-        header = "Kind: {0}{2}{1}, Type: {0}{3}{1}, Property: {0}{4}{1}".format(red2, end, self.kind, self.type, self.property)
-        content = "{4} {2}: {0}{3}{1}".format(red2, end, self.name, self.content, self.sign)
+        header = "Kind: {0}{2}{1}, Type: {0}{3}{1}, Property: {0}{4}{1}".format(_red2, _end, self.kind, self.type, self.property)
+        content = "{4} {2}: {0}{3}{1}".format(_red2, _end, self.name, self.content, self.sign)
         return header + "\n" + content
 
     def __pos__(self):
@@ -45,7 +42,7 @@ class Substance(object):
     def __getitem__(self, dictionary):
         for item in [self.type, self.kind]:
             if item in dictionary.keys():
-                return dictionary.get(item)
+                return dictionary[item]
         else:
             return ""
 
@@ -105,9 +102,9 @@ class Path(Substance):
     def __str__(self):
         header, content = Substance.__str__(self).split("\n")
         header += ", Family: {0}{4}{1}\nExist: {0}{2}{1}, Dir: {0}{3}/..{1}".format(
-            red2, end, self.exist, self.dir.split(r'\\'[:1:])[-1], self.family)
+            _red2, _end, self.exist, self.dir.split(r'\\'[:1:])[-1], self.family)
         p_name, extra = ("Extension", self.extension) if self.type == "file" else (("Files amount", self.len) if self.type == "folder" else ("Extra", ""))
-        header += "\n** {3}: {0}{2}{1}".format(red2, end, extra, p_name)
+        header += "\n** {3}: {0}{2}{1}".format(_red2, _end, extra, p_name)
         return header + "\n" + content
 
     def __pos__(self):
@@ -121,9 +118,9 @@ class Path(Substance):
 
         if self.type == "file":
             extension = self.name.split('.')
-            return "Without extension" if len(extension) == 1 else get_key('.' + extension[-1].lower(), sample.files)
+            return "Without extension" if len(extension) == 1 else get_key('.' + extension[-1].lower(), _files)
         elif self.type == "folder":
-            families, all_files = list(sample.files.keys()), []
+            families, all_files = list(_files.keys()), []
             for root, folders, files in os.walk(self.content):
                 all_files.extend([op.join(root, x) for x in files])
             self.len = len(all_files)
@@ -143,26 +140,28 @@ class Path(Substance):
             return None
 
     def __getitem__(self, dictionary):
-        if self.type == "file" and self.property in sample.files_properties.keys():
-            return sample.files_properties.get(self.property)[1]
-            # TODO: 📁(🎵, 📝) - get for folder by folder_type by contained files(not name)
+        if self.type == "file" and self.property in _files_p:
+            return _files_p[self.property][1]   # TODO: 📁(🎵, 📝) - get for folder by folder_type by contained files(not name)
             # return sign if self.type == 'file' else "{}({})".format(sample.objects.get("folder"), sign)
+        elif self.type == "folder" and self.property == "~/empty":
+            return _obj["e_folder"]
         else:
             return Substance.__getitem__(self, dictionary)
 
     def __invert__(self):
         if self.type == "file":
-            return sample.files_properties.get(self.property, ["Unassigned"])[0]
+            return _files_p.get(self.property, ["Unassigned"])[0]
         elif self.type == "folder":
             # return [sample.files_properties.get(x, ["Unassigned"])[0] for i, x in enumerate(self.property) if i < 3]
             if 0 < self.len <= 300:
-                return list(dict.fromkeys([sample.files_properties.get(x, ["Unassigned"])[0] for i, x in enumerate(self.property) if i < 3]))
+                return list(dict.fromkeys([_files_p.get(x, ["Unassigned"])[0] for i, x in enumerate(self.property) if i < 3]))
             else:
                 return self.property
         else:
             return "Unassigned"
 
 
+# TODO: to_center, to_column; rus/eng/ambiguous
 class String(Substance):
     def __init__(self, value, name=''):
         Substance.__init__(self, value, name)
@@ -184,26 +183,24 @@ def init(unknown_substance, name=''):
 
 if __name__ == "__main__":
     def test_cases(mode):
-        for i, (right_answer, test_case) in enumerate(sample.types.items()):
+        for i, (right_answer, test_case) in enumerate(_typ.items()):
             user_answer = init(test_case)
             if mode == 0:
                 print(str(user_answer))
             else:
                 user = user_answer.kind + "_" + user_answer.type
                 user += "_" + str(user_answer.exist) if user_answer.kind == "path" else ""
-                print("{}: {}".format(i, red2 + str(test_case) + end))
-                print("Expected answer: %s" % red2 + str(right_answer) + end)
-                print("User answer: {}".format(red2 * (user == right_answer) + user + end))
+                print("{}: {}".format(i, _red2 + str(test_case) + _end))
+                print("Expected answer: %s" % _red2 + str(right_answer) + _end)
+                print("User answer: {}".format(_red2 * (user == right_answer) + user + _end))
             print()
 
     test_cases(0)
     test_value = "Hello! I'm Iri :)"
-    values = [test_value, [test_value], None, r"F:\Work\CODE\Projects\SortManager\Sorted\Audio",
-        "F:\Work\CODE\Projects\SortManager\TestType", "F:\Work\CODE", r"F:\Work\CODE\toStudy\Python\PyQt\converter.bat"]
-    dirs = sample.dirs.values()
-    [print(init(content, 'item'), '\n') for content in values[::-1]]
+    values = [test_value, [test_value], None, r"F:\Work\CODE\Projects\SortManager\Sorted\Audio", "F:\Work\CODE\Projects\SortManager\TestType", "F:\Work\CODE", r"F:\Work\CODE\toStudy\Python\PyQt\converter.bat"]
+    dirs = _dirs.values()
+    # [print(init(content, 'item'), '\n') for content in values[::-1]]
     # print(sample.files_properties.get(init(values[-1]).property[0]))
     for content in dirs:
         Dir = init(content[1])
         print(Dir, '\n')
-

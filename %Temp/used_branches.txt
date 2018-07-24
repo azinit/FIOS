@@ -1,3 +1,2 @@
-F:\Work\CODE\toStudy\Python\my_second
-F:\Work\CODE\toStudy\Python\PyQt
-F:\Work\CODE\toStudy\Python\__pycache__
+F:\Work\CODE\Projects\SortManager\toSort\HelloWorld
+F:\Work\CODE\Projects\SortManager\toSort\vk

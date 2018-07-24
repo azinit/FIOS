@@ -1,5 +1,6 @@
-import FIOS.sample as sample
-import FIOS.convert as convert
+from FIOS.font import grey as _grey, end as _end, beige as _beige
+from FIOS.sample import choicebox as _box
+from FIOS.convert import to_interval as _to_i, to_single_list as _to_s
 
 # TODO: simplify ; rename() ; incorrect words ; match with fm; multiple tags
 help_req = {
@@ -69,9 +70,9 @@ def console(ui):
         if fin[0].isdigit():
             return ("ent", '', int(fin[0])) if not fin[1] else ("ind", fin[-1], (fin[:-2:]))
         else:
-            cmd, tag = req.get("cmd").get(fin[0], ''), req.get("tag").get(fin[1], '')
-            cmd = "ref" if not cmd and ui.count(' ') == 0 and ui else cmd
-            return (cmd, tag, fin[1]) if not tag else (cmd, tag, fin[2])
+            _cmd, _tag = req.get("cmd").get(fin[0], ''), req.get("tag").get(fin[1], '')
+            _cmd = "ref" if not _cmd and ui.count(' ') == 0 and ui else _cmd
+            return (_cmd, _tag, fin[1]) if not _tag else (_cmd, _tag, fin[2])
 
     cmd, tag, val = init_input()
     [print(k.ljust(32, ' '), v) if v else print('.' * 29 + k + '.' * 29) for k, v in help_req.items()] if ui == "help" else None
@@ -79,22 +80,24 @@ def console(ui):
     val = int(val) if str(val).isdigit() else val
     if isinstance(val, list):
         for i in range(len(val)):
-            val[i] = (int(val[i]) if val[i].isdigit() else val[i]) if val[i].count('-') == 0 else convert.to_interval(val[i], int)
-        val = convert.to_single_list(val)
+            val[i] = (int(val[i]) if val[i].isdigit() else val[i]) if val[i].count('-') == 0 else _to_i(val[i], int)
+        val = _to_s(val)
     return cmd, tag, val
 
 
-def start(*args, requester='', choicebox=True, reverse=False):
-    print(args[1:]) if len(args) > 1 else ''
+def start(*args, requester='', choicebox=True, reverse=False, color=_beige):
+    val = args[1:] if len(args) > 1 else []
+    if val:
+         [print('-', x) for x in _to_s(val)]
     text = args[0].capitalize() if args[0].islower() else args[0]
-    print(requester + text, '?', sample.choicebox[0]*choicebox)
-    user_input = input('>> ')
+    print(color + requester + color + text, '?', _box[0] * choicebox + _end)
+    user_input = input(color + '>> ' + _end)
     true_return = ['y', "yes"] if reverse else ['', 'y', "yes"]
     if user_input in true_return:
-        print(sample.font.grey + "<< yes" + sample.font.end)
+        print(_grey + "<< yes" + _end)
         return True
     else:
-        print(sample.font.grey + "<< no" + sample.font.end)
+        print(_grey + "<< no" + _end)
         return False
 
 

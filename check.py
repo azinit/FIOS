@@ -1,7 +1,7 @@
 import os
 
-import FIOS.sample as sample
-
+from FIOS.sample import engchars as _eng
+from FIOS.convert import _rld
 # TODO
 def time():
     pass
@@ -17,26 +17,8 @@ def intersection():
     pass
 
 
-def duplicate(filepath, fullname):
-    dst = os.path.split(filepath.path)[0]
-    b = False
-    while not b:
-        path = dst + '/' + fullname
-        if os.path.exists(path):
-            new, ext = fullname.split('.')
-            try:
-                new, brk = new.split('(')
-                brk = brk[0:len(brk) - 1:]
-                if int(brk):
-                    brk = '(' + str(int(brk) + 1) + ')'
-                os.rename(fullname, new + brk + '.' + ext)
-                fullname = new + brk + '.' + ext
-            except:
-                os.rename(fullname, new + '(2).' + ext)
-                fullname = new + '(2).' + ext
-        else:
-            b = True
-    return fullname
+def duplicate(source, destination):
+
 
 
 def name(full_path):
@@ -68,13 +50,13 @@ def digits(digit_list, pow_=1):
     return digit_list
 
 
-def verb(word, parent='get'):
+def verb(word, parent='get'):   # TODO:
     # inspect
     v = [False, False, False]
     exc = 'bpdtnml'
     lastchar = word[::-1].lower() if len(word) <= 3 else word[len(word):len(word) - 4:-1].lower()
     # correct verb
-    for i in sample.engchars.get('vowels'):
+    for i in _eng['vowels']:
         if lastchar[0] == i and i != 'y':
             word = word[0:len(word) - 1:] + 'ing'
             v[2] = True

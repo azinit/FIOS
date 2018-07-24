@@ -57,6 +57,7 @@ backs = [whitebg, greybg, greybg2, blackbg, redbg, redbg2, yellowbg, yellowbg2, 
 simples = [white, grey, grey2, black, red, red2, yellow, yellow2, green, green2, beige, beige2, blue,
            blue2, violet, violet2]
 
+# TODO: lists => dict with pairs; bg, sm => invert value (bg <=> sm)
 
 def bg(simple_color):
     return backs[simples.index(simple_color)]

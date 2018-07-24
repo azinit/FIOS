@@ -235,7 +235,7 @@ def randomize(self, amount, kit, it = 'none'):
     c = 0
     # printlst = sort.list.bynum(printlst, amount)
     for i,p in enumerate(printlst):
-        s += (font.beige2 + p + ' ' + font.end)
+        s += (font.beige2 + p + ' ' iri+ font.end)
         if (i+1) % sep == 0:
             c += 1
             print('%s. %s' % (font.yellow + str(check.digits(c)) + font.end,s))

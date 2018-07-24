@@ -1,7 +1,7 @@
 import os
 import re
 
-import FIOS.substance as substance
+from FIOS.substance import init as _init
 
 
 # =====    DIGITS   ===== #
@@ -55,7 +55,7 @@ def hierarchy(directory):
         root = directory
         directory = os.listdir(directory)
     while i != len(directory):
-        element, el = directory[i], substance.init(os.path.join(root, directory[i]))
+        element, el = directory[i], _init(os.path.join(root, directory[i]))
         if el.type == "folder":
             sorted_hierarchy.append(element)
             directory.pop(directory.index(element))
