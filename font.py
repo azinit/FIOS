@@ -70,17 +70,21 @@ def sm(back_color):
 
 def enhance(color):
     list_color = simples if color in simples else backs
-    ind = list_color.index(color)
-    if ind % 2 == 1 and ind > 2:
-        return color
+    if color in list_color:
+        ind = list_color.index(color)
+        if ind % 2 == 1 and ind > 2:
+            return color
+        else:
+            return list_color[ind + 1]
     else:
-        return list_color[ind + 1]
+        return color
 
 
-def paint(value, content_color=beige, next_color=end):
-    for c in simples + backs + [end]:
-        if c != content_color:
-            value = str(value).replace(c, '')
+def paint(value, content_color=beige, next_color=end, total=False):
+    if total:
+        for c in simples + backs + [end]:
+            if c != content_color:
+                value = str(value).replace(c, '')
     return content_color + str(value) + next_color
 
 

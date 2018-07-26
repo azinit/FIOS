@@ -10,12 +10,12 @@ from FIOS.substance import init as _init
 from FIOS.convert import to_center as _to_c
 
 default_width = _Settings.width
+_fl = 2
 
-
-# TODO: simplify by functions; s_1, s_2, s_3 => s_1, s_2, s_3 = [generator]; ¯\_(ツ)_/¯ case (str = [nothing to sort, exception , .. ])
+# TODO: simplify by functions; s_1, s_2, s_3 => s_1, s_2, s_3 = [generator]; ¯\_(ツ)_/¯ case (str = [nothing to sort, exception , .. ]); ljust
 def result(item, flag, mode, sub='', decore=lambda x: x, init=None,
            general_c='', i_false=_f.red, i_true=_f.blue, i_none=_f.yellow,
-           s_false=_f.red, s_true=_f.blue2, s_none=_f.yellow, end='\n', fluency=1):
+           s_false=_f.red, s_true=_f.blue2, s_none=_f.yellow, end='\n', fl=_fl):
     """ Write result of process in console """
     def _col_sign(name, color):
         """ Colorize symbol """
@@ -23,13 +23,13 @@ def result(item, flag, mode, sub='', decore=lambda x: x, init=None,
 
     def _col_obj(val, colors, sign):
         """ Colorize item """
-        return _f.paint(str(sign + ' '*(len(sign) > 0)) + str(decore(_init(val, fluency).content)), colors[flag], c_end)
+        return _f.paint(str(sign + ' ' * (len(sign) > 0)) + str(decore(val)), colors[flag], c_end)
 
     def _get_sign(val, ind):
         """ Init sign """
-        return _init(val, ).sign if init[ind] is True else init[ind]
+        return _init(val, fl=fl).sign if init[ind] is True else init[ind]
     """ Download signs from sample """
-    flag, sign = _init(flag).property, []
+    flag, sign = _init(flag, fl=fl).property, []
     for n, c in zip(["arrow", "arrow_r", "arrow_broken", "flag", "flag"], [i_true, i_true, i_false, i_true, i_none]):
         sign.append(_col_sign(n, c))
 
@@ -53,7 +53,6 @@ def result(item, flag, mode, sub='', decore=lambda x: x, init=None,
     """ Colorize items """
     item = _col_obj(item, c_items, _get_sign(item, 0))
     sub = _col_obj(sub, c_subs, _get_sign(sub, 1))
-
     notification_dict = {
         "create":       ["{1}{0} already exists!",      "{1}Created: {0}",           "{1}Error occurred: {0}"],
         "rename":       ["{0} " + sign[2] + " {1}",     "{0} " + sign[0] + " {1}",   "Not found: {0}"],
@@ -71,11 +70,9 @@ def result(item, flag, mode, sub='', decore=lambda x: x, init=None,
     print(general_c + notification_dict[mode][flag].format(item, sub) + c_end, end=end)
 
 
-def status(tag='', pattern='', width=0, color='', delta=0):
+def status(tag='', pattern='-', width=default_width, color='', delta=0):
     """ Write status of method, process in console """
     name = str(inspect.stack()[1+delta][3]) if not tag else tag
-    pattern = '-' if not pattern else pattern
-    width = default_width if not width else width
     name = _to_c(name.upper(), width, pattern, color)
     print(name)
 
@@ -100,11 +97,11 @@ def parameters(*args, marker=_obj.get("element"), color=_f.beige, general_color=
     print() if end.count('\n') == 0 else None
 
 
-def process(mode, flag, color=_f.beige, pat='.'):
+def process(mode, flag, color=_f.beige, pat='.', fl=_fl):
     """ Write step of process in console """
     color = color + _f.black if color in _f.backs else color
     res = ["finishing", "starting", "in process"]
-    print("{} {}{}".format(_f.paint(mode.capitalize(), color), res[_init(flag).property], pat * 7))
+    print("{} {}{}".format(_f.paint(mode.capitalize(), color), res[_init(flag, fl=fl).property], pat * 7))
 
 
 # TODO: Upgrade Height

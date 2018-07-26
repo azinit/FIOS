@@ -1,4 +1,5 @@
 import os
+import os.path as op
 import re
 
 from FIOS.substance import init as _init
@@ -46,19 +47,21 @@ def file_order(directory, num_list=""):
 
 
 # TODO: optimize
-def hierarchy(directory):
+def hierarchy(directory, fl=1):
     sorted_hierarchy, i = [], 0
     if isinstance(directory, list):
         root = ''
-        directory = directory.copy()
+        directory = list(directory).copy()
     else:
         root = directory
         directory = os.listdir(directory)
+
+    directory = [_init(op.join(root, x), fl=fl) for x in directory]
+
     while i != len(directory):
-        element, el = directory[i], _init(os.path.join(root, directory[i]))
-        if el.type == "folder":
-            sorted_hierarchy.append(element)
-            directory.pop(directory.index(element))
+        if directory[i].type == "folder":
+            sorted_hierarchy.append(directory[i])
+            directory.pop(i)
             i -= 1
         i += 1
     sorted_hierarchy.extend(directory)
@@ -66,6 +69,7 @@ def hierarchy(directory):
 
 
 if __name__ == "__main__":
+    hierarchy("F:\Database\Sort", 5)
     path_ = r'F:\Work\Lessons\Code\Iri\[dev]CreateTheory\vs 1.0\Planimetry\Triangles\Various\Formulas'
     sub = 'defin123ition4_1.txt'
     sub1 = 'definition1.txt'
@@ -75,4 +79,4 @@ if __name__ == "__main__":
     print(by_num(sub2))
     print(by_interval([x for x in range(1, 55)], 6))
     print(os.listdir(path_))
-    print(file_order(path_))
+    # print(file_order(path_))

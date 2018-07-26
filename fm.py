@@ -12,10 +12,12 @@ from FIOS.sample import files_properties as _files_p
 from FIOS.substance import init as _init
 from FIOS.split import path as sp_path, file as sp_file
 
+_fl = 2
+
 
 # =====  Built-in  ===== #
-def _catch_exception(value, exc='', color=_f.red):
-    exc = _ind.get(_ind.default_exc) if not exc else exc
+def _catch_exception(value, exc='', color=_f.red, fl=_fl):
+    exc = _ind.get(_ind.default_exc, fl=fl) if not exc else exc
     if value in exc:
         _note.message_console("⛔ %s: Exception ¯\_(ツ)_/¯" % sp_path(value, 2), c_pat='', color=color)
         return True
@@ -31,7 +33,7 @@ def _mode(delta=0):
 # =====   General  ===== #
 def create(path, content="", public=False):
     """ Create new file/folder by path """
-    item = _init(path)
+    item = _init(path, fl=_fl)
     success = False
     if item.kind == "path" and not item.exist:
         if item.type in ["folder", "ambiguous"]:
@@ -52,11 +54,11 @@ def create(path, content="", public=False):
     return success
 
 
-def rename(old, new, public=False, branch_view=3):
+def rename(old, new, public=False, branch_view=3, fl=_fl):
     """ Rename exist file/ folder by path """
     success = False
     if not _catch_exception(old):
-        item0, item1 = _init(old), _init(new)
+        item0, item1 = _init(old, fl=fl), _init(new, fl=fl)
         # print(str(item1))
         if not item0.exist:
             success, new = None, ''
@@ -67,15 +69,15 @@ def rename(old, new, public=False, branch_view=3):
                 os.rename(old, new)
                 success = True
             except Exception as e:
-                print(_f.paint(e, _f.red))
+                print("[RN]", _f.paint(e, _f.red), [old, new])
         _note.result(old, success, _mode(), new, lambda x: sp_path(x, branch_view), init=[item0.sign, True]) if public else None
     return new if success else success
 
 
-def delete(path, public=False, success=False):
+def delete(path, public=False, success=False, fl=_fl):
     """ Delete exist file/ folder by path """
     if not _catch_exception(path):
-        item = _init(path)
+        item = _init(path, fl=fl)
         if not item.exist:
             success = None
         else:
@@ -96,13 +98,14 @@ def clean():
 
 
 # TODO: test on images, audio, ...
-def open(path, public=False):
+def open(path, public=False, fl=_fl):
     """ Open selected file/folder by path """
     success = None
-    if not _catch_exception(path):
+    if not _catch_exception(path, fl=fl):
         _note.result(path, success, _mode()) if public else None
         try:
             os.startfile(path)
+            input()
             success = True
         except():
             success = False
@@ -111,9 +114,9 @@ def open(path, public=False):
 
 
 # TODO: close folder, file...
-def close(path, public=False):
+def close(path, public=False, fl=_fl):
     """ Close selected file/folder by path """
-    item = _init(path)
+    item = _init(path, fl=fl)
     success = False
     if item.type == "file":
         os.system("TASKKILL /F /IM %s" % _files_p.get(item.property))
@@ -122,17 +125,17 @@ def close(path, public=False):
     return success
 
 
-def move(source, destination, public=False, branch_view=3, item_color=_f.blue, folder_color=_f.blue2, ignore_errors=False, mod="move", exc=''):
+def move(source, destination, public=False, branch_view=3, item_color=_f.blue, folder_color=_f.blue2, ignore_errors=False, mod="move", exc='', fl=_fl):
     """ Move file/folder to any destination by pathways """
     success = False
-    if not _catch_exception(source, exc) and not _catch_exception(destination, exc):
-        _src, _dst = _init(source), _init(destination)
+    if not _catch_exception(source, exc, fl=fl) and not _catch_exception(destination, exc, fl=fl):
+        _src, _dst = _init(source, fl=fl), _init(destination, fl=fl)
         create(_dst.content) if not _dst.exist and _src.exist else None
         # input(src)
         if not _src.exist:
             success, destination = None, ''
         else:
-            new_source = _is_dup(source, destination)
+            new_source = _is_dup(source, destination, fl=fl)
             if new_source:
                 source = rename(source, new_source, branch_view=1)
                 item_color = _f.yellow
@@ -143,16 +146,19 @@ def move(source, destination, public=False, branch_view=3, item_color=_f.blue, f
                     shutil.move(source, destination) if mod == "move" else shutil.copy2(source, destination)
                     success = True
                 except Exception as e:
-                    print(_f.paint(e, _f.red)) if not ignore_errors else None
+                    print(["MV"], _f.paint(e, _f.red)) if not ignore_errors else None
+            else:
+                source = _src.content
+                destination = new_source
 
         _note.result(source, success, _mode(), destination, lambda x: sp_path(x, branch_view),
                      i_true=item_color, s_true=folder_color, init=[_src.sign, True]) if public else None
         return success
 
 
-def copy(source, destination, public=False, branch_view=3, item_color=_f.blue, folder_color=_f.blue2, ignore_errors=False, exc=''):
+def copy(source, destination, public=False, branch_view=3, item_color=_f.blue, folder_color=_f.blue2, ignore_errors=False, exc='', fl=_fl):
     """ Copy file/folder to any destination by pathways """
-    return move(source, destination, public, branch_view, item_color, folder_color, ignore_errors, mod="copy", exc=exc)
+    return move(source, destination, public, branch_view, item_color, folder_color, ignore_errors, mod="copy", exc=exc, fl=fl)
 
 
 # =====    PyQt    ===== #
@@ -183,6 +189,6 @@ if __name__ == "__main__":
 
     # test_fm()
     # ui2py(r"F:\Work\CODE\toStudy\Python\PyQt\Poems.ui")
-    src = [r"F:\Work\CODE\Projects\SortManager\toSort\chatClient\chatClient.exe",  r"F:\Work\CODE\Projects\SortManager\toSort\desktop\6.ZTL"]
-    dst = [r"F:\Work\CODE\Projects\SortManager\Sorted\System", r"F:\Work\CODE\Projects\SortManager\Sorted\CG"]
-    # move(src[1], dst[1], True)
+    src = [r"F:\Work\CODE\Projects\SortManager\toSort\chatClient\chatClient.exe",  r"F:\Work\CODE\Projects\SortManager\toSort\desktop\13.mp3"]
+    dst = [r"F:\Work\CODE\Projects\SortManager\Sorted\System", r"F:\Work\CODE\Projects\SortManager\Sorted\CG", r"F:\Work\CODE\Projects\SortManager\Sorted\Audio"]
+    move(src[1], dst[2], True)

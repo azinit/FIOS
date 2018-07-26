@@ -11,14 +11,17 @@ dir_tmp = r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS\%
 used_tmp, exc_tmp = "used_branches.txt", "exc_branches.txt"
 default_used = r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS\%Temp\used_branches.txt"
 default_exc = r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS\%Temp\exc_branches.txt"
+_fl = 2
 
 
 # =====    Extra   ===== #
 def string(value, color=_font.red2):
+    """ Index string by color """
     return color + value + _font.end
 
 
 def content(value, pattern):
+    """ Search and Index <pattern> in <value> and return indexes """
     res = []
     for i in range(len(str(value))):
         if str(value)[i] == pattern:
@@ -27,9 +30,10 @@ def content(value, pattern):
 
 
 # =====   General   ===== #
-def new(full_path, public=False):
+def new(full_path, public=False, fl=_fl):
+    """ Create new index_file by <full_path> """
     def create(path, _content="", _public=False):
-        item = _init(path)
+        item = _init(path, fl=fl)
         success = False
         if item.kind == "path" and not item.exist:
             if item.type in ["folder", "ambiguous"]:
@@ -55,63 +59,72 @@ def new(full_path, public=False):
         print(e)
 
 
-def append(data_path, *args, public=False):
+def append(index_file, *args, public=False, fl=_fl):
+    """ Append <*args> into index_file by <data_path> """
     args = args[0] if isinstance(args[0], list) else args
-    if not os.path.exists(data_path):
-        new(data_path, public)
+    if not os.path.exists(index_file):
+        new(index_file, public)
 
-    wroten = get(data_path)
+    wroten = get(index_file, fl=fl)
     s_args = [x for x in args if x not in wroten]
     if s_args:
-        success = _to_file(data_path, '\r\n'.join(s_args) + '\r\n', 'a')
+        success = _to_file(index_file, '\r\n'.join(s_args) + '\r\n', 'a')
     else:
         success = None
     [_r(x, success, "index") for x in args] if public else None
 
 
-def get(data_path, mode="used", public=False):
+def get(index_file, mode="indexed", public=False, fl=_fl):
+    """ Get indexed items from <data_path> """
     data_links = False, []
     try:
-        _data = _init(data_path)
+        _data = _init(index_file, fl=fl)
         os.chdir(_data.dir)
-        data_links = _from_file(data_path).split('\r\n')[:-1:]
+        data_links = _from_file(index_file).split('\r\n')[:-1:]
     except Exception as e:
         print(e)
-    _mc(os.path.split(data_path)[1], "reading...") if public else None
+    _mc(os.path.split(index_file)[1], "reading...") if public else None
     for link in data_links:
-        _mc(link, 'was %s.' % mode, _init(link).sign, _font.grey) if public else None
+        _mc(link, 'was %s.' % mode, _init(link, fl=fl).sign, _font.grey) if public else None
     return data_links
 
 
-def clean(data_path, public=False):
+def clean(index_file, public=False, fl=_fl):
+    """ Clean <data_path> with indexed items """
     success = False
     try:
-        _data = _init(data_path)
+        _data = _init(index_file, fl=fl)
         os.chdir(_data.dir)
-        _to_file(data_path, '')
+        _to_file(index_file, '')
         success = True
     except Exception as e:
         print(e)
-    _r(data_path, success, "clean") if public else None
+    _r(index_file, success, "clean") if public else None
 
 
-def files(label_list, check_list, to_index_list, color=_font.grey):
+def files(out_list, check_list, indexed_list, color=_font.grey):
+    """ Index items from <check_list> by <indexed_list> and return it in <out_list> with <color>"""
     index_list, special = [], []
-    for index_path in to_index_list:
-        if index_path in check_list:
-            index_list.append(list(check_list).index(index_path))
-            special.append(index_path)
-    return [_font.paint(x, color) if i in index_list else x for i, x in enumerate(label_list)], special
+    if check_list:
+        if not isinstance(check_list[0], str):
+            check_list = [x.content for x in check_list]
+
+    for indexed_path in indexed_list:
+        if indexed_path in check_list:
+            index_list.append(list(check_list).index(indexed_path))
+            special.append(indexed_path)
+    return [_font.paint(x, color, total=True) if i in index_list else x for i, x in enumerate(out_list)], special
 
 
 if __name__ == "__main__":
     data = [r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS\%Temp\used_branches.txt",
             r"C:\Users\Feebon\AppData\Local\Programs\Python\Python36-32\Lib\FIOS\%Temp\exc_branches.txt"]
 
+    print(string(value="SomeString. Mark me. pleeease ^___^", color=_font.beige))
+    print(content(value="Hello. It's Me", pattern="'"))
+    print(content(value=type("Hello. It's Me"), pattern="'"))
+
     def test_cycle():
-        print(string(value="SomeString. Mark me. pleeease ^___^", color=_font.beige))
-        print(content(value="Hello. It's Me", pattern="'"))
-        print(content(value=type("Hello. It's Me"), pattern="'"))
         # new(os.getcwd(), True)
 
         for j in range(2):

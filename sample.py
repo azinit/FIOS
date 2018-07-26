@@ -48,6 +48,7 @@ files = {
     "Font":                     [".ttf", ".otf"],
     "Link":                     [".lnk"],
     #   Code
+    "Java":                     [".java", ".jar"],
     "Python":                   [".py", ".whl", ".pyc"],
     "Pascal":                   [".pas"],
     "Visual Studio":            [".sln", ".cs", ".csproj"],
@@ -158,6 +159,7 @@ files_properties = {
     "Font":                     ["System", objects["font"]],
     "Link":                     ["System", objects["link"]],
     #   Code
+    "Java":                     ["Code", objects["code"]],
     "Python":                   ["Code", objects["code"]],
     "Pascal":                   ["Code", objects["code"]],
     "Visual Studio":            ["Code", objects["windows"]],
@@ -171,17 +173,20 @@ files_properties = {
     "Torrent":                  ["Download⬇", objects["net"]],
 }
 dirs = {
-    "Audio":        [_f.violet, "F:\Work\CODE\Projects\SortManager\Sorted\Audio", objects["audio"]],
-    "Adobe":        [_f.beige, "F:\Work\CODE\Projects\SortManager\Sorted\Adobe", objects["camera"]],
-    "Graphic":      [_f.blue2, "F:\Work\CODE\Projects\SortManager\Sorted\Graphic", objects["image"]],
-    "CG":           [_f.beige, "F:\Work\CODE\Projects\SortManager\Sorted\CG", objects["draw"]],
-    "Text":         [_f.white, "F:\Work\CODE\Projects\SortManager\Sorted\Text", objects["text"]],
-    "Software":     [_f.yellow, "F:\Work\CODE\Projects\SortManager\Sorted\Software", objects["play"]],
-    "System":       [_f.blackbg, "F:\Work\CODE\Projects\SortManager\Sorted\System", objects["system"]],
-    "Download⬇":    [_f.beige2 + _f.bold, "F:\Work\CODE\Projects\SortManager\Sorted\Download", objects["net"]],
-    "Code":         [_f.beige, "F:\Work\CODE\Projects\SortManager\Sorted\Code", objects["code"]],
-    "Games":        [_f.red, "F:\Work\CODE\Projects\SortManager\Sorted\Games", objects["game"]],
-    "Unassigned":   ['', r"F:\Work\CODE\Projects\SortManager\Sorted\Unassigned", objects["question"]]
+    "Audio":            [_f.violet, "F:\Work\CODE\Projects\SortManager\Sorted\Audio", objects["audio"]],
+    "Adobe":            [_f.beige, "F:\Work\CODE\Projects\SortManager\Sorted\Adobe", objects["camera"]],
+    "Graphic":          [_f.blue2, "F:\Work\CODE\Projects\SortManager\Sorted\Graphic", objects["image"]],
+    "CG":               [_f.beige, "F:\Work\CODE\Projects\SortManager\Sorted\CG", objects["draw"]],
+    "Text":             [_f.white, "F:\Work\CODE\Projects\SortManager\Sorted\Text", objects["text"]],
+    "Software":         [_f.yellow, "F:\Work\CODE\Projects\SortManager\Sorted\Software", objects["play"]],
+    "System":           [_f.blackbg, "F:\Work\CODE\Projects\SortManager\Sorted\System", objects["system"]],
+    "Download⬇":        [_f.beige2 + _f.bold, "F:\Work\CODE\Projects\SortManager\Sorted\Download⬇", objects["net"]],
+    "Code":             [_f.beige, "F:\Work\CODE\Projects\SortManager\Sorted\Code", objects["code"]],
+    "Games":            [_f.red, "F:\Work\CODE\Projects\SortManager\Sorted\Games", objects["game"]],
+    "Unassigned":       ['', r"F:\Work\CODE\Projects\SortManager\Sorted\Unassigned", objects["question"]],
+    "__Study":          [_f.blackbg, "F:\Work\CODE\Projects\SortManager\Sorted\__Study", objects["dataStructure"]],
+    "__Work":           [_f.blackbg, r"F:\Work\CODE\Projects\SortManager\Sorted\__Work", objects["text"]],
+    "__Archive":        [_f.blackbg, r"F:\Work\CODE\Projects\SortManager\Sorted\__Archive", objects["archive"]],
 }
 
 priority = [_f.red2, _f.red, _f.yellow2, _f.yellow, _f.green]
@@ -196,6 +201,25 @@ phrases = {
     "solution":     ["Ты конечно смотри сам, но мне кажется @q", "Не знаю... Наверное @q", "Спорно. На самом деле. Но думаю @q", "@q выбирай - не ошибешься", "@q конечно"],
     "switch":       ["хватит", "о главном", "ладно", "ясно", "понятно", "подскажи", "ири", "помоги", "слушай", "твоя помощь", "помочь", "поможешь мне", "дашь совет"],
     "bye":          ["Ладно.. Мне бежать. Пока)", "До скорого!", "Пока. Еще поболтаем", "Давай. Удачи)"]
+}
+versions = {
+    "requester":    1.0,
+    "cfg":          2.0,
+    "check":        0.0,
+    "convert":      0.99,
+    "fm":           1.0,
+    "font":         2.19,   # TODO
+    "get":          0.99,
+    "substance":    2.2,
+    "index":        0.9,
+    "iri":          4.0,
+    "navigator":    4.0,
+    "notifier":     1.0,
+    "read":         2.0,
+    "sample":       1.1,
+    "sort":         0.9,
+    "split":        0.99,
+    "write":        0.9,
 }
 types = {
     "number_int_pos":               128,
@@ -239,24 +263,6 @@ types = {
     "path_folder_deep":             r"F:\Work\CODE\toStudy",
     "path_folder_invalid":          r"F:\Work\CODE\Projects\SortManager\Sorted\Code ",
     "path_folder_invalid_":         r"F:\Work\CODE\toStudy\Python\my_second",
-}
-versions = {
-    "requester":    1.0,
-    "cfg":          2.0,
-    "check":        0.0,
-    "convert":      0.99,
-    "fm":           1.0,
-    "font":         2.19,   # TODO
-    "get":          0.99,
-    "substance":    2.2,
-    "index":        0.9,
-    "iri":          4.0,
-    "notifier":     1.0,
-    "read":         2.0,
-    "sample":       1.1,
-    "sort":         0.9,
-    "split":        0.99,
-    "write":        0.9,
 }
 
 #   Special Symbols

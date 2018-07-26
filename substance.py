@@ -6,7 +6,7 @@ import datetime as d
 from FIOS.font import red2 as _red2, end as _end
 from FIOS.sample import files as _files, files_properties as _files_p, dirs as _dirs, objects as _obj, types as _typ
 
-# TODO: */ bug ; fluency parameter
+# TODO: */ bug ; fluency parameter ; fluency only in methods not in class??! :(
 kinds_dict = {
     lambda x, n, f: Flag.create(x, n, f):                                         lambda x: isinstance(x, (bool, type(None))),
     lambda x, n, f: Number.create(int(x) if isinstance(x, str) else x, n, f):     lambda x: isinstance(x, (int, float, complex)) or str(x).isdigit(),
@@ -18,13 +18,13 @@ kinds_dict = {
 }
 
 
-# TODO: define type of objects
+# TODO: define type of objects; __len__ and ...
 class Substance(object):
     def __init__(self, content, name='', fluency=1):
         self.content = content
         self.fluency = fluency
         self.name = str(inspect.stack()[5][4][0]).lstrip().split(" = ")[0] if not name else name
-        self.kind = str(inspect.stack()[3][4][0][17::]).split('.')[0]
+        self.kind = str(inspect.stack()[3][4][0][20::]).split('.')[0]
         self.kind = self.kind[0].lower() + self.kind[1:]
         self.type = abs(self)
         self.property = + self
@@ -175,11 +175,9 @@ class Path(Substance):
         else:
             return "Unassigned"
 
-    def get_content_type(self, fluently=True, in_general=True, main_sign=True):
-        if self.type == "folder" and self.fluency < 2:
-            if fluently:
-                return _obj["folder"]
-            else:
+    def get_content_type(self, in_general=True, main_sign=True):
+        if self.type == "folder":
+            if self.fluency < 2:
                 if self.property == "~/empty":
                     symbol = ''
                 elif self.property == "~/DEEP":
@@ -194,8 +192,10 @@ class Path(Substance):
                 else:
                     symbol = "( ❓ )"
                 return (self.sign + ' ')*main_sign + symbol
+            else:
+                return _obj["folder"]
         else:
-            return None
+            return ''
 
 
 # TODO: to_center, to_column; rus/eng/ambiguous
@@ -212,20 +212,21 @@ class String(Substance):
             return "line"
 
 
-def init(unknown_substance, name='', fluency=1):
+def init(unknown_substance, name='', fl=1):
+    # print(_red2 + str([inspect.stack()[1][3], fl, unknown_substance]) + _end)    # !!! FOR DEBUG BY REQUESTS !!!
     for kind, match_condition in kinds_dict.items():
         if match_condition(unknown_substance):
-            return kind(unknown_substance, name, fluency)
+            return kind(unknown_substance, name, fl)
 
 
 if __name__ == "__main__":
     def test_cases(mode):
         for i, (right_answer, test_case) in enumerate(_typ.items()):
-            user_answer = init(test_case, fluency=2)
+            user_answer = init(test_case, fl=2)
             if mode == 0:
                 print(str(user_answer))
-                if user_answer.type == "folder":
-                    print(user_answer.get_content_type(False))
+                # if user_answer.type == "folder":
+                #    print(user_answer.get_content_type(False))
             else:
                 user = user_answer.kind + "_" + user_answer.type
                 user += "_" + str(user_answer.exist) if user_answer.kind == "path" else ""
@@ -243,8 +244,8 @@ if __name__ == "__main__":
     # [print(init(content, 'item'), '\n') for content in values[::-1]]
     # print(sample.files_properties.get(init(values[-1]).property[0]))
     for item_i in dirs:
-        Dir = init(item_i[1], fluency=2)
+        Dir = init(item_i[1], fl=1)
         print(Dir)
-        print(Dir.get_content_type(False), '\n')
+        # print(Dir.get_content_type(False), '\n')
     finish = d.datetime.now()
     print(finish - start)

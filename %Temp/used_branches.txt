@@ -1,2 +1,7 @@
-F:\Work\CODE\Projects\SortManager\toSort\HelloWorld
-F:\Work\CODE\Projects\SortManager\toSort\vk
+F:\Work\CODE\Projects\SortManager\toSort
+F:\Work\CODE\Projects\SortManager\toSort\chatClient
+F:\Work\CODE\Projects\SortManager\toSort\desktop
+F:\Database\Sort\desktop 06.02.2018
+F:\Database\Sort\desktop 06.03.2018
+F:\Database\Sort\desktop 27.02.2018
+F:\Database\Sort

@@ -1,4 +1,3 @@
-F:\Work\CODE\Projects\SortManager\toSort\IRIOMEN2.psd
+F:\Database\Sort\Music
 F:\Work\CODE\Projects\SortManager\toSort\HelloWorld
-F:\Work\CODE\toStudy\Python\output.txt
-F:\Work\CODE\toStudy\Python\.idea
+F:\Work\CODE\Projects\SortManager\toSort\IRIOMEN2.psd

@@ -7,7 +7,7 @@ from FIOS.substance import init as _init
 from FIOS.convert import _rld
 from FIOS.split import file as sp_file
 
-
+_fl = 2
 # TODO
 def time():
     pass
@@ -23,8 +23,8 @@ def intersection():
     pass
 
 
-def duplicate(source, destination):
-    src = _init(source)
+def duplicate(source, destination, fl=_fl):
+    src = _init(source, fl=fl)
     if op.exists(op.join(destination, src.name)):   # TODO: check (1)(2) ...; folders merger or inc index by input
         old, ext = sp_file(src.name)
         ext, res = ext if not ext else '.' + ext, re.findall("\d+", old)
@@ -34,7 +34,7 @@ def duplicate(source, destination):
         else:
             digit = 1
             new = old + "_%d" % digit
-        while op.exists(op.join(destination, new + ext)):
+        while op.exists(op.join(destination, new + ext)) or op.exists(op.join(src.dir, new + ext)):
             new = _rld(new, digit)
             digit += 1
         return op.join(src.dir, new + ext)
@@ -112,5 +112,6 @@ def verb(word, parent='get'):   # TODO:
     return dirs, count'''
 
 if __name__ == "__main__":
-    print(digits_by_pow(digits=['1', '0002', '3', 'abs', 12.3, '04', '25', '23', '04', '107'], pow_=5))
-    print(digits_by_pow(digits=1, pow_=2))
+    print(digits_by_pow(digits=['1', '0002', '3', 'abs', 12.3, '04', '25', '23', '04', '107'], pow_=5, parser=str))
+    print(digits_by_pow(digits=1, pow_=2, parser=str))
+    print(duplicate(r"F:\Work\CODE\Projects\SortManager\toSort\desktop\13.mp3", r"F:\Work\CODE\Projects\SortManager\Sorted\Audio"))

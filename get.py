@@ -6,6 +6,8 @@ from FIOS.convert import to_seconds as _to_s, to_hms as _to_hms, to_single_list 
 from FIOS.substance import init as _init
 from FIOS.notifier import status as _s
 
+_fl = 2
+
 
 # =====   Common   ===== #)
 # TODO : function: path_intersection(deeepest up lvl)
@@ -29,12 +31,12 @@ def key_by_value(search, dictionary):
 
 
 # =====  File Sys  ===== #
-def subs(path, folders=True, files=False, public=False, recursive=True):
+def subs(path, folders=True, files=False, public=False, recursive=True, color=_beige, fl=_fl):
     def unite(main_dir, sub_list):
         return list(map(lambda x: os.path.join(main_dir, x), sub_list))
 
-    _s(pattern='.', color=_beige) if public else None
-    dst, level = _init(path), 0
+    _s(pattern='.', color=color) if public else None
+    dst, level = _init(path, fl=fl), 0
     root = os.path.split(dst.content)[0] if dst.kind == 'file' else dst.content
     if root:
         result_files, result_folders = [], [root] if folders else []
@@ -47,8 +49,9 @@ def subs(path, folders=True, files=False, public=False, recursive=True):
                 result_files.extend(unite(rootName, fileNames))
             level += 1
         if public:
-            [print(_yellow, _init(x).sign, x, _end) for x in result_folders]
-            [print(_blue, _init(x).sign, x, _end) for x in result_files]
+            [print(_yellow, _init(x, fl=fl).sign, x, _end) for x in result_folders]
+            [print(_blue, _init(x, fl=fl).sign, x, _end) for x in result_files]
+        _s(tag='.', pattern='.', color=color) if public else None
         if files and folders:
             return result_folders, result_files
         elif files:
