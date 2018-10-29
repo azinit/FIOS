@@ -1,0 +1,62 @@
+F:\Work\CODE\Projects\SortManager\toSort
+F:\Work\CODE\Projects\SortManager\toSort\chatClient
+F:\Work\CODE\Projects\SortManager\toSort\desktop
+F:\Database\Sort\desktop 06.02.2018
+F:\Database\Sort\desktop 06.03.2018
+F:\Database\Sort\desktop 27.02.2018
+F:\Database\Sort
+F:\Database\Sort\desk
+F:\Database\Sort\phone
+F:\Database\Sort\desk\Annabelle
+F:\Database\Sort\desk\Chopping
+F:\Database\Sort\desk\girl
+F:\Database\Sort\desk\ITIS
+F:\Database\Sort\desk\Nataly
+F:\Database\Sort\desk\Skyrim. Altiras World
+F:\Database\Sort\desk\Soft
+F:\Database\Sort\desk\[ST]Modeling
+F:\Database\Sort\desk\res\Textures\clutter
+F:\Database\Sort\desk\res\Textures\architecture\markarth
+F:\Database\Sort\desk\res\Textures\architecture\solitude
+F:\Database\Sort\desk\res\Textures\architecture\windhelm
+F:\Database\Sort\desk\res\Textures\clutter\dragonmap
+F:\Database\Sort\desk\res\Textures\clutter\ingredients
+F:\Database\Sort\desk\res\Textures\clutter\quest
+F:\Database\Sort\desk\res\Textures\clutter\wine
+F:\Database\Sort\desk\res\Textures\clutter\signage\inns
+F:\Database\Sort\desk\res\Textures\clutter\signage\riften
+F:\Database\Sort\desk\res\Textures\clutter\signage\riverwood
+F:\Database\Sort\desk\res\Textures\clutter\signage\roadsigns
+F:\Database\Sort\desk\res\Textures\clutter\signage\solitude
+F:\Database\Sort\desk\res\Textures\dlc02\clutter
+F:\Database\Sort\desk\res\Textures\dungeons\imperial
+F:\Database\Sort\desk\res\Textures\dungeons\riften
+F:\Database\Sort\desk\res\Textures\interface\books
+F:\Database\Sort\desk\res\Textures\interface\books\illuminated_letters
+F:\Database\Sort\desk\res\Textures\interface\books\map_illustration
+F:\Database\Sort\desk\Zhilet\Жилет
+F:\Database\Sort\desk\Zhilet\Жилет\Новая папка
+F:\Database\Sort\Lesson_01\Lesson_01
+F:\Database\Sort\Lesson_01\Lesson_01\Adobe After Effects Auto-Save
+F:\Database\Sort\Lesson_01\Lesson_01\Assets
+F:\Database\Sort\Lesson_01\Lesson_01\Sample_Render
+F:\Database\Sort\phone\android
+F:\Database\Sort\phone\android\Download
+F:\Database\Sort\phone\android\Screenshots
+F:\Database\Sort\phone\android\VK
+F:\Database\Sort\phone\android\Том 6. Карты судьбы
+F:\Database\Sort\phone\android\Download\vktemp
+F:\Database\Sort\phone\android\VK\Downloads
+F:\Database\Sort\phone\android\WhatsApp\Databases
+F:\Database\Sort\phone\android\WhatsApp\Media\WhatsApp Stickers
+F:\Database\Sort\phone\android\WhatsApp\Media\WhatsApp Voice Notes
+F:\Database\Sort\phone\android\WhatsApp\Media\WhatsApp Animated Gifs\Private
+F:\Database\Sort\phone\android\WhatsApp\Media\WhatsApp Animated Gifs\Sent
+F:\Database\Sort\phone\android\WhatsApp\Media\WhatsApp Audio\Private
+F:\Database\Sort\phone\android\WhatsApp\Media\WhatsApp Audio\Sent
+F:\Database\Sort\phone\android\WhatsApp\Media\WhatsApp Documents\Private
+F:\Database\Sort\phone\android\WhatsApp\Media\WhatsApp Documents\Sent
+F:\Database\Sort\phone\android\WhatsApp\Media\WhatsApp Images\Private
+F:\Database\Sort\phone\android\WhatsApp\Media\WhatsApp Images\Sent
+F:\Database\Sort\phone\android\WhatsApp\Media\WhatsApp Video\Private
+F:\Database\Sort\phone\android\WhatsApp\Media\WhatsApp Video\Sent

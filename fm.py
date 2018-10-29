@@ -161,6 +161,10 @@ def copy(source, destination, public=False, branch_view=3, item_color=_f.blue, f
     return move(source, destination, public, branch_view, item_color, folder_color, ignore_errors, mod="copy", exc=exc, fl=fl)
 
 
+def get_info(path):
+    return os.stat(path)
+
+
 # =====    PyQt    ===== #
 def ui2py(path):
     """ Convert *.ui file to *.py """
@@ -191,4 +195,6 @@ if __name__ == "__main__":
     # ui2py(r"F:\Work\CODE\toStudy\Python\PyQt\Poems.ui")
     src = [r"F:\Work\CODE\Projects\SortManager\toSort\chatClient\chatClient.exe",  r"F:\Work\CODE\Projects\SortManager\toSort\desktop\13.mp3"]
     dst = [r"F:\Work\CODE\Projects\SortManager\Sorted\System", r"F:\Work\CODE\Projects\SortManager\Sorted\CG", r"F:\Work\CODE\Projects\SortManager\Sorted\Audio"]
-    move(src[1], dst[2], True)
+    path = r"F:\Downloads\Folder\sp85573.exe"
+    print(get_info(path))
+    # move(src[1], dst[2], True)

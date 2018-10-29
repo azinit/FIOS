@@ -1,0 +1,62 @@
+FIOS Hierarchy:
+	- write/read/cfg
+	- convert
+	-
+
+Необходима умная система
+	- проводник по компьютерной системе
+	- проводник по FIOS, его функциям и уведомлениям
+
+FIOS:
+> 0. Закончить среду FIOS
+	V временная общая концепция определена
+	X get_() => @overrided get()
+	V осталось доработать конкретные классы
+=> V init == Engine
+	V distribution by Classes
+	V> More Distribution in Classes
+		* Path check
+	V> Tests
+...Powered by FIOS...
+V get, sample, marker, fi
+V> check, sort, split
+V> ask, notifier dev + anywhere	
+1. Доработать Sort Manager
+	> определить общую структуру проекта
+		folder.References: Lib/FIOS
+		file.SortManager.py: execute file
+		> прописать основные моменты в build,preparing
+	> для этого нужно доучить C#
+2. Сортировать файлы по местам => Подчистить систему
+3. Кастомизировать программы
+4. Сохранить файлы настроек в /Bag
+
+
+
+def intersection(value, comparewith):
+    # f: string intersection
+    if value and comparewith:
+        result = []
+        if not isinstance(value, list) and isinstance(comparewith, list):
+            if isinstance(comparewith[0], list):
+                for sublist in comparewith:
+                    b = intersection(value, sublist)
+                    if b:
+                        result.append(b)
+                        break
+            else:
+                result = False if comparewith.count(value) < 1 else value
+                return result
+        elif isinstance(value, list) and isinstance(comparewith, list):
+            for subvalue in value:
+                if isinstance(subvalue, list):
+                    for subsubvalue in subvalue:
+                        b = (intersection(subsubvalue, comparewith))
+                        if b:
+                            result.append(b)
+                else:
+                    b = (intersection(subvalue, comparewith))
+                    if b:
+                        result.append(b)
+
+        return convert.to_single_list(result)

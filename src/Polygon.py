@@ -45,4 +45,20 @@ def test_copy():
 def print_field():
     print(_f)
 
-test_dic()
+def to_unique_list():
+    some_list = ["Alpha", "Beta", "Alpha", "Gamma", "Delta", "Epsilon", "Epsilon", "Beta"]
+    # Unique without arranging
+    created_set = set(some_list)
+    unique_list = list(created_set)
+    print(some_list)  # outputs ['Alpha', 'Beta', 'Alpha', 'Gamma', 'Delta', 'Epsilon', 'Epsilon', 'Beta']
+    print(created_set)  # outputs {'Alpha', 'Gamma', 'Epsilon', 'Beta', 'Delta'}
+    print(unique_list)  # outputs ['Alpha', 'Gamma', 'Epsilon', 'Beta', 'Delta']
+    print()
+    # Unique with arranging
+    created_dict = dict.fromkeys(some_list)
+    unique_list = list(created_dict)
+    print(some_list)  # outputs ['Alpha', 'Beta', 'Alpha', 'Gamma', 'Delta', 'Epsilon', 'Epsilon', 'Beta']
+    print(created_dict)  # outputs {'Alpha': None, 'Beta': None, 'Gamma': None, 'Delta': None, 'Epsilon': None}
+    print(unique_list)  # outputs ['Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon']
+
+# test_dic()

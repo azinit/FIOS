@@ -169,6 +169,7 @@ class Path(Substance):
             return _files_p.get(self.property, ["Unassigned"])[0]
         elif self.type == "folder":
             if 0 < self.len <= 300:
+
                 return list(dict.fromkeys([_files_p.get(x, ["Unassigned"])[0] for i, x in enumerate(self.property) if i < 3]))
             else:
                 return self.property
