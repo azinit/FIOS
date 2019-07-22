@@ -6,32 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4c7994ae-4e4c-41a2-98f5-65087b27f3a7" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/%Temp/exc_branches.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/%Temp/used_branches.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/FIOS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FIOS.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Iri(old).py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IriCore(old).py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IriTests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyApp.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Polygon.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SecondPolygon.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ThirdPolygon.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ask().py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cfg.py" beforeDir="false" afterPath="$PROJECT_DIR$/cfg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/copied.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/copied.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fm.py" beforeDir="false" afterPath="$PROJECT_DIR$/fm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ind" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_audio.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pic.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/qm_copied.psd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/qm_logo.psd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/substance.py" beforeDir="false" afterPath="$PROJECT_DIR$/substance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/read.py" beforeDir="false" afterPath="$PROJECT_DIR$/read.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -72,68 +48,16 @@
     <SUITE FILE_PATH="coverage/FIOS$_ifmo__II__4_.coverage" NAME="[ifmo][II][4] Coverage Results" MODIFIED="1518023975246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Study" />
     <SUITE FILE_PATH="coverage/FIOS$SecondPolygon.coverage" NAME="SecondPolygon Coverage Results" MODIFIED="1532506574700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-387341990">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="1" />
-          <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="py" value="11" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Python" value="11" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="py" value="4" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="Python" value="4" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.vcs.git.usages">
-        <counts>
-          <entry key="git.branch.merge" value="1" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FavoritesManager">
     <favorites_list name="FIOS" />
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/iri.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="34" column="96" lean-forward="true" selection-start-line="34" selection-start-column="96" selection-end-line="34" selection-end-column="96" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/cfg.py">
+        <entry file="file://$PROJECT_DIR$/util/fpath.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="46" lean-forward="true" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="969">
+              <caret line="179" column="76" selection-start-line="179" selection-start-column="76" selection-end-line="179" selection-end-column="76" />
             </state>
           </provider>
         </entry>
@@ -149,19 +73,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>convert</find>
-      <find>write</find>
-      <find>split</find>
-      <find>f.</find>
-      <find>note</find>
-      <find>empt</find>
-      <find>pow</find>
-      <find>sample</find>
-      <find>i</find>
-      <find>start</find>
-      <find>c_fin</find>
-      <find>clear_path</find>
-      <find>run</find>
       <find>correct</find>
       <find>//</find>
       <find>system</find>
@@ -179,7 +90,30 @@
       <find>process</find>
       <find>get</find>
       <find>get(</find>
+      <find>request</find>
+      <find>timeout</find>
+      <find>i/533.4</find>
+      <find>to_interval</find>
+      <find>pattern</find>
+      <find>put</find>
+      <find>large_list</find>
+      <find>read</find>
+      <find>test__</find>
+      <find>by_num</find>
+      <find>__proxies</find>
+      <find>done=i</find>
+      <find>http://</find>
     </findStrings>
+    <replaceStrings>
+      <replace>i/534.4&quot;</replace>
+      <replace>range_</replace>
+      <replace>symb</replace>
+      <replace>restrain</replace>
+      <replace>nested</replace>
+      <replace>write</replace>
+      <replace>__test__</replace>
+      <replace>extract</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
@@ -189,41 +123,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/iConfig.py" />
-        <option value="$PROJECT_DIR$/IriCore.py" />
-        <option value="$PROJECT_DIR$/IriAssist.py" />
-        <option value="$PROJECT_DIR$/Study/[ifmo][II][7].py" />
-        <option value="$PROJECT_DIR$/Study/[ifmo][II][4].py" />
-        <option value="$PROJECT_DIR$/Study/[ifmo][II][5].py" />
-        <option value="$PROJECT_DIR$/Study/[ifmo][II][3].py" />
-        <option value="$PROJECT_DIR$/Study/[ifmo][II][6].py" />
-        <option value="$PROJECT_DIR$/Study/Program_1.py" />
-        <option value="$PROJECT_DIR$/Study/Program_2.py" />
-        <option value="$PROJECT_DIR$/Study/Program_3.py" />
-        <option value="$PROJECT_DIR$/Study/Program_4.py" />
-        <option value="$PROJECT_DIR$/HS.py" />
-        <option value="$PROJECT_DIR$/modules/Iri.py" />
-        <option value="$PROJECT_DIR$/../Lessons/Code/Iri/FB/[FB] Sort Manager v.2.5.py" />
-        <option value="$PROJECT_DIR$/projects/HS/HS.py" />
-        <option value="$PROJECT_DIR$/io.py" />
-        <option value="$PROJECT_DIR$/ask().py" />
-        <option value="$PROJECT_DIR$/IO.py" />
-        <option value="$PROJECT_DIR$/ask.py" />
-        <option value="$PROJECT_DIR$/adapter.py" />
-        <option value="$PROJECT_DIR$/init.py" />
-        <option value="$PROJECT_DIR$/marker.py" />
-        <option value="$PROJECT_DIR$/fi.py" />
         <option value="$PROJECT_DIR$/Iri.py" />
         <option value="$PROJECT_DIR$/Main.py" />
         <option value="$PROJECT_DIR$/settings.py" />
         <option value="$PROJECT_DIR$/ind" />
-        <option value="$PROJECT_DIR$/read.py" />
         <option value="$PROJECT_DIR$/Iri(old).py" />
-        <option value="$PROJECT_DIR$/iri.py" />
-        <option value="$PROJECT_DIR$/write.py" />
-        <option value="$PROJECT_DIR$/split.py" />
-        <option value="$PROJECT_DIR$/convert.py" />
-        <option value="$PROJECT_DIR$/sort.py" />
         <option value="$PROJECT_DIR$/sample.py" />
         <option value="$PROJECT_DIR$/notifier.py" />
         <option value="$PROJECT_DIR$/font.py" />
@@ -234,37 +138,92 @@
         <option value="$PROJECT_DIR$/IriCore(old).py" />
         <option value="$PROJECT_DIR$/requester.py" />
         <option value="$PROJECT_DIR$/index.py" />
-        <option value="$PROJECT_DIR$/fm.py" />
-        <option value="$PROJECT_DIR$/check.py" />
         <option value="$PROJECT_DIR$/substance.py" />
-        <option value="$PROJECT_DIR$/get.py" />
         <option value="$PROJECT_DIR$/cfg.py" />
+        <option value="$PROJECT_DIR$/sys/filemanager.py" />
+        <option value="$PROJECT_DIR$/web/ua.txt" />
+        <option value="$PROJECT_DIR$/utils/converter.py" />
+        <option value="$PROJECT_DIR$/utils/path.py" />
+        <option value="$PROJECT_DIR$/util/number.py" />
+        <option value="$PROJECT_DIR$/util/string.py" />
+        <option value="$PROJECT_DIR$/util/path.py" />
+        <option value="$PROJECT_DIR$/util/fcolor.py" />
+        <option value="$PROJECT_DIR$/util/fstyle.py" />
+        <option value="$PROJECT_DIR$/util/fnum.py" />
+        <option value="$PROJECT_DIR$/convert.py" />
+        <option value="$PROJECT_DIR$/read.py" />
+        <option value="$PROJECT_DIR$/io/reader.py" />
+        <option value="$PROJECT_DIR$/io/writer.py" />
+        <option value="$PROJECT_DIR$/write.py" />
+        <option value="$PROJECT_DIR$/split.py" />
+        <option value="$PROJECT_DIR$/sys/manager.py" />
+        <option value="$PROJECT_DIR$/sys/items/path.py" />
+        <option value="$PROJECT_DIR$/sys/explorer.py" />
+        <option value="$PROJECT_DIR$/util/flist.py" />
+        <option value="$PROJECT_DIR$/sort.py" />
+        <option value="$PROJECT_DIR$/util/fstring.py" />
+        <option value="$PROJECT_DIR$/check.py" />
+        <option value="$PROJECT_DIR$/fm.py" />
+        <option value="$PROJECT_DIR$/get.py" />
+        <option value="$PROJECT_DIR$/util/fnumber.py" />
+        <option value="$PROJECT_DIR$/util/fpath.py" />
+        <option value="$PROJECT_DIR$/util/fdict.py" />
+        <option value="$PROJECT_DIR$/util/fdate.py" />
+        <option value="$PROJECT_DIR$/iri.py" />
+        <option value="$PROJECT_DIR$/io/console.py" />
+        <option value="$PROJECT_DIR$/web/proxies.txt" />
+        <option value="$PROJECT_DIR$/web/agents.json" />
+        <option value="$PROJECT_DIR$/web/webkit.py" />
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-8" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="85" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1809" />
+    <option name="height" value="1096" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="fios" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fios" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="editor.config.ad.shown" value="true" />
     <property name="last_opened_file_path" value="F:/Work/Lessons/Code/Iri" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Martis\AppData\Local\Programs\Python\Python37-32\Lib\site-packages\fios\__trash__\v.1.X" />
+      <recent name="C:\Users\Martis\AppData\Local\Programs\Python\Python37-32\Lib\site-packages\fios\_trash" />
+      <recent name="C:\Users\Martis\AppData\Local\Programs\Python\Python37-32\Lib\site-packages\fios\_trash\v.1.X" />
+      <recent name="C:\Users\Martis\AppData\Local\Programs\Python\Python37-32\Lib\site-packages\fios\_trash\v.0.X" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -278,8 +237,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.requester">
-    <configuration name="SecondPolygon" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.webkit">
+    <configuration name="console" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FIOS" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -287,12 +246,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/io" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SecondPolygon.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/io/console.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -301,7 +260,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="fm" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="flist" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FIOS" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -309,12 +268,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/util" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/fm.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/util/flist.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -336,7 +295,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/get.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Martis\AppData\Local\Programs\Python\Python37-32\Lib\site-packages\fios\_trash\v.1.X\get.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -345,7 +304,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="navigator" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="sort" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FIOS" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -358,7 +317,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/navigator.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Martis\AppData\Local\Programs\Python\Python37-32\Lib\site-packages\fios\_trash\v.1.X\sort.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -367,7 +326,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="requester" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="webkit" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FIOS" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -375,12 +334,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/web" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/requester.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/web/webkit.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -389,7 +348,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+    <configuration default="true" type="js.build_tools.gulp">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <gulpfile />
@@ -414,19 +373,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.navigator" />
-      <item itemvalue="Python.fm" />
-      <item itemvalue="Python.SecondPolygon" />
+      <item itemvalue="Python.sort" />
+      <item itemvalue="Python.flist" />
       <item itemvalue="Python.get" />
-      <item itemvalue="Python.requester" />
+      <item itemvalue="Python.webkit" />
+      <item itemvalue="Python.console" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.requester" />
-        <item itemvalue="Python.SecondPolygon" />
-        <item itemvalue="Python.navigator" />
+        <item itemvalue="Python.webkit" />
+        <item itemvalue="Python.console" />
         <item itemvalue="Python.get" />
-        <item itemvalue="Python.fm" />
+        <item itemvalue="Python.flist" />
+        <item itemvalue="Python.sort" />
       </list>
     </recent_temporary>
   </component>
@@ -440,8 +399,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1515410308289</updated>
+      <workItem from="1563755921417" duration="3967000" />
+      <workItem from="1563778704558" duration="14087000" />
     </task>
     <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="30044000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -453,56 +417,55 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.09229829" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19669509" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.32995737" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3278867" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3271028" />
       <window_info anchor="bottom" id="Cvs" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="3" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="4" weight="0.32897604" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" weight="0.3278867" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32897604" />
-      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32893288" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.3281412" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3281412" />
       <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.32939914" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="12" weight="0.3278328" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info active="true" anchor="right" id="Run" order="4" visible="true" weight="0.4477612" />
-      <window_info anchor="right" id="Debug" order="5" weight="0.41257995" />
+      <window_info anchor="right" id="Run" order="4" visible="true" weight="0.27025586" />
+      <window_info anchor="right" id="Debug" order="5" weight="0.18230277" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info anchor="right" id="Data View" order="7" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.09229829" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19669509" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.32995737" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3278867" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3271028" />
       <window_info anchor="bottom" id="Cvs" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="3" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="4" weight="0.32897604" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" weight="0.3278867" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32897604" />
-      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32893288" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.3281412" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3281412" />
       <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.32939914" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="12" weight="0.3278328" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info active="true" anchor="right" id="Run" order="4" visible="true" weight="0.4477612" />
+      <window_info anchor="right" id="Run" order="4" weight="0.32356077" />
       <window_info anchor="right" id="Debug" order="5" weight="0.41257995" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info anchor="right" id="Data View" order="7" />
@@ -511,8 +474,10 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -532,164 +497,26 @@
       </default-breakpoints>
     </breakpoint-manager>
   </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/fios$flist.coverage" NAME="flist Coverage Results" MODIFIED="1563785562518" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/util" />
+    <SUITE FILE_PATH="coverage/fios$path__1_.coverage" NAME="path (1) Coverage Results" MODIFIED="1563756708438" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/util" />
+    <SUITE FILE_PATH="coverage/fios$fstring.coverage" NAME="fstring Coverage Results" MODIFIED="1563758653377" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/util" />
+    <SUITE FILE_PATH="coverage/fios$fnumber.coverage" NAME="fnumber Coverage Results" MODIFIED="1563785213510" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/util" />
+    <SUITE FILE_PATH="coverage/fios$console.coverage" NAME="console Coverage Results" MODIFIED="1563791945001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/io" />
+    <SUITE FILE_PATH="coverage/fios$path_.coverage" NAME="path_ Coverage Results" MODIFIED="1563755958530" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/util" />
+    <SUITE FILE_PATH="coverage/fios$webkit.coverage" NAME="webkit Coverage Results" MODIFIED="1563793698558" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/web" />
+    <SUITE FILE_PATH="coverage/fios$explorer.coverage" NAME="explorer Coverage Results" MODIFIED="1563784845508" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sys" />
+    <SUITE FILE_PATH="coverage/fios$sort.coverage" NAME="sort Coverage Results" MODIFIED="1563785486715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/fios$get.coverage" NAME="get Coverage Results" MODIFIED="1563786005166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/fios$path.coverage" NAME="path Coverage Results" MODIFIED="1563755927081" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/util" />
+    <SUITE FILE_PATH="coverage/fios$fpath.coverage" NAME="fpath Coverage Results" MODIFIED="1563782036164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/util" />
+    <SUITE FILE_PATH="coverage/fios$reader.coverage" NAME="reader Coverage Results" MODIFIED="1563757545296" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/io" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/marker.py" />
-    <entry file="file://$PROJECT_DIR$/.idea/FIOS.iml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-1613798190/builtins.py" />
-    <entry file="file://F:/Work/Lessons/Code/Iri/Codecademy&amp;&amp;Lessons/prj_12. Practice.OS Module.part 1.py" />
-    <entry file="file://F:/Work/Lessons/Code/Iri/Codecademy&amp;&amp;Lessons/prj_12. os.walk.py" />
-    <entry file="file://F:/Work/Lessons/Code/Iri/Codecademy&amp;&amp;Lessons/prj_12. os and os.path modules(part 5).py" />
-    <entry file="file://F:/Work/Lessons/Code/Iri/Codecademy&amp;&amp;Lessons/prj_12. os and os.path modules (part 4).py" />
-    <entry file="file://F:/Work/Lessons/Code/Iri/Codecademy&amp;&amp;Lessons/prj_12. os and os.path modules (part 3).py" />
-    <entry file="file://F:/Work/Lessons/Code/Iri/Codecademy&amp;&amp;Lessons/prj_12. os and os.path modules (part 2).py" />
-    <entry file="file://F:/Work/Lessons/Code/Iri/Codecademy&amp;&amp;Lessons/prj_12. RecursionDir.py" />
-    <entry file="file://F:/Work/Lessons/Code/Iri/Codecademy&amp;&amp;Lessons/prj_12. os and os.path modules (part 1).py" />
-    <entry file="file://F:/Work/Lessons/Code/Iri/FB/[FB] Sort Manager v.2.5.py" />
-    <entry file="file://F:/Work/Lessons/Code/Iri/FB/Iri.py" />
-    <entry file="file://$PROJECT_DIR$/ind" />
-    <entry file="file://F:/Work/CODE/toStudy/Python/PyQt/Poems.py" />
-    <entry file="file://$PROJECT_DIR$/../codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="310" selection-start-line="310" selection-end-line="310" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../getpass.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-957">
-          <caret line="61" column="41" selection-start-line="61" selection-start-column="34" selection-end-line="61" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-1613798190/sys.py" />
-    <entry file="file://F:/Work/CODE/toStudy/Python/some.py" />
-    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-1613798190/math.py" />
-    <entry file="file://$PROJECT_DIR$/ask().py" />
-    <entry file="file://$PROJECT_DIR$/../../Tools/demo/redemo.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/read.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/convert.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="18" column="45" lean-forward="true" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../ntpath.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="213" selection-start-line="213" selection-end-line="213" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../os.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="401" selection-start-line="401" selection-end-line="401" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Iri(old).py" />
-    <entry file="file://$PROJECT_DIR$/sort.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="54" column="9" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/notifier.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sample.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="217" column="1" selection-start-line="199" selection-end-line="217" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/font.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="57" column="34" lean-forward="true" selection-start-line="57" selection-start-column="34" selection-end-line="57" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Polygon.py" />
-    <entry file="file://$PROJECT_DIR$/SecondPolygon.py" />
     <entry file="file://$PROJECT_DIR$/ThirdPolygon.py" />
-    <entry file="file://$PROJECT_DIR$/navigator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4080">
-          <caret line="254" column="22" selection-start-line="254" selection-start-column="22" selection-end-line="254" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MyApp.py" />
     <entry file="file://$PROJECT_DIR$/IriCore(old).py" />
-    <entry file="file://$PROJECT_DIR$/requester.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="95" column="69" selection-start-line="95" selection-start-column="69" selection-end-line="95" selection-end-column="69" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="70" column="14" selection-start-line="70" selection-start-column="14" selection-end-line="70" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="2" column="13" lean-forward="true" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/check.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/substance.py">
+    <entry file="file://$PROJECT_DIR$/__trash__/substance.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="840">
           <caret line="216" selection-start-line="216" selection-end-line="216" />
@@ -699,59 +526,360 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/get.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="738">
-          <caret line="77" column="71" selection-start-line="77" selection-start-column="71" selection-end-line="77" selection-end-column="71" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.py" />
     <entry file="file://$PROJECT_DIR$/fi.py" />
-    <entry file="file://$PROJECT_DIR$/split.py">
+    <entry file="file://$PROJECT_DIR$/__trash__/notifier.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="134" column="19" selection-start-line="134" selection-start-column="19" selection-end-line="134" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__trash__/cfg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-51">
+          <caret line="18" column="46" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/ua.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/string.py" />
+    <entry file="file://$PROJECT_DIR$/web/User.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/Proxy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../email/quoprimime.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__trash__/v.1.X/font.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="693">
+          <caret line="146" column="16" lean-forward="true" selection-start-line="2" selection-end-line="146" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__trash__/exbool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__trash__/v.1.X/convert.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="15" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/fstyle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/io/reader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="12" selection-start-line="12" selection-end-line="12" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__trash__/v.1.X/read.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="6" column="18" lean-forward="true" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/write.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="863">
-          <caret line="84" column="11" selection-start-line="84" selection-start-column="11" selection-end-line="84" selection-end-column="11" />
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/iri.py">
+    <entry file="file://$PROJECT_DIR$/__trash__/v.1.X/write.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="34" column="96" lean-forward="true" selection-start-line="34" selection-start-column="96" selection-end-line="34" selection-end-column="96" />
+        <state relative-caret-position="105">
+          <caret line="71" column="15" selection-start-line="71" selection-start-column="15" selection-end-line="71" selection-end-column="15" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cfg.py">
+    <entry file="file://$PROJECT_DIR$/__trash__/v.1.X/split.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="46" lean-forward="true" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
+        <state relative-caret-position="187">
+          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__trash__/navigator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="808">
+          <caret line="254" column="22" selection-start-line="254" selection-start-column="22" selection-end-line="254" selection-end-column="22" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__trash__/requester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="95" column="69" selection-start-line="95" selection-start-column="69" selection-end-line="95" selection-end-column="69" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/io/writer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../ntpath.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-45">
+          <caret line="522" column="8" selection-start-line="522" selection-start-column="8" selection-end-line="522" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/python_stubs/-1009463762/nt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="380" column="4" selection-start-line="380" selection-start-column="4" selection-end-line="380" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/explorer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1238">
+          <caret line="345" lean-forward="true" selection-start-line="345" selection-end-line="345" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/items/path.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="59" selection-start-line="5" selection-start-column="59" selection-end-line="5" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__trash__/v.1.X/sort.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="78" column="28" lean-forward="true" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/fstring.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="57" column="18" selection-start-line="57" selection-start-column="18" selection-end-line="57" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__trash__/v.1.X/check.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="59" selection-start-line="59" selection-end-line="70" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__trash__/.editorconfig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__trash__/v.1.X/fm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1054">
+          <caret line="62" column="26" lean-forward="true" selection-start-line="62" selection-start-column="26" selection-end-line="62" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__trash__/v.1.X/_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/flist.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="35" column="37" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/fnumber.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="849">
+          <caret line="52" column="40" selection-start-line="52" selection-start-column="40" selection-end-line="52" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__trash__/v.1.X/get.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1088">
+          <caret line="64" column="26" lean-forward="true" selection-start-line="64" selection-start-column="26" selection-end-line="64" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/fdict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="63" selection-start-line="19" selection-start-column="63" selection-end-line="19" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__trash__/sample.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3196">
+          <caret line="231" column="37" lean-forward="true" selection-start-line="231" selection-start-column="37" selection-end-line="231" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__trash__/iri.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-357">
+          <caret line="3" selection-start-line="3" selection-end-line="7" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__trash__/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__trash__/index.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="70" column="14" selection-start-line="70" selection-start-column="14" selection-end-line="70" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../requests/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="74" selection-start-line="74" selection-end-line="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/io/console.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="163" column="21" lean-forward="true" selection-start-line="163" selection-start-column="21" selection-end-line="163" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/python_stubs/-1009463762/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="2871" column="8" selection-start-line="2871" selection-start-column="8" selection-end-line="2871" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/proxies.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5933">
+          <caret line="349" column="18" selection-start-line="349" selection-start-column="18" selection-end-line="349" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/agents.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/webkit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="278" selection-start-line="278" selection-end-line="278" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/fdate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="31" column="31" lean-forward="true" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/fpath.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="969">
+          <caret line="179" column="76" selection-start-line="179" selection-start-column="76" selection-end-line="179" selection-end-column="76" />
         </state>
       </provider>
     </entry>
