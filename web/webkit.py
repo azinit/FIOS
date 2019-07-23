@@ -22,6 +22,7 @@ URL_PROXIES_2 = "https://free-proxy-list.net/"
 
 def load(url, **kwargs):
     # TODO: add https
+    # TODO: User-Agent dry?
     # Proxy bind only with Agent!
     """ Load HTML content of page """
     # init kwargs
@@ -33,7 +34,7 @@ def load(url, **kwargs):
     options = {}
     # fill options
     if notify:                      console.log(message="{url} is loading...", thread=THREAD_NAME)
-    if agent:                       options["headers"] = {"User-Agent": get_user() if agent is True else agent}
+    if agent:                       options["headers"] = {"User-Agent": get_user()["User-Agent"] if agent is True else agent}
     if proxy:                       options["proxies"] = {"http": get_proxy(url) if proxy is True else proxy}
     if isinstance(timeout, int):    options["timeout"] = timeout
     # get response
@@ -43,8 +44,10 @@ def load(url, **kwargs):
 
 def soupify(url, **kwargs):
     """ Get soup of page """
+    features = kwargs.get("features", "html.parser")
+
     html = load(url, **kwargs)
-    soup_ = BeautifulSoup(html, features="html.parser")
+    soup_ = BeautifulSoup(html, features=features)
     return soup_
 
 
@@ -64,6 +67,7 @@ def get_user(**kwargs):
     user = {}
 
     if current:
+        # TODO: python-requests?
         soup = soupify(url=URL_USER_INFO)
         div         = soup.find("div", class_="ip-block")
         my_ip       = div.span.text
@@ -209,12 +213,14 @@ def __save_list(file_list, content):
 
 # LOADING #
 def load_proxies():
-    return __load_list("proxies.txt")
+    file = os.path.join(CUR_DIR, 'proxies.txt')
+    return __load_list(file)
 
 
 def load_agents():
     import json
-    with open('agents.json', 'r') as json_file:
+    file = os.path.join(CUR_DIR, 'agents.json')
+    with open(file, 'r') as json_file:
         data = json.load(json_file)
     return data["agents"]
 

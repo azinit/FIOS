@@ -198,7 +198,7 @@ def delete(path: Union[bytes, str, os.PathLike], **kwargs):
 
 # TODO: close folder/file
 def close(**kwargs):
-    """ Close process/file/folder in sys """
+    """ Close process/file/folder in os """
     # TODO: rewrite
     # item = _init(path, fl=fl)
     # success = False
@@ -253,6 +253,7 @@ def copy(src: Union[bytes, str, os.PathLike], dst: Union[bytes, str, os.PathLike
     """ Copy folder/file from-to """
     # TODO: enum if contains
     def __copy():
+        # https://stackoverflow.com/a/1903753
         try:
             source_size = os.stat(__source_file).st_size
             copied = 0

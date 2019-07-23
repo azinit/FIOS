@@ -15,15 +15,15 @@ def write(*values, **kwargs):
 
 
 def log(message, **kwargs):
-    """ Log message with sys date """
+    """ Log message with os date """
     thread = kwargs.get("thread", None)
     from datetime import datetime
     sys_time = datetime.now().strftime("%H:%M:%S")
-    print("[{sys_time}]{thread} {message}".format(
+    write("[{sys_time}]{thread} {message}".format(
         sys_time=sys_time,
         thread="" if thread is None else " [%s]" % thread,
         message=message,
-    ))
+    ), **kwargs)
 
 
 def error(message, **kwargs):
@@ -62,6 +62,11 @@ def progress(title, done, **kwargs):
     # TODO: tqdm?
 
     # init local functions
+    def __sys_time():
+        from datetime import datetime
+        sys_time = datetime.now().strftime("%H:%M:%S")
+        return allowed_sys_time * ("[%s] " % sys_time)
+
     def __finished():
         return percent >= 100 or _finish_force
 
@@ -99,7 +104,8 @@ def progress(title, done, **kwargs):
     allowed_bar         = kwargs.get("allowed_bar",         False)
     allowed_percent     = kwargs.get("allowed_percent",     True)
     allowed_iterator    = kwargs.get("allowed_iterator",    False)
-    _finish_force       = kwargs.get("_finish_force",        False)
+    allowed_sys_time    = kwargs.get("allowed_sys_time",    False)
+    _finish_force       = kwargs.get("_finish_force",       False)
 
     # compute percent cases
     if done == total == 0: done, total = 1, 1
@@ -111,7 +117,8 @@ def progress(title, done, **kwargs):
     block_undone        = length - block_done
 
     # compute message
-    msg = "{state}{title}: {bar} {percent} {iterator}".format(
+    msg = "{time}{state}{title}: {bar} {percent} {iterator}".format(
+        time=__sys_time(),
         state=__state(),
         title=title,
         bar=__bar(),
@@ -159,8 +166,8 @@ if __name__ == '__main__':
         limit = 32
         for i in range(limit):
             time.sleep(0.02)
-            _finish = i == 27
-            # _finish = False
+            # _finish = i == 27
+            _finish = False
             progress(
                 title="PROCESS",
                 length=10,
@@ -174,6 +181,7 @@ if __name__ == '__main__':
                 allowed_state=True,
                 allowed_percent=True,
                 allowed_iterator=True,
+                allowed_sys_time=True,
                 _finish_force=_finish,
             )
             if _finish:
