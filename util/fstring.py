@@ -3,7 +3,11 @@
 
 DEFAULT_WIDTH = 64
 
-
+"""
+..............................................................................................................
+................................................ METHOD SUMMARY ..............................................
+..............................................................................................................
+"""
 def center(string: str, **kwargs):
     """ Align value with center """
     width   = kwargs.get("width", DEFAULT_WIDTH)
@@ -40,9 +44,58 @@ def restrain(content: str, **kwargs):
     return ''.join(levels) + content + ''.join(levels[::-1])
 
 
-def put(content: str, **kwargs):
-    # TODO:
+def put(message: str, **kwargs):
+    # TODO: Margin
+    # TODO: Few-rows messages
+    # TODO: HTML,CSS tags?
+    """ Put message in box """
+    # TODO: height
+    # init kwargs
+    width       = kwargs.get("width",   45)
+    width       = max(width, len(message) + 2)  # validate
+    padding_h   = kwargs.get("padding_h", 3)
+    padding_v   = kwargs.get("padding_v", 1)
+    dummy       = kwargs.get("dummy", " ")
+
+    h           = "─"
+    v           = "│"
+    sep         = "\r\n"
+    corners     = ["┐", "┌", "└", "┘"]  # 0 - 90 - 180 - 270 - 0
+
+    box = []
+
+    def __width():
+        return padding_h + width + padding_h
+
+    def header():
+        term = "{c_1}{t}{c_2}".format(c_1=corners[1], t=h * __width(), c_2=corners[0])
+        box.append(term)
+
+    def padding(value):
+        def pv():
+            term = "{v}{w}{v}".format(v=v, w=dummy * __width())
+            box.append(term)
+
+        for i in range(value): pv()
+
+    def content():
+        term = "{v}{pd}{content}{pd}{v}".format(v=v, pd= dummy * padding_h,
+                                                content=center(message, symb=dummy, width=width))
+        box.append(term)
+
+    def footer():
+        term = "{c_3}{t}{c_4}".format(c_3=corners[2], t=h * __width(), c_4=corners[3])
+        box.append(term)
+
+    header()
+    padding(padding_v)
+    content()
+    padding(padding_v)
+    footer()
+
     """
+    │012345678901234567890123456790123456790123456789012│
+    
     ┌───────────────────────────────────────────────────┐
     │                                                   │
     │   Serving!                                        │
@@ -54,6 +107,14 @@ def put(content: str, **kwargs):
     │                                                   │
     └───────────────────────────────────────────────────┘
     """
+
+    return sep.join(box)
+
+
+def volume(message: str, **kwargs):
+    # TODO:
+    # 3d text by symbols
+    pass
 
 # TODO: pluralize?
 # def verb(word, parent='get'):   # TODO:
@@ -81,22 +142,82 @@ def put(content: str, **kwargs):
 #     return word
 
 
+def contains(string: str, terms: list):
+    for term in terms:
+        if term in string:      # equals: "string.contains(term)"
+            return True
+    else:
+        return False
+
+
+def only_letters(term: str):
+    """ Format string from odd characters """
+    def __is_valid_gap(char):
+        # TODO: Last char?
+        return formatted[-1] != " " and char == " "
+
+    formatted = ""
+
+    # removing odd chars
+    for char in term:
+        if char.isalpha() or __is_valid_gap(char):
+            formatted += char
+
+    # remove odd gap
+    if formatted[-1] == " ": formatted = formatted[:-1:]
+    return formatted
+
+
+"""
+..............................................................................................................
+................................................ TESTS .......................................................
+..............................................................................................................
+"""
 if __name__ == '__main__':
     # TODO:
     def __test__center():
-        print(":::center:::")
+        print(":::::::::::::::::::::center:::::::::::::::::::::")
         print(center(string="SomeItem", width=20, symb='X', color='\33[36m'))
 
     def __test__float():
-        print(":::float:::")
+        print(":::::::::::::::::::::float:::::::::::::::::::::")
         test_set = ["292 521", "1: 123 312 321", "0: 123 51 2", "2: 123 242 424 123 123", "1: 123 323"]
         [print(float_(x, border='|', width=30)) for x in test_set]
 
     def __test__restrain():
-        print(":::restrain:::")
+        print(":::::::::::::::::::::restrain:::::::::::::::::::::")
         test_str = "Some text is there. Must be. The main thing is believe"
         print(restrain(content=test_str, offset=2, pattern='.'))
 
-    __test__center()
-    __test__float()
-    __test__restrain()
+    def __test__put():
+        print(":::::::::::::::::::::put:::::::::::::::::::::")
+        box = put(
+            message="CaseParser v.0.5",
+            # width=2,
+            # padding_v=1,
+            dummy=" ",
+        )
+        print(box)
+
+    def __test__only_letters():
+        print(":::::::::::::::::::::only_letters:::::::::::::::::::::")
+        term = "Ryazan, Russia - May 13, 2018: Name website on the display of PC, url -"
+        term = only_letters(term)
+        print([term])
+
+    def __test__contain():
+        print(":::::::::::::::::::::contain:::::::::::::::::::::")
+        prohibited = ["google", "yandex", "moneycontrol.com", "coinmarketcap.com"]
+        # string = "www.google.com"
+        string = "https://coinmarketcaep.com/currencies/factom/"
+        # string = "https://coinmarketcap.com/currencies/lisk/"
+        # string = "bing"
+        r = contain(string, prohibited)
+        print(r)
+
+    # __test__center()
+    # __test__float()
+    # __test__restrain()
+    __test__put()
+    __test__only_letters()
+    __test__contain()

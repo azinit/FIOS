@@ -23,10 +23,8 @@ __map_match = {
 }
 
 
-def __get_type(**kwargs):
+def __get_type(folder, file):
     """ Get type from kwargs: file or folder """
-    folder  = kwargs.get("folder",  False)
-    file    = kwargs.get("file",    False)
     is_valid = folder ^ file
 
     if folder and is_valid:
@@ -64,44 +62,57 @@ def __is_file(type_):
 
 def create(path, **kwargs):
     """ Create folder/file in directory """
+    # TODO: already exist
     def __create_folder(path_):
         try:
-            os.makedirs(path_)
-            return True
+            if os.path.exists(path_):
+                return 2
+            else:
+                os.makedirs(path_)
+                return 1
         except Exception as e:
-            console.log(e, thread=THREAD_NAME)
-            return False
+            # console.log(e, thread=THREAD_NAME)
+            return 0
 
-    def __create__file(path_, **kwargs_):
+    def __create__file(path_, content):
         try:
-            content = kwargs_.get("content", "")
+            if not os.path.exists(path_) or overwrite:
+                directory = os.path.dirname(path_)
+                if not os.path.exists(directory):
+                    create(path=directory, folder=True)
 
-            directory = os.path.dirname(path_)
-            if not os.path.exists(directory):
-                create(path=directory, folder=True)
-
-            from fios.io import writer
-            writer.write(path_, content)
-            return True
+                from fios.io import writer
+                success = writer.write(path_, content)
+                return success is not False
+            else:
+                return 2 if os.path.exists(path_) else 0
         except Exception as e:
-            console.log(e, thread=THREAD_NAME)
-            return False
+            # console.log(e, thread=THREAD_NAME)
+            return 0
     # init kwargs
-    notify      = kwargs.get("notify", False)
-    type_       = __get_type(**kwargs)
+    folder      = kwargs.get("folder",      False)
+    file        = kwargs.get("file",        False)
+
+    overwrite   = kwargs.get("overwrite",   False)
+    content     = kwargs.get("content",     "")
+
+    notify      = kwargs.get("notify",      False)
+    type_       = __get_type(folder,        file)
+    
     state       = 0
 
     # create items
     if __is_folder(type_):  state = __create_folder(path)
-    if __is_file(type_):    state = __create__file(path, **kwargs)
+    if __is_file(type_):    state = __create__file(path, content)
 
     # notify
     if notify:
-        from util import fpath
+        from fios.util import fpath
         console.result(
-            item=       fpath.cut(path, **kwargs),
+            item=       fpath.cut(path),
+            # item=       fpath.cut(path, **kwargs),
             state=      state,
-            patterns=   ["Creation failed: %s", "Created: %s"],
+            patterns=   ["Creation failed: %s", "Created: %s", "Already exists: %s"],
             thread=     THREAD_NAME,
         )
     return state
@@ -334,7 +345,31 @@ def info(path: Union[bytes, str, os.PathLike]):
     # TODO: Extend?
     return os.stat(path)
 
+"""
+...................................................
+.................... VALIDATE  ....................
+...................................................
+"""
+def validate(string, empty=False):
+    prohibited = [
+        ['\\', '∖'],
+        ['/', '╱'],
+        [':', '⠅'],
+        ['?', '␦'],
+        ['*', '⁕'],
+        ['"', "''"],
+        ['|', ' ⎸'],
+        ['<', '≺'],
+        ['>', '≻'],
+        ['.', '.'],
+        [',', ','],
+    ]
+    for char in prohibited:
+        pattern = char[0]
+        repl = char[1] if not empty else ""
 
+        string = string.replace(pattern, repl)
+    return string
 """
 ..............................................................................................................
 ................................................ TESTS .......................................................
@@ -379,7 +414,7 @@ if __name__ == '__main__':
         #      r"F:\Work\CODE\toStudy\Python\PyQt\my_second\my third", True, 4)
     
     def __test__info():
-        print(":::info:::")
+        print(":::::::::::::::::::::info:::::::::::::::::::::")
         info_ = info(__file__)
         print(info_)
 

@@ -12,7 +12,8 @@ THREAD_NAME = "WRITER"
 # TODO: ? write.me(), write.list(), write.priority(),
 def write(path: str, content: str, **kwargs):
     import os
-    if path and os.path.exists(path):
+    # if path and os.path.exists(path):
+    if path and os.path.exists(os.path.split(path)[0]):
         # init kwargs
         mode        = kwargs.get("mode",        "w")
         encoding    = kwargs.get("encoding",    "utf-8")
@@ -26,6 +27,8 @@ def write(path: str, content: str, **kwargs):
             thread=THREAD_NAME
         )
         return content
+    else:
+        return False
 
 
 def writelines(path: str, content: list, **kwargs):
@@ -38,10 +41,10 @@ def writelines(path: str, content: list, **kwargs):
 
 if __name__ == '__main__':
     def __test__write():
-        print(":::write:::")
+        print(":::::::::::::::::::::write:::::::::::::::::::::")
 
     def __test__writelines():
-        print(":::writelines:::")
+        print(":::::::::::::::::::::writelines:::::::::::::::::::::")
 
     __test__write()
     __test__writelines()

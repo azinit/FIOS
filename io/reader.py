@@ -35,10 +35,10 @@ def readlines(path, **kwargs):
 
 if __name__ == '__main__':
     def __test__read():
-        print(":::read:::")
+        print(":::::::::::::::::::::read:::::::::::::::::::::")
 
     def __test__readlines():
-        print(":::readlines:::")
+        print(":::::::::::::::::::::readlines:::::::::::::::::::::")
 
     __test__read()
     __test__readlines()

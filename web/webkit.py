@@ -244,25 +244,25 @@ if __name__ == '__main__':
     ]
 
     def __test__refresh():
-        print(":::refresh:::")
+        print(":::::::::::::::::::::refresh:::::::::::::::::::::")
         proxies = refresh_proxies(notify=True)
         return proxies
 
     def __test__proxy():
-        print(":::proxy:::")
+        print(":::::::::::::::::::::proxy:::::::::::::::::::::")
         # p = get_proxy(url=test_set[0], notify=True, proxies=proxies)
         p = get_proxy(url=test_set[0], notify=True)
         print(p)
 
     def __test__filter():
-        print(":::filter:::")
+        print(":::::::::::::::::::::filter:::::::::::::::::::::")
         filtered = filter_proxies(proxies=load_proxies()[:50], url=test_set[0], notify=True)
         print(filtered)
         filtered = filter_proxies(proxies=proxies[:50], url=test_set[0], notify=True)
         print(filtered)
 
     def __test__get_user():
-        print(":::get_user:::")
+        print(":::::::::::::::::::::get_user:::::::::::::::::::::")
         # print(get_user(current=True))
         # print(get_user(current=True, agent=False, ip=True))
         # print(get_user(current=True, agent=False, ip=False))

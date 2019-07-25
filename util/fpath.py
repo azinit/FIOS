@@ -141,7 +141,7 @@ def file(fullname):
 
 if __name__ == '__main__':
     def __test__decorate():
-        print(":::decorate:::")
+        print(":::::::::::::::::::::decorate:::::::::::::::::::::")
         print(decorate(__file__))
 
 
@@ -150,7 +150,7 @@ if __name__ == '__main__':
         test_set = [
             r"F:\Work\CODE\toStudy\Python"
         ]
-        print(":::cut:::")
+        print(":::::::::::::::::::::cut:::::::::::::::::::::")
         print(cut(__file__))
         print(cut(__file__, level=2))
         print(cut(__file__, level=1))
@@ -161,12 +161,12 @@ if __name__ == '__main__':
         print(cut(os.path.abspath(__file__), level=5))
 
     def __test__rld():
-        print(":::rld:::")
+        print(":::::::::::::::::::::rld:::::::::::::::::::::")
         print(_rld(r"F:\Work\CODE\Projects\SortManager\toSort\desktop_2\leather_002_bitmap_2.sbsar", 2))
         print(_rld(r"leather_002_bitmap_2.sbsar", 2))
 
     def __test__file():
-        print(":::file:::")
+        print(":::::::::::::::::::::file:::::::::::::::::::::")
         print(file(fullname="sample"))
         print(file(fullname="sample.py"))
         print(file(fullname="sample.py.py"))

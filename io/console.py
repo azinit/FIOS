@@ -1,3 +1,9 @@
+def __sys_time():
+    from datetime import datetime
+    sys_time = datetime.now().strftime("%H:%M:%S")
+    return "[%s] " % sys_time
+
+
 def write(*values, **kwargs):
     """ Extended print analogue """
     sep         = kwargs.get("sep", " ")
@@ -5,6 +11,7 @@ def write(*values, **kwargs):
     # file      = kwargs.get("file", None)      # TODO:
     flush       = kwargs.get("flush", False)
     color       = kwargs.get("color", None)     # TODO:
+    # TODO: sys_time?
 
     if flush:
         import sys
@@ -36,9 +43,10 @@ def error(message, **kwargs):
 
 def process(title, **kwargs):
     """ Print process header with decorators """
-    width       = kwargs.get("width", 32)
-    symb        = kwargs.get("symb", ".")
-    indent      = kwargs.get("indent", True)
+    width               = kwargs.get("width", 32)
+    symb                = kwargs.get("symb", ".")
+    indent              = kwargs.get("indent", True)
+    allowed_sys_time    = kwargs.get("allowed_sys_time", False)
 
     # indent case
     if indent:
@@ -50,22 +58,29 @@ def process(title, **kwargs):
     )
     pattern = "{%s}" % pattern
     # fill pattern
-    msg = pattern.format(title)
+    msg = "{time}{msg}".format(
+        time=allowed_sys_time * __sys_time(),
+        msg=pattern.format(title),
+    )
     write(msg, **kwargs)
 
 
 # TODO: 0, 1, 2,.... 99, 100? | total - 1
 def progress(title, done, **kwargs):
+    # TODO: Few lines
     """ Print progress [...] in console """
     #     "|████████                             | 24.7MB 3.2MB/s eta 0:00:25"
     #     "|█████████████████               | 54.6MB 6.4MB/s eta 0:00:08"
     # TODO: tqdm?
 
     # init local functions
-    def __sys_time():
-        from datetime import datetime
-        sys_time = datetime.now().strftime("%H:%M:%S")
-        return allowed_sys_time * ("[%s] " % sys_time)
+    def __extra():
+        return (extra_data is not None) * (" | " + str(extra_data))
+
+    # def __sys_time():
+    #     from datetime import datetime
+    #     sys_time = datetime.now().strftime("%H:%M:%S")
+    #     return allowed_sys_time * ("[%s] " % sys_time)
 
     def __finished():
         return percent >= 100 or _finish_force
@@ -105,6 +120,8 @@ def progress(title, done, **kwargs):
     allowed_percent     = kwargs.get("allowed_percent",     True)
     allowed_iterator    = kwargs.get("allowed_iterator",    False)
     allowed_sys_time    = kwargs.get("allowed_sys_time",    False)
+
+    extra_data          = kwargs.get("extra_data",          None)
     _finish_force       = kwargs.get("_finish_force",       False)
 
     # compute percent cases
@@ -117,13 +134,14 @@ def progress(title, done, **kwargs):
     block_undone        = length - block_done
 
     # compute message
-    msg = "{time}{state}{title}: {bar} {percent} {iterator}".format(
-        time=__sys_time(),
+    msg = "{time}{state}{title}: {bar} {percent} {iterator}{extra}".format(
+        time=allowed_sys_time * __sys_time(),
         state=__state(),
         title=title,
         bar=__bar(),
         percent=__percent(),
         iterator=__iterator(),
+        extra=__extra(),
     )
     if __finished():
         msg += "\r\n"
@@ -140,13 +158,22 @@ def result(item, state, **kwargs):
     if are_valid_patterns: log(message=patterns[state] % item, thread=thread)
 
 
+def box(message, **kwargs):
+    from fios.util import fstring
+    box_ = fstring.put(message, **kwargs)
+    write(box_, **kwargs)
+
+
 if __name__ == '__main__':
     def __test__log():
+        print(":::::::::::::::::::::log:::::::::::::::::::::")
         log("Hello!")
         log(message="Hello")
         log("Lop", thread="AP")
+        log([1, 2, 3])
 
     def __test__process():
+        print(":::::::::::::::::::::process:::::::::::::::::::::")
         # process("L")
         process(
             title="TITLE",
@@ -155,13 +182,23 @@ if __name__ == '__main__':
             symb="/"
         )
 
+        process(
+            title="PROCESS",
+            indent=True,
+            width=64,
+            allowed_sys_time=True,
+        )
+
     def __test__write():
+        print(":::::::::::::::::::::write:::::::::::::::::::::")
         write("dw", flush=True)
         write("dw", flush=True)
         write("dw", flush=False)
         write("dw", flush=False)
+        write("---", "EXCEL", "WRITE", "ROW", "WORK!@#FA%D#$@LF@")
 
     def __test__progress():
+        print(":::::::::::::::::::::progress:::::::::::::::::::::")
         import time
         limit = 32
         for i in range(limit):
@@ -181,16 +218,16 @@ if __name__ == '__main__':
                 allowed_state=True,
                 allowed_percent=True,
                 allowed_iterator=True,
-                allowed_sys_time=True,
+                allowed_sys_time=False,
                 _finish_force=_finish,
             )
             if _finish:
                 break
 
 
-    # __test__log()
-    # __test__process()
-    # __test__write()
+    __test__log()
+    __test__process()
+    __test__write()
     __test__progress()
     __test__progress()
     __test__progress()

@@ -37,7 +37,7 @@ def extract(expression: str):
 """
 if __name__ == '__main__':
     def __test__extract():
-        print(":::extract:::")
+        print(":::::::::::::::::::::extract:::::::::::::::::::::")
         sub = 'defin123ition4_1.txt'
         sub1 = 'definition1.txt'
         sub2 = 'defini1tion1.txt'
