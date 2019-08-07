@@ -35,7 +35,8 @@ def writelines(path: str, content: list, **kwargs):
     # TODO: \r\n?
     # TODO: success?
     # TODO: callback?
-    str_content = "\r\n".join(content)
+    joiner = kwargs.get("joiner", "\r\n")
+    str_content = joiner.join(content)
     write(path, str_content, **kwargs)
 
 

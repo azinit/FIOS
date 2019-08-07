@@ -60,7 +60,7 @@ def soupify(url, **kwargs):
 
 def get_user(**kwargs):
     current         = kwargs.get("current", False)
-    agent           = kwargs.get("agent", True)
+    agent           = kwargs.get("agent",   True)
     ip              = kwargs.get("ip",      False)
     url             = kwargs.get("url",     URL_USER_INFO)
 
@@ -218,6 +218,7 @@ def load_proxies():
 
 
 def load_agents():
+    # https://yandex.ru/support/webmaster/robot-workings/check-yandex-robots.html?lang=en
     import json
     file = os.path.join(CUR_DIR, 'agents.json')
     with open(file, 'r') as json_file:
@@ -231,7 +232,6 @@ def __load_list(file_list):
     with open(file_list, 'r') as file:
         content = file.read().split('\n')
     return content
-
 
 """
 ..............................................................................................................
@@ -277,8 +277,43 @@ if __name__ == '__main__':
         print(get_user(ip=True))
         print(get_user(ip=True))
 
+    def __test__auth():
+        print(":::::::::::::::::::::auth:::::::::::::::::::::")
+        import requests
+        from bs4 import BeautifulSoup
 
-    proxies = __test__refresh()
+        login_data = {
+            "name": "feebon",
+            "pass": "Udiri1iam_",
+            # "form_build_id": "form-FEC-akHmIYyHgTfYI_uOM_24t8gVwS4xNBJGCy5UghI",
+            "form_id": "new_login_form",
+            "op": "Login",
+        }
+
+        login_weblancer = {
+            "name": "Feebon",
+            "pass": "Udiri1iam",
+        }
+
+        headers = {
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36"
+        }
+
+        with requests.Session() as session:
+            # url = "https://www.weblancer.net/"
+            url = "https://www.codechef.com/"
+
+            r = session.get(url, headers=headers)
+            soup = BeautifulSoup(r.content, features="html.parser")
+            # login_data["form_build_id"] = soup.find("input", attrs={"name": "form_build_id"})["value"]
+
+            # r = session.post(url, data=login_data, headers=headers)
+            r = session.post(url, data=login_weblancer, headers=headers)
+            print(r.text)
+
+
+    # proxies = __test__refresh()
     # __test__proxy()
     # __test__filter()
-    __test__get_user()
+    # __test__get_user()
+    __test__auth()

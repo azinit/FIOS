@@ -51,7 +51,7 @@ def from_timestamp(timestamp):
     from datetime import datetime
     # print(1563811175.168 - 1557003600.000)
     # 6807575.167999983
-    return datetime.fromtimestamp(timestamp / 1000)
+    return datetime.fromtimestamp(timestamp)
 
 
 """

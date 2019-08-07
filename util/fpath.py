@@ -47,7 +47,7 @@ def file(fullname):
         filename, file_extension = result
     else:    # > 2
         filename, file_extension = '.'.join(result[:len(result) - 1:]), result[len(result) - 1]
-    return filename, file_extension
+    return {"name": filename, "extension": file_extension}
 
 
 # # TODO: optimize, dev
@@ -170,9 +170,12 @@ if __name__ == '__main__':
         print(file(fullname="sample"))
         print(file(fullname="sample.py"))
         print(file(fullname="sample.py.py"))
+        p = r"E:\__STORAGE__\2.WORK\(C) Other\Freelance\Orders\(__WIP__)\[PARSE] CaseParser\[GIT]\CaseParser\Portfolios\Pavel_Kapysk"
+        print(file(fullname=p))
 
     __test__decorate()
     __test__cut()
+    __test__file()
 
     # print(duplicate(r"F:\Work\CODE\Projects\SortManager\toSort\desktop\13.mp3",
     #                 r"F:\Work\CODE\Projects\SortManager\Sorted\Audio"))

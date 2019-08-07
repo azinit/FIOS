@@ -19,9 +19,9 @@ def path(full_path, up_lvl=2):
 
 
 if __name__ == "__main__":
-    # print(file(fullname="sample"))
-    # print(file(fullname="sample.py"))
-    # print(file(fullname="sample.py.py"))
-    # print(path(full_path=r"F:\Work\CODE\toStudy\Python", up_lvl=3))
-    # print(path(full_path=r"F:\Work\CODE\toStudy\Python", up_lvl=0))
-    # print(path(full_path=r"F:\Work\CODE\toStudy\Python", up_lvl=-1))
+    print(file(fullname="sample"))
+    print(file(fullname="sample.py"))
+    print(file(fullname="sample.py.py"))
+    print(path(full_path=r"F:\Work\CODE\toStudy\Python", up_lvl=3))
+    print(path(full_path=r"F:\Work\CODE\toStudy\Python", up_lvl=0))
+    print(path(full_path=r"F:\Work\CODE\toStudy\Python", up_lvl=-1))

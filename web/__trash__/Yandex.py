@@ -5,6 +5,7 @@ import yandex_search
 
 def search(term, **kwargs):
     # https://xml.yandex.ru/limits/
+    # 26.07.19: ip: 84.39.247.25
     num = kwargs.get("num", 5)
 
     API_USER = "martis-boolean"

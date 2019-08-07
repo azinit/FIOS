@@ -30,7 +30,10 @@ def read(path, **kwargs):
 
 def readlines(path, **kwargs):
     # TODO: \r\n?
-    return read(path, **kwargs).split("\n")
+    remove_empty_rows = kwargs.get("remove_empty_rows", False)
+    lines = read(path, **kwargs).split("\n")
+    if remove_empty_rows:   lines = [l for l in lines if l != ""]
+    return lines
 
 
 if __name__ == '__main__':

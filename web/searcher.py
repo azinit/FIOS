@@ -50,8 +50,14 @@ def yandex(term, **kwargs):
     API_USER = "martis-boolean"
     API_KEY = "03.909492691:e52aa52332f8301adf2f56de3f9495c1"
 
-    yandex = yandex_search.Yandex(api_user=API_USER, api_key=API_KEY)
-    results = yandex.search(term).items
+    searcher = yandex_search.Yandex(api_user=API_USER, api_key=API_KEY)
+    try:
+        results = searcher.search(term).items
+    except yandex_search.ConfigException:
+        input("Ваш IP сменился.\nОбновите его, пожалуйста, для поисковой машины (нажмите Enter) ")
+        input("Обновили? (нажмите Enter)")
+        print("Идем дальше!")
+        return yandex(term, **kwargs)
     return {"engine": "yandex", "results": results[:num:]}
 
 
@@ -63,17 +69,17 @@ def yandex(term, **kwargs):
 
 
 def show_results(data: dict):
-    engine = data["engine"]
-    results = data["results"]
+    engine      = data["engine"]
+    results     = data["results"]
 
-    key_title = "title"
-    key_url = "url" if engine == "yandex" else "link"
+    key_title   = "title"
+    key_url     = "url" if engine == "yandex" else "link"
     key_snippet = "snippet"
 
     for item in results:
-        print("[%s]" % item[key_title])
-        print(item[key_url])
-        print(item[key_snippet])
+        print("TITLE:  ", item[key_title])
+        print("URL:    ", item[key_url])
+        print("DESC:   ", item[key_snippet])
         print()
 
 
@@ -86,8 +92,22 @@ def show_results(data: dict):
 if __name__ == '__main__':
     def __test__yandex():
         print(":::::::::::::::::::::yandex:::::::::::::::::::::")
-        results = yandex('ethereum')
-        show_results(results)
+        # terms = ["python", "java", "js", "react", "graphql"]
+        terms = ["coca femsa sab de cv", "ciner resources lp", "codorus valley bancorp inc", "cnx midstream partners lp",
+                 "clearside biomedical inc", "european partners plc"]
+        from fios.web import webkit
+        import time
+        for term in terms:
+            print("SEARCH: ", term)
+            print("-"*999)
+            # print(webkit.get_user(ip=True, agent=False, current=True))
+            results = yandex(term, num=10)
+            show_results(results)
+            print("="*999)
+            print()
+            time.sleep(5)
+
+
 
 
     __test__yandex()

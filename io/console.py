@@ -20,6 +20,30 @@ def write(*values, **kwargs):
     else:
         print(*values, sep=sep, end=end)
 
+# TODO: table
+
+
+def ask(question, **options):
+    # TODO: Extend: Yes/No => Variants/Codes
+    label_yes = options.get("label_yes", "Y")
+    label_no  = options.get("label_no",  "N")
+    code_yes  = options.get("code_yes",  True)
+    code_no   = options.get("code_no",   False)
+    skip      = options.get("skip", None)
+
+    formatted_question = "{question} [{vars}]\n>>> ".format(
+        question=question,
+        vars="/".join([label_yes, label_no])
+    )
+    response = str(input(formatted_question)).lower()
+    if response == label_yes.lower():
+        return code_yes
+    elif response == label_no.lower():
+        return code_no
+    else:
+        log("< Повторяем вопрос >")
+        return ask(question, **options)
+
 
 def log(message, **kwargs):
     """ Log message with os date """
@@ -65,8 +89,19 @@ def process(title, **kwargs):
     write(msg, **kwargs)
 
 
+def wait(callback):
+    import time
+    while not callback():
+        steps = ["\\", "|", "/", "-"]
+        for s in steps:
+            write(s, flush=True)
+            time.sleep(0.1)
+
+
 # TODO: 0, 1, 2,.... 99, 100? | total - 1
+# TODO: thread?
 def progress(title, done, **kwargs):
+    # TODO: Final term
     # TODO: Few lines
     """ Print progress [...] in console """
     #     "|████████                             | 24.7MB 3.2MB/s eta 0:00:25"
@@ -159,6 +194,7 @@ def result(item, state, **kwargs):
 
 
 def box(message, **kwargs):
+    # TODO: Abs
     from fios.util import fstring
     box_ = fstring.put(message, **kwargs)
     write(box_, **kwargs)
@@ -171,6 +207,9 @@ if __name__ == '__main__':
         log(message="Hello")
         log("Lop", thread="AP")
         log([1, 2, 3])
+        log("Message #1", flush=True)
+        log("Message #2", flush=True)
+        log("Message #3", flush=True)
 
     def __test__process():
         print(":::::::::::::::::::::process:::::::::::::::::::::")
@@ -224,11 +263,24 @@ if __name__ == '__main__':
             if _finish:
                 break
 
+    def __test__ask():
+        print(":::::::::::::::::::::ask:::::::::::::::::::::")
+        print(ask("1. Можно кратко, Да или Нет?"))
+        print(ask("2. Можно кратко, Да или Нет?"))
+        print(ask("3. Можно кратко, Да или Нет?"))
+        print(ask("4. Можно кратко, Да или Нет?"))
 
-    __test__log()
-    __test__process()
-    __test__write()
-    __test__progress()
-    __test__progress()
-    __test__progress()
-    __test__progress()
+
+    def __test__wait():
+        print(":::::::::::::::::::::wait:::::::::::::::::::::")
+        wait(lambda: False)
+    # ........................................................................................................
+    # __test__log()
+    # __test__process()
+    # __test__write()
+    # __test__progress()
+    # __test__progress()
+    # __test__progress()
+    # __test__progress()
+    # __test__ask()
+    __test__wait()

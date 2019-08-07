@@ -1,0 +1,130 @@
+#   File System
+files = {
+    #   CG
+    "Image":                    [".jpeg", ".jpg", ".png", ".gif", ".ico"],
+    "Texture":                  [".dds", ".tga", ".raw", ".bmp", ".tiff"],
+    "Vector":                   [".svg"],
+    "Video":                    [".avi", ".mp4"],
+    "Adobe Photoshop doc":      [".psd", ".psb"],
+    "Adobe Illustrator doc":    [".ai"],
+    "Photoshop preset":         [".eps", ".sln", ".jsx"],
+    "3ds Max":                  [".max", ".ms", ".mse", ".bip"],
+    "Zbrush":                   [".zpr", ".ztl", ".cfg"],
+    "3d Coat":                  ["..."],
+    "Topogun":                  ["..."],
+    "3D Model":                 [".obj", ".fbx", ".mtl"],
+    "Substance":                [".sbs", ".sbsar", ".spsm"],
+    "PureRef":                  [".pur"],
+    "Cinema 4D":                [".c4d"],
+    "Maya":                     [".ma"],
+    "Marmoset Toolbag":         [".mview"],
+    "Corel Draw":               [".cdr"],
+    "Paint.NET":                [".pdn"],
+    "Marvelous Designer":       [".Zprj"],
+    #   Documents
+    "Adobe Reader":             [".pdf", ".djvu"],
+    "Microsoft Office":         [".doc", ".docx", ".rtf"],
+    "Microsoft Excel":          [".xls", ".xlsx", ".xlsm"],
+    "Microsoft PowerPoint":     [".ppt", ".pptx"],
+    "XMind":                    [".xmind"],
+    "Text":                     [".txt"],
+    "Code":                     [".xml", ".js", ".java", ".url", ".xml", ""],
+    "Config":                   [".ini", ".config"],
+    "LogFile":                  [".log"],
+    # "": ["..."],
+    #   Audio
+    "Audio":                    [".mp3", ".wav", ".m4a"],
+    "Sibelius":                 [".sib"],
+    "Guitar Pro":               [".gpx", ".gp5", ".gp4", ".gp3"],
+    #   System
+    "Archive":                  [".zip", ".rar", ".7zip", ".7z"],
+    "Launch":                   [".exe", ".msi", ".bat"],
+    "Font":                     [".ttf", ".otf"],
+    "Link":                     [".lnk"],
+    #   Code
+    "Java":                     [".java", ".jar"],
+    "Python":                   [".py", ".whl", ".pyc"],
+    "Pascal":                   [".pas"],
+    "Visual Studio":            [".sln", ".cs", ".csproj"],
+    "Android Studio":           [".apk"],
+    "UI Style":                 [".ui"],
+    "WEB":                      [".html", ".css", ".js"],
+    #   Special
+    #       Games
+    "Skyrim":                   [".esp", ".esm", ".bsa", ".bsl"],
+    #       Torrent
+    "Torrent":                  [".torrent"]
+}
+
+files_properties = {
+    "Image":                    ["Graphic", objects["image"]],
+    "Texture":                  ["CG", objects["texture"]],
+    "Vector":                   ["Graphic", objects["vector"]],
+    "Video":                    ["Graphic", objects["video"]],
+    "Adobe Photoshop doc":      ["Adobe", objects["camera"]],
+    "Adobe Illustrator doc":    ["Adobe", objects["draw"]],
+    "Photoshop preset":         ["Adobe", objects["settings"]],
+    "3ds Max":                  ["CG", objects["house"]],
+    "Zbrush":                   ["CG", objects["people"]],
+    "3d Coat":                  ["CG", objects["house"]],
+    "Topogun":                  ["CG", objects["house"]],
+    "3D Model":                 ["CG", objects["house"]],
+    "Substance":                ["CG", objects["texture"]],
+    "PureRef":                  ["CG", objects["image"]],
+    "Cinema 4D":                ["CG", objects["house"]],
+    "Maya":                     ["CG", objects["house"]],
+    "Marmoset Toolbag":         ["CG", objects["camera"]],
+    "Corel Draw":               ["CG", objects["draw"]],
+    "Paint.NET":                ["CG", objects["draw"]],
+    "Marvelous Designer":       ["CG", objects["cloth"]],
+    #   Documents
+    "Adobe Reader":             ["Text", objects["slides"]],
+    "Microsoft Office":         ["Text", objects["text"]],
+    "Microsoft Excel":          ["Text", objects["table"]],
+    "Microsoft PowerPoint":     ["Text", objects["slides"]],
+    "XMind":                    ["Text", objects["map"]],
+    "Text":                     ["Text", objects["text"]],
+    "Code":                     ["Text", objects["code"]],
+    "Config":                   ["Text", objects["log"]],
+    "LogFile":                  ["Text", objects["log"]],
+    # "": ["..."],
+    #   Audio
+    "Audio":                    ["Audio", objects["audio"]],
+    "Sibelius":                 ["Audio", objects["piano"]],
+    "Guitar Pro":               ["Audio", objects["guitar"]],
+    #   System
+    "Archive":                  ["System", objects["archive"]],
+    "Launch":                   ["Software", objects["play"]],
+    "Font":                     ["System", objects["font"]],
+    "Link":                     ["System", objects["link"]],
+    #   Code
+    "Java":                     ["Code", objects["code"]],
+    "Python":                   ["Code", objects["code"]],
+    "Pascal":                   ["Code", objects["code"]],
+    "Visual Studio":            ["Code", objects["windows"]],
+    "Android Studio":           ["Code", objects["phone"]],
+    "UI Style":                 ["System", objects["grid"]],
+    "WEB":                      ["Code", objects["code"]],
+    #   Special
+    #       Games
+    "Skyrim":                   ["Games", objects["game"]],
+    #       Torrent
+    "Torrent":                  ["Download⬇", objects["net"]],
+}
+
+dirs = {
+    "Audio":            [_f.violet, "F:\Work\CODE\Projects\SortManager\Sorted\Audio", objects["audio"]],
+    "Adobe":            [_f.beige, "F:\Work\CODE\Projects\SortManager\Sorted\Adobe", objects["camera"]],
+    "Graphic":          [_f.blue2, "F:\Work\CODE\Projects\SortManager\Sorted\Graphic", objects["image"]],
+    "CG":               [_f.beige, "F:\Work\CODE\Projects\SortManager\Sorted\CG", objects["draw"]],
+    "Text":             [_f.white, "F:\Work\CODE\Projects\SortManager\Sorted\Text", objects["text"]],
+    "Software":         [_f.yellow, "F:\Work\CODE\Projects\SortManager\Sorted\Software", objects["play"]],
+    "System":           [_f.blackbg, "F:\Work\CODE\Projects\SortManager\Sorted\System", objects["system"]],
+    "Download⬇":        [_f.beige2 + _f.bold, "F:\Work\CODE\Projects\SortManager\Sorted\Download⬇", objects["net"]],
+    "Code":             [_f.beige, "F:\Work\CODE\Projects\SortManager\Sorted\Code", objects["code"]],
+    "Games":            [_f.red, "F:\Work\CODE\Projects\SortManager\Sorted\Games", objects["game"]],
+    "Unassigned":       ['', r"F:\Work\CODE\Projects\SortManager\Sorted\Unassigned", objects["question"]],
+    "__Study":          [_f.blackbg, "F:\Work\CODE\Projects\SortManager\Sorted\__Study", objects["dataStructure"]],
+    "__Work":           [_f.blackbg, r"F:\Work\CODE\Projects\SortManager\Sorted\__Work", objects["text"]],
+    "__Archive":        [_f.blackbg, r"F:\Work\CODE\Projects\SortManager\Sorted\__Archive", objects["archive"]],
+}

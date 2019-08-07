@@ -22,7 +22,7 @@ __map_match = {
     "file":         1,
 }
 
-
+# TODO: Rewrite
 def __get_type(folder, file):
     """ Get type from kwargs: file or folder """
     is_valid = folder ^ file
@@ -110,13 +110,20 @@ def create(path, **kwargs):
         from fios.util import fpath
         console.result(
             item=       fpath.cut(path),
-            # item=       fpath.cut(path, **kwargs),
             state=      state,
             patterns=   ["Creation failed: %s", "Created: %s", "Already exists: %s"],
             thread=     THREAD_NAME,
         )
     return state
 
+def create_all(paths: list, **options):
+    from fios.util.fdict import are_dict
+    # TODO: are valid, options for every path?
+    are_valid = True
+    if are_valid:
+        return [create(path, **options) for path in paths]
+    else:
+        return None
 
 """
 ...................................................
@@ -179,9 +186,13 @@ def delete(path: Union[bytes, str, os.PathLike], **kwargs):
             return False
 
     # init kwargs
-    ignore_errors   = kwargs.get("ignore_errors", True)
-    notify          = kwargs.get("notify", False)
-    type_           = __get_type(**kwargs)
+    folder          = kwargs.get("folder",          False)
+    file            = kwargs.get("file",            False)
+    
+    ignore_errors   = kwargs.get("ignore_errors",   True)
+    notify          = kwargs.get("notify",          False)
+    
+    type_           = __get_type(folder,            file)
     state           = 0
 
     # delete items
@@ -230,12 +241,13 @@ def close(**kwargs):
 # TODO: test on images, audio, ...
 def open_(path, **kwargs):
     """ Open folder/file in Explorer """
-    notify = kwargs.get("notify", False)
+    notify          = kwargs.get("notify", False)
+    wait_message    = kwargs.get("wait_message", "...")
 
     # open
     try:
         os.startfile(path)
-        input("...")        # TODO: Pause?
+        if wait_message:    input(wait_message)        # TODO: Pause?
         state = 1
     except Exception as e:
         console.log(e, thread=THREAD_NAME)
@@ -336,7 +348,7 @@ def move(src: Union[bytes, str, os.PathLike], dst: Union[bytes, str, os.PathLike
 
 """
 ...................................................
-.................... STAT  ........................
+.................... INFO ........................
 ...................................................
 """
 
@@ -345,16 +357,27 @@ def info(path: Union[bytes, str, os.PathLike]):
     # TODO: Extend?
     return os.stat(path)
 
+
+def is_accessible(path: Union[bytes, str, os.PathLike]):
+    try:
+        with open(path, 'r+', encoding='utf-8') as file:
+            return True
+    except:
+        return False
+
+
 """
 ...................................................
 .................... VALIDATE  ....................
 ...................................................
 """
+
+
 def validate(string, empty=False):
     prohibited = [
         ['\\', '∖'],
         ['/', '╱'],
-        [':', '⠅'],
+        [':', '։'],
         ['?', '␦'],
         ['*', '⁕'],
         ['"', "''"],
@@ -370,6 +393,29 @@ def validate(string, empty=False):
 
         string = string.replace(pattern, repl)
     return string
+
+
+"""
+...................................................
+.................... RENAME_PASSIVE ...............
+...................................................
+"""
+
+
+def match(e: str, another_name: str):
+    import os
+    from fios.util import fpath
+    directory, name             = os.path.split(os.path.abspath(e))
+    if os.path.isdir(e):    ext = ""
+    else:                   ext = fpath.file(name)["extension"]
+
+    another_full_name   = '{name}{ext}'.format(
+        name=another_name,
+        ext= ('.%s' % ext) * (ext != "")
+    )
+    return os.path.join(directory, another_full_name)
+
+
 """
 ..............................................................................................................
 ................................................ TESTS .......................................................
@@ -418,6 +464,28 @@ if __name__ == '__main__':
         info_ = info(__file__)
         print(info_)
 
+    def __test__match():
+        print(":::::::::::::::::::::match:::::::::::::::::::::")
+        dir_ = os.path.dirname(os.path.abspath(__file__))
+        print(os.path.abspath(__file__))
+        print(match(e=__file__, another_name="LowPoly"))
+        print()
+        print(dir_)
+        print(match(e=dir_, another_name="gta"))
+
+        print()
+        path = r"E:\__STORAGE__\2.WORK\(C) Other\Freelance\Orders\(__WIP__)\[PARSE] CaseParser\[GIT]\CaseParser\Portfolios\Pavel_Kapysk"
+        print(path)
+        print(match(e=path, another_name="Pavel_Kapysh"))
+
+
+    def __test__access():
+        print(":::::::::::::::::::::access:::::::::::::::::::::")
+        # path = __file__
+        path = r"C:\Users\Martis\Desktop\password_database(AutoRecovered).xlsx"
+        path = r"C:\Users\Martis\Desktop\password_database(AutoRecovered).xlsx"
+        print(is_accessible(path))
+
     __test__create()
     __test__rename()
     __test__delete()
@@ -426,3 +494,5 @@ if __name__ == '__main__':
     __test__copy()
     __test__move()
     __test__info()
+    __test__match()
+    __test__access()
