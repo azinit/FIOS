@@ -20,6 +20,7 @@ From developer for developers.
 - Initializer (for every primitive)
 - Custom Windows Navigator
 - YouTube Parser
+- Controllers library (with often-used services and GUI-controls)
 
 ## Issues
 - I think, main issues for now are: _bad compatibility_,  _bad module hierarchy_, _bad optimization_
