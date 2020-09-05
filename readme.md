@@ -1,4 +1,4 @@
-# FIOS
+# DEPRECATED
 Python-library.
 From developer for developers.
 
